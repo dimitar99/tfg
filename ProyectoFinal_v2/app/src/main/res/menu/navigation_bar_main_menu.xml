@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navBarItemMainHome"
+        android:icon="@drawable/newspaper"
+        android:textColor="@color/black"
+        android:title="@string/drawerTxtNews" />
+
+    <item
+        android:id="@+id/navBarItemMainLocate"
+        android:icon="@drawable/location"
+        android:textColor="@color/black"
+        android:title="@string/drawerTxtLocate" />
+
+    <item
+        android:id="@+id/navBarItemMainRoutine"
+        android:icon="@drawable/routines"
+        android:textColor="@color/black"
+        android:title="@string/drawerTxtRoutine" />
+
+</menu>

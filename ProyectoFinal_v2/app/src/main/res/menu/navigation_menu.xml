@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="@string/drawerTxtTitleGroupSettings">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_profile"
+                    android:icon="@drawable/ic_name"
+                    android:title="@string/drawerTxtProfile" />
+                <item
+                    android:id="@+id/nav_prefences"
+                    android:icon="@drawable/ic_settings"
+                    android:title="@string/drawerTxtPrefence" />
+
+                <item
+                    android:id="@+id/nav_imc"
+                    android:icon="@drawable/ic_imc"
+                    android:title="IMC" />
+
+                <item
+                    android:id="@+id/nav_logout"
+                    android:icon="@drawable/ic_logout"
+                    android:title="@string/drawerTxtLogout" />
+            </group>
+        </menu>
+    </item>
+    <item android:title="@string/admin" android:visible="false" android:id="@+id/nav_administrator">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_users"
+                    android:title="@string/users" />
+            </group>
+        </menu>
+    </item>
+</menu>

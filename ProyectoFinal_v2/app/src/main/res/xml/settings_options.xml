@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory android:title="@string/settingsTxtLanguage">
+        <ListPreference
+            android:dialogTitle="@string/settingsTxtLanguageListTitle"
+            android:entries="@array/language"
+            android:entryValues="@array/codeLanguage"
+            android:key="prefLanguage"
+            android:summary="@string/settingsTxtLanguageListTitle"
+            android:title="@string/settingsTxtLanguage"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/txtPersonal">
+        <EditTextPreference
+            android:dialogTitle="@string/ajustesPrefNick"
+            android:key="prefNick"
+            android:summary="@string/nickname"
+            android:title="@string/ajustesPrefNick" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/txtCustomization">
+        <ListPreference
+            android:dialogTitle="@string/txtFont"
+            android:entries="@array/fonts"
+            android:entryValues="@array/codeFonts"
+            android:key="prefFont"
+            android:summary="@string/txtFont"
+            android:title="@string/ajustesPrefFontList" />
+
+        <SwitchPreference
+            android:key="prefDarkMode"
+            android:disableDependentsState="false"
+            android:title="@string/darkMode"
+            android:summaryOff="@string/disabled"
+            android:summaryOn="@string/enabled"/>
+
+        <SwitchPreference
+            android:key="prefNotifications"
+            android:disableDependentsState="false"
+            android:title="@string/notifications"
+            android:summaryOff="@string/disabled"
+            android:summaryOn="@string/enabled"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>
