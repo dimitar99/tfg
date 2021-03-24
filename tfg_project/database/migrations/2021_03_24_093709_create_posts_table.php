@@ -18,11 +18,11 @@ class CreatePostsTable extends Migration
 
             $table->string('title');
             $table->integer('likes')->default(0);
-            //$table->string('image');
+            $table->string('image')->nullable();
 
             //Referencia a table users
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->timestamps();
         });

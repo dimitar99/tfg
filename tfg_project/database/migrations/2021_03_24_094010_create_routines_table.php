@@ -17,9 +17,9 @@ class CreateRoutinesTable extends Migration
             $table->increments('id');
 
             $table->string('name');
-            //$table->enum('type');
+            $table->string('type')->nullable();
             $table->string('description');
-            //$table->string('video');
+            $table->string('video')->nullable();
 
             $table->timestamps();
         });
