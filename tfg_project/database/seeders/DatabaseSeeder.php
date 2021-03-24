@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +14,34 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $this->truncateTable([
+            'users',
+            'posts',
+            'comments',
+            //'routines',
+        ]);
+
+        $this->call([
+            UserSeeder::class,
+            PostSeeder::class,
+            CommentSeeder::class,
+        ]);
+    }
+
+    protected function truncateTable(array $tables){
+
+        /* Desactivar la revisión de claves ajenas para que no de problemas 
+        al eliminar la tabla */
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+
+        /* Se vacia la tabla para que no de error al crear profesiones que 
+        ya existen */
+        foreach ($tables as $table) {
+            DB::table($table)->truncate();
+        }
+
+        /* Se activa nuevamente la revisió de claves ajenas */
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+
     }
 }
