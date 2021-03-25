@@ -107,7 +107,7 @@ class UserController extends Controller
 
         return response()->json([
             'mensaje' => 'Usuario creado correctamente'
-        ]);
+        ], 200);
 
     }
     
@@ -130,12 +130,12 @@ class UserController extends Controller
 
         if($user->save()){
             return response()->json([
-                'Usuario actualizado correctamente'
+                'mensaje' => 'Usuario actualizado correctamente'
             ], 200);
         }
 
         return response()->json([
-            'La actualizacion ha fallado'
+            'mensaje' =>'La actualizacion ha fallado'
         ], 400);
 
     }

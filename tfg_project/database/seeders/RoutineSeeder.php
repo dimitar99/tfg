@@ -16,17 +16,23 @@ class RoutineSeeder extends Seeder
     {
         Routine::create([
             'name' => 'Rutina 1',
+            'type' => 'Tipo 1',
             'description' => 'Esto es una prueba para crear una rutina y que la tabla no se quede vacia',
+            'video' => 'video'
         ]);
 
         Routine::create([
             'name' => 'Rutina 2',
+            'type' => 'Tipo 2',
             'description' => 'Esto es una prueba para crear una rutina y que la tabla no se quede vacia',
+            'video' => 'video'
         ]);
 
         Routine::create([
             'name' => 'Rutina 3',
+            'type' => 'Tipo 3',
             'description' => 'Esto es una prueba para crear una rutina y que la tabla no se quede vacia',
+            'video' => 'video'
         ]);
     }
 }

@@ -23,7 +23,7 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::post('/users/new', [UserController::class, 'store']);
 
     //ELIMINAR USUARIO
-    Route::delete('/users/{user}/delete', [UserController::class, 'destroy']);
+    Route::delete('/users/{user}/destroy', [UserController::class, 'destroy']);
 
     //ACTUALIZAR USUARIO
     Route::put('/users/{user}/update', [UserController::class, 'update']);
