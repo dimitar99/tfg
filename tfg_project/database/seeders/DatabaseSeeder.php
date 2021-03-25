@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             'users',
             'posts',
             'comments',
-            //'routines',
+            'routines',
         ]);
 
         $this->call([
