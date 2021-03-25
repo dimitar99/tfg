@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Routine extends Model
 {
     protected $table = 'routines';
+
+    protected $fillable = [
+        'name',
+        'type',
+        'description',
+        'video'
+    ];
 }
