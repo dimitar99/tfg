@@ -87,7 +87,9 @@ class UserController extends Controller
     public function index(){
 
         $users = User::paginate(10);
-        return UserResource::collection($users);
+        return view('users.index', [
+            'users' => $users,
+        ]);
 
     }
 
@@ -110,15 +112,15 @@ class UserController extends Controller
         ], 200);
 
     }
-    
+
     /*
     * Actualiza un usuario
     */
 
     public function update(UserUpdateRequest $request, User $user){
-        
+
         $user = User::find($user->id);
-        
+
         $user->name = $request->name;
         $user->surnames = $request->surnames;
         $user->nick = $request->nick;
@@ -147,7 +149,7 @@ class UserController extends Controller
     public function destroy(User $user){
 
         $user = User::find($user->id);
-        
+
         if($user->delete()){
             return response()->json([
                 'mensaje' => 'Usuario eliminado correctamente'

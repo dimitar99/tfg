@@ -58,4 +58,24 @@ class User extends Authenticatable
         });
 
     }
+
+    public static function updateUser()
+    {
+
+    }
+
+    public static function deleteUser()
+    {
+
+    }
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'user_follower', 'user_id', 'follower_id', 'id', 'id');
+    }
+
+    public function followed()
+    {
+        return $this->belongsToMany(User::class, 'user_follower', 'follower_id', 'user_id', 'id', 'id');
+    }
 }

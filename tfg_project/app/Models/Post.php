@@ -9,4 +9,23 @@ class Post extends Model
 {
     protected $table = 'posts';
 
+    protected $fillable = [
+        'body'
+    ];
+
+    public static function createPost()
+    {
+
+    }
+
+    public static function updatePost()
+    {
+
+    }
+
+    public static function deletePost()
+    {
+
+    }
+
 }

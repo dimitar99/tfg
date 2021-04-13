@@ -15,7 +15,7 @@ class PostSeeder extends Seeder
     public function run()
     {
         Post::create([
-            'title' => 'Titulo de prueba',
+            'body' => 'Body de prueba',
             'user_id' => 1,
         ]);
     }
