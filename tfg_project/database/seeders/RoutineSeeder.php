@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Routine;
+use App\Models\RoutinesType;
 use Illuminate\Database\Seeder;
 
 class RoutineSeeder extends Seeder
@@ -16,21 +17,21 @@ class RoutineSeeder extends Seeder
     {
         Routine::create([
             'name' => 'Rutina 1',
-            'type' => 'Tipo 1',
+            'type' => RoutinesType::all()->random()->id,
             'description' => 'Esto es una prueba para crear una rutina y que la tabla no se quede vacia',
             'video' => 'video'
         ]);
 
         Routine::create([
             'name' => 'Rutina 2',
-            'type' => 'Tipo 2',
+            'type' => RoutinesType::all()->random()->id,
             'description' => 'Esto es una prueba para crear una rutina y que la tabla no se quede vacia',
             'video' => 'video'
         ]);
 
         Routine::create([
             'name' => 'Rutina 3',
-            'type' => 'Tipo 3',
+            'type' => RoutinesType::all()->random()->id,
             'description' => 'Esto es una prueba para crear una rutina y que la tabla no se quede vacia',
             'video' => 'video'
         ]);

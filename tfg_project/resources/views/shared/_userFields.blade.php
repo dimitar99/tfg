@@ -14,8 +14,8 @@
 <br>
 
 <div class="form-group">
-    <label for="nick">Nick: </label>
-    <input type="text" class="form-control" name="nick" id="nick" placeholder="pepe_fitness"
+    <label for="nick">Nick: </label> <small>(Puede contener numeros, maximo 15 caracteres)</small>
+    <input type="text" maxlength="15" class="form-control" name="nick" id="nick" placeholder="pepe_fitness"
         value="{{ old('nick', $user->nick) }}">
 </div>
 <br>
@@ -35,7 +35,7 @@
 <br>
 
 <div class="form-group">
-    <label for="password">Contraseña: </label>
+    <label for="password">Contraseña: </label> <small>(Minimo 8 carácteres)</small>
     <input type="password" class="form-control" name="password" id="password">
 </div>
 <br>

@@ -8,8 +8,14 @@
 
 <div class="form-group">
     <label for="type">Tipo: </label>
-    <input type="text" class="form-control" name="type" id="type" placeholder="Pectoral"
-        value="{{ old('type', $routine->type) }}">
+    <select name="type" id="type" class="form-control">
+        <option value="">Selecciona un tipo</option>
+        @foreach($routineTypes as $routine)
+            <option value="{{ $routine->id }}" {{ old('routine_id', ) }}>
+                {{ $routine->name }}
+            </option>
+        @endforeach
+    </select>
 </div>
 <br>
 

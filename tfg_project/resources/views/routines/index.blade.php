@@ -27,7 +27,7 @@
                             @foreach($routines as $routine)
                                 <tr>
                                     <td>{{$routine->name}}</td>
-                                    <td>{{$routine->type}}</td>
+                                    <td>{{$routine->routineType}}</td>
                                     <td>{{$routine->description}}</td>
                                     <td>{{$routine->video}}</td>
                                     <td>

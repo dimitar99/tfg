@@ -17,8 +17,7 @@ class CreateRoutinesTable extends Migration
             $table->increments('id');
 
             $table->string('name');
-            $table->string('type')->nullable();
-            $table->string('description');
+            $table->text('description');
             $table->string('video')->nullable();
 
             $table->timestamps();
@@ -32,6 +31,6 @@ class CreateRoutinesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('routine');
+        Schema::dropIfExists('routines');
     }
 }

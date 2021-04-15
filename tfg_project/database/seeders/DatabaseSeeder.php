@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\RoutinesType;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -19,23 +20,25 @@ class DatabaseSeeder extends Seeder
             'posts',
             'comments',
             'routines',
+            'routines_types'
         ]);
 
         $this->call([
             UserSeeder::class,
             PostSeeder::class,
             CommentSeeder::class,
-            RoutineSeeder::class
+            RoutinesTypeSeeder::class,
+            RoutineSeeder::class,
         ]);
     }
 
     protected function truncateTable(array $tables){
 
-        /* Desactivar la revisión de claves ajenas para que no de problemas 
+        /* Desactivar la revisión de claves ajenas para que no de problemas
         al eliminar la tabla */
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
 
-        /* Se vacia la tabla para que no de error al crear profesiones que 
+        /* Se vacia la tabla para que no de error al crear profesiones que
         ya existen */
         foreach ($tables as $table) {
             DB::table($table)->truncate();

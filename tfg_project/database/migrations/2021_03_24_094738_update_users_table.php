@@ -30,6 +30,7 @@ class UpdateUsersTable extends Migration
         Schema::table('users', function(Blueprint $table){
             $table->dropColumn('surnames');
             $table->dropColumn('nick');
+            $table->dropColumn('avatar');
         });
     }
 }

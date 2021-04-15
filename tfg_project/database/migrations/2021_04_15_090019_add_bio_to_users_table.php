@@ -25,6 +25,6 @@ class AddBioToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropColumns('bio');
+        Schema::dropIfExists('bio');
     }
 }

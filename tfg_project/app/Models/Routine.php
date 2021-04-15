@@ -15,4 +15,9 @@ class Routine extends Model
         'description',
         'video'
     ];
+
+    public function routineType()
+    {
+        return $this->belongsTo(RoutinesType::class);
+    }
 }

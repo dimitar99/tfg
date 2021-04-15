@@ -6,6 +6,7 @@ use App\Http\Forms\RoutineForm;
 use App\Http\Requests\CreateRoutineRequest;
 use App\Http\Requests\UpdateRoutineRequest;
 use App\Models\Routine;
+use App\Models\RoutinesType;
 
 class RoutineController extends Controller
 {
@@ -46,12 +47,6 @@ class RoutineController extends Controller
         $request->createRoutine();
 
         return redirect()->route('routines.index');
-
-        /*
-        return response()->json([
-            'mensaje' => 'Usuario creado correctamente'
-        ], 200);
-        */
     }
 
     /*
@@ -62,7 +57,9 @@ class RoutineController extends Controller
     {
         $routine = Routine::findOrFail($id);
 
-        return view('routines.edit', compact('routine'));
+        //$routineTypes = RoutinesType::all();
+
+        return new RoutineForm('routines.edit', $routine);
     }
 
     /*
