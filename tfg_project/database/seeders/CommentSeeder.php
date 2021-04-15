@@ -14,10 +14,22 @@ class CommentSeeder extends Seeder
      */
     public function run()
     {
-        Comment::create([
-            'user_id' => 1,
-            'post_id' => 1,
-            'content' => 'Esto es un comentario de prueba para rellenar la tabla y que no este vacia',
-        ]);
+        foreach (range(1, 10) as $i){
+            Comment::create([
+                'user_id' => 1,
+                'post_id' => 1,
+                'content' => 'Esto es un comentario de prueba para rellenar la tabla y que no este vacia',
+            ]);
+            Comment::create([
+                'user_id' => 1,
+                'post_id' => 2,
+                'content' => 'Esto es un comentario de prueba para rellenar la tabla y que no este vacia',
+            ]);
+            Comment::create([
+                'user_id' => 1,
+                'post_id' => 3,
+                'content' => 'Esto es un comentario de prueba para rellenar la tabla y que no este vacia',
+            ]);
+        }
     }
 }

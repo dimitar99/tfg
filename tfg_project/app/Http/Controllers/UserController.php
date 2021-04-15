@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Forms\UserForm;
+use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Http\Requests\UserCreateRequest;
-use App\Http\Requests\UserUpdateRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Carbon\Carbon;
@@ -17,7 +19,8 @@ class UserController extends Controller
     * Valida los datos, realiza registro y devuelve un access token
     */
 
-    public function register(UserCreateRequest $request){
+    public function register(CreateUserRequest $request)
+    {
 
         $data = ([
             'name' => $request->name,
@@ -35,22 +38,22 @@ class UserController extends Controller
             'access_token' => $create_token->accessToken,
             'token_type' => 'Bearer',
             'expires_at' => Carbon::parse($create_token->token->expires_at)->toDateTimeString()
-        ], 201 );
-
+        ], 201);
     }
 
     /*
     * Valida los datos de login y devuelve un access token
     */
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
 
         $request->validate([
             'email' => 'required|email',
         ]);
 
         //Si el usuario no se autentifica correctamente devuelve error
-        if (!Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+        if (!Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             return response()->json([
                 'message' => 'Unauthorized'
             ], 400);
@@ -67,69 +70,86 @@ class UserController extends Controller
             'token_type' => 'Bearer',
             'expires_at' => Carbon::parse($create_token->token->expires_at)->toDateTimeString()
         ]);
-
     }
 
     /*
     * Devuelve el usuario que hay logeado actualmente
     */
 
-    public function getCurrentUser(Request $request){
+    public function getCurrentUser(Request $request)
+    {
 
         return new UserResource($request->user());
-
     }
 
     /*
     * Devuelve el listado de usuarios paginado
     */
 
-    public function index(){
-
+    public function index()
+    {
         $users = User::paginate(10);
+
         return view('users.index', [
             'users' => $users,
         ]);
-
     }
 
     /*
-    * Crea un usuario
+    * Muestra el detalle de un usuario
     */
 
-    public function store(UserCreateRequest $request){
+    public function show($id)
+    {
+        $user = User::findOrFail($id);
 
-        $user = User::create([
-            'name' => $request->name,
-            'surnames' => $request->surnames,
-            'nick' => $request->nick,
-            'email' => $request->email,
-            'password' => bcrypt($request->password)
-        ]);
+        return view('users.show', compact('user'));
+    }
 
+    /*
+    * Crear un usuario
+    */
+
+    public function create()
+    {
+        return new UserForm('users.create', new User);
+    }
+
+    public function store(CreateUserRequest $request)
+    {
+        $request->createUser();
+
+        return redirect()->route('users.index');
+
+        /*
         return response()->json([
             'mensaje' => 'Usuario creado correctamente'
         ], 200);
+        */
+    }
 
+    /*
+    * Editar un usuario
+    */
+
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+
+        return new UserForm('users.edit', $user);
     }
 
     /*
     * Actualiza un usuario
     */
 
-    public function update(UserUpdateRequest $request, User $user){
+    public function update(UpdateUserRequest $request, User $user)
+    {
+        $request->updateUser($user);
 
-        $user = User::find($user->id);
+        return redirect()->route('users.show', ['id' => $user->id]);
 
-        $user->name = $request->name;
-        $user->surnames = $request->surnames;
-        $user->nick = $request->nick;
-        $user->email = $request->email;
-
-        if($request->password){
-            $user->password = bcrypt($request->password);
-        }
-
+        /*
         if($user->save()){
             return response()->json([
                 'mensaje' => 'Usuario actualizado correctamente'
@@ -139,27 +159,17 @@ class UserController extends Controller
         return response()->json([
             'mensaje' =>'La actualizacion ha fallado'
         ], 400);
-
+        */
     }
 
     /*
-    * Elimina un usuario
+    * Enviar un usuario a la papelera
     */
 
-    public function destroy(User $user){
+    public function destroy(User $user)
+    {
+        $user->forceDelete();
 
-        $user = User::find($user->id);
-
-        if($user->delete()){
-            return response()->json([
-                'mensaje' => 'Usuario eliminado correctamente'
-            ], 200);
-        }
-
-        return response()->json([
-            'mensaje' => 'La eliminacion ha fallado'
-        ], 400);
-
+        return redirect()->route('users.index');
     }
-
 }

@@ -21,7 +21,7 @@ class CreatePostsTable extends Migration
 
             //Referencia a table users
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->timestamps();
         });

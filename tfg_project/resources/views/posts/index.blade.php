@@ -1,36 +1,52 @@
 @extends('layouts.app')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Listado usuarios') }}</div>
+@section('title', 'Listado Posts')
 
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead class="thead-dark">
-                            <tr>
-                              <th>Name</th>
-                              <th>Surnames</th>
-                              <th>Nick</th>
-                              <th>Email</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach(App\Models\Post::all() as $user)
+@section('content')
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">{{ __('Listado Posts') }}</div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="thead-dark">
                                 <tr>
-                                    <td>{{$user->name}}</td>
-                                    <td>{{$user->surnames}}</td>
-                                    <td>{{$user->nick}}</td>
-                                    <td>{{$user->email}}</td>
+                                    <th>Id</th>
+                                    <th>Imagen</th>
+                                    <th>Body</th>
+                                    <th>Commentarios</th>
+                                    <th>Acciones</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                  </div>
+                            </thead>
+                            <tbody>
+                                @foreach ($posts as $post)
+                                    <tr>
+                                        <td>{{ $post->id }}</td>
+                                        <td>
+                                            @if($post->image)
+                                                {{ $post->image }}
+                                            @else
+                                                No image found
+                                            @endif
+                                        </td>
+                                        <td>{{ $post->body }}</td>
+                                        <td>{{ $post->comments->count() }}</td>
+                                        <td>
+                                            <form action="{{ route('posts.destroy', $post) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <a href="{{ route('posts.show', $post) }}" class="btn btn-outline-secondary btn-sm">Ver</a>
+                                                <button type="submit">Eliminar</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 @endsection

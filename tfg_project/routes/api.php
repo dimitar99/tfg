@@ -29,7 +29,6 @@ Route::group(['middleware' => ['auth:api']], function() {
     //ELIMINAR USUARIO
     Route::delete('/users/{user}/destroy', [UserController::class, 'destroy']);
 
-
     //LISTADO RUTINAS
     Route::get('/routines', [RoutineController::class, 'index']);
 

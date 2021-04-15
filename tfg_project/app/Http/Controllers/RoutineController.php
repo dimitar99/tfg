@@ -2,88 +2,88 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RoutineCreateRequest;
-use App\Http\Requests\RoutineUpdateRequest;
-use App\Http\Resources\RoutineResource;
+use App\Http\Forms\RoutineForm;
+use App\Http\Requests\CreateRoutineRequest;
+use App\Http\Requests\UpdateRoutineRequest;
 use App\Models\Routine;
-use Illuminate\Http\Request;
 
 class RoutineController extends Controller
 {
-    
+
     /*
-    * Devuelve el listado de usuarios paginado
+    * Devuelve el listado de rutinas paginado
     */
 
-    public function index(){
-
+    public function index()
+    {
         $routines = Routine::paginate(10);
-        return RoutineResource::collection($routines);
 
+        return view('routines.index', compact('routines'));
     }
 
     /*
-    * Crea una rutina
+    * Muestra el detalle de una rutina
     */
 
-    public function store(RoutineCreateRequest $request){
-        
-        $routine = Routine::create([
-            'name' => $request->name,
-            'type' => $request->type,
-            'description' => $request->description,
-            'video' => $request->video
-        ]);
+    public function show($id)
+    {
+        $routine = Routine::findOrFail($id);
 
+        return view('routines.show', compact('routine'));
+    }
+
+    /*
+    * Crear una rutina
+    */
+
+    public function create()
+    {
+        return new RoutineForm('routines.create', new Routine);
+    }
+
+    public function store(CreateRoutineRequest $request)
+    {
+        $request->createRoutine();
+
+        return redirect()->route('routines.index');
+
+        /*
         return response()->json([
-            'mensaje' => 'Rutina creada correctamente'
+            'mensaje' => 'Usuario creado correctamente'
         ], 200);
+        */
+    }
 
+    /*
+    * Editar una rutina
+    */
+
+    public function edit($id)
+    {
+        $routine = Routine::findOrFail($id);
+
+        return view('routines.edit', compact('routine'));
     }
 
     /*
     * Actualiza una rutina
     */
 
-    public function update(RoutineUpdateRequest $request, Routine $routine){
+    public function update(UpdateRoutineRequest $request, Routine $routine)
+    {
+        $request->updateRoutine($routine);
 
-        $routine = Routine::find($routine->id);
-
-        $routine->name = $request->name;
-        $routine->type = $request->type;
-        $routine->description = $request->description;
-        $routine->video = $request->video;
-
-        if($routine->save()){
-            return response()->json([
-                'mensaje' => 'Rutina actualizada correctamente'
-            ], 200);
-        }
-
-        return response()->json([
-            'mensaje' => 'La actualizacion ha fallado'
-        ], 400);
-
+        return redirect()->route('routines.show', ['id' => $routine->id]);
     }
 
     /*
     * Elimina una rutina
     */
 
-    public function destroy(Routine $routine){
+    public function destroy(Routine $routine)
+    {
+        $routine->forceDelete();
 
-        $routine = Routine::find($routine->id);
-
-        if($routine->delete()){
-            return response()->json([
-                'mensaje' => 'La rutina se ha borrado correctamente'
-            ], 200);
-        }
-
-        return response()->json([
-            'mensaje' => 'La eliminacion ha fallado'
-        ], 400);
-
+        return redirect()->route('routines.index');
     }
-
 }

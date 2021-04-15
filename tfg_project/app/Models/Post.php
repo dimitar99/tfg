@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
@@ -13,19 +12,9 @@ class Post extends Model
         'body'
     ];
 
-    public static function createPost()
+    public function comments()
     {
-
-    }
-
-    public static function updatePost()
-    {
-
-    }
-
-    public static function deletePost()
-    {
-
+        return $this->hasMany(Comment::class);
     }
 
 }

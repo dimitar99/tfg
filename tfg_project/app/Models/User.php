@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'surnames',
         'nick',
+        'bio',
         'email',
         'password',
     ];
@@ -56,16 +57,6 @@ class User extends Authenticatable
                 'password' => $data['password'],
             ]);
         });
-
-    }
-
-    public static function updateUser()
-    {
-
-    }
-
-    public static function deleteUser()
-    {
 
     }
 
