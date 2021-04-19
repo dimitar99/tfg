@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Routine extends Model
@@ -18,6 +17,13 @@ class Routine extends Model
 
     public function routineType()
     {
-        return $this->belongsTo(RoutinesType::class);
+        return $this->belongsTo(RoutineType::class, 'type');
+    }
+
+    public function scopeType($query, $type)
+    {
+        if ($type){
+            return $query->where('type', '=', $type);
+        }
     }
 }

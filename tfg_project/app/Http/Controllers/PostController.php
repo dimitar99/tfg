@@ -11,11 +11,11 @@ class PostController extends Controller
     * Devuelve el listado de post paginado
     */
 
-    public function index()
+    public function list()
     {
         $posts = Post::paginate(10);
 
-        return view('posts.index', ['posts' => $posts]);
+        return view('posts.list', ['posts' => $posts]);
     }
 
     /*

@@ -13,14 +13,24 @@
 
                     @include('shared._errors')
 
-                    <form method="POST" action="{{ url("/users/{$user->id}") }}">
+                    <form method="POST" action="{{ url("/users/{$user->id}") }}" enctype="multipart/form-data">
 
                         @method('PUT')
                         @include('shared._userFields')
 
+                        @if($avatar != "")
+                            <img src="{{ $avatar }}" alt="Avatar de usuario" width="200px" height="200px">
+                        @endif
+
+                        <div class="form-group">
+                            <label for="avatar">Avatar: </label> <small>(Solo formato .jpg)</small>
+                            <input type="file" class="form-control" name="avatar" id="avatar">
+                        </div>
+                        <br>
+
                         <div class="form-group mt-4">
                             <button type="submit" class="btn btn-primary">Actualizar</button>
-                            <a href="{{ route('users.index') }}" style="text-decoration: none">Volver</a>
+                            <a href="{{ route('users.list') }}" style="text-decoration: none">Volver</a>
                         </div>
 
                     </form>

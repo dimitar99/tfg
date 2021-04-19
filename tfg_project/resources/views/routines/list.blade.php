@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Listado Usuarios')
+@section('title', 'Listado Rutinas')
 
 @section('content')
 <div class="container">
@@ -27,7 +27,7 @@
                             @foreach($routines as $routine)
                                 <tr>
                                     <td>{{$routine->name}}</td>
-                                    <td>{{$routine->routineType}}</td>
+                                    <td>{{$routine->routineType->name}}</td>
                                     <td>{{$routine->description}}</td>
                                     <td>{{$routine->video}}</td>
                                     <td>

@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-    <a href="{{ route('posts.index') }}" class="btn btn-outline-dark btn-sm">Regresar al listado</a>
+    <a href="{{ route('posts.list') }}" class="btn btn-outline-dark btn-sm">Regresar al listado</a>
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">

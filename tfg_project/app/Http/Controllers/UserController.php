@@ -11,6 +11,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -18,11 +19,13 @@ class UserController extends Controller
     * Devuelve el listado de usuarios paginado
     */
 
-    public function index()
+    public function list()
     {
-        $users = User::paginate(10);
+        $users = User::query()
+            ->orderBy('name')
+            ->paginate(10);
 
-        return view('users.index', [
+        return view('users.list', [
             'users' => $users,
         ]);
     }
@@ -35,7 +38,13 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return view('users.show', compact('user'));
+        $avatar = "";
+
+        if(Storage::exists($user->avatar)){
+            $avatar = Storage::url($user->avatar);
+        }
+
+        return view('users.show', compact('user', 'avatar'));
     }
 
     /*
@@ -51,7 +60,7 @@ class UserController extends Controller
     {
         $request->createUser();
 
-        return redirect()->route('users.index');
+        return redirect()->route('users.list');
     }
 
     /*
@@ -62,7 +71,13 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return new UserForm('users.edit', $user);
+        $avatar = "";
+
+        if(Storage::exists($user->avatar)){
+            $avatar = Storage::url($user->avatar);
+        }
+
+        return view('users.edit', compact('user', 'avatar'));
     }
 
     /*
@@ -84,6 +99,6 @@ class UserController extends Controller
     {
         $user->forceDelete();
 
-        return redirect()->route('users.index');
+        return redirect()->route('users.list');
     }
 }

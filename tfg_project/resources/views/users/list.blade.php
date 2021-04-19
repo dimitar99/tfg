@@ -51,6 +51,8 @@
                     </table>
                   </div>
             </div>
+            {{ $users->links() }}
+            <p>Viendo pagina {{ $users->currentPage()}} de {{ $users->lastPage()}} </p>
         </div>
     </div>
 </div>

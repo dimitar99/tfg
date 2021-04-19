@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\RoutinesType;
+use App\Models\RoutineType;
 use Illuminate\Database\Seeder;
 
 class RoutinesTypeSeeder extends Seeder
@@ -14,13 +14,13 @@ class RoutinesTypeSeeder extends Seeder
      */
     public function run()
     {
-        RoutinesType::create(['name' => 'Pecho']);
-        RoutinesType::create(['name' => 'Biceps']);
-        RoutinesType::create(['name' => 'Triceps']);
-        RoutinesType::create(['name' => 'Hombros']);
-        RoutinesType::create(['name' => 'Espalda']);
-        RoutinesType::create(['name' => 'Piernas']);
-        RoutinesType::create(['name' => 'Abdominales']);
-        RoutinesType::create(['name' => 'Cardio']);
+        RoutineType::create(['name' => 'Pecho']);
+        RoutineType::create(['name' => 'Biceps']);
+        RoutineType::create(['name' => 'Triceps']);
+        RoutineType::create(['name' => 'Hombros']);
+        RoutineType::create(['name' => 'Espalda']);
+        RoutineType::create(['name' => 'Piernas']);
+        RoutineType::create(['name' => 'Abdominales']);
+        RoutineType::create(['name' => 'Cardio']);
     }
 }

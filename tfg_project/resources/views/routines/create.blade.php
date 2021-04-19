@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Crear nuevo rutina</div>
+                <div class="card-header">Crear nueva rutina</div>
 
                 <div class="card-body">
 
@@ -19,7 +19,7 @@
 
                         <div class="form-group mt-4">
                             <button type="submit" class="btn btn-primary">Crear rutina</button>
-                            <a href="{{ route('routines.index') }}" style="text-decoration: none">Volver</a>
+                            <a href="{{ route('routines.list') }}" style="text-decoration: none">Volver</a>
                         </div>
 
                     </form>

@@ -15,11 +15,11 @@ class RoutineController extends Controller
     * Devuelve el listado de rutinas paginado
     */
 
-    public function index()
+    public function list()
     {
         $routines = Routine::paginate(10);
 
-        return view('routines.index', compact('routines'));
+        return view('routines.list', compact('routines'));
     }
 
     /*
@@ -46,7 +46,7 @@ class RoutineController extends Controller
     {
         $request->createRoutine();
 
-        return redirect()->route('routines.index');
+        return redirect()->route('routines.list');
     }
 
     /*
@@ -56,8 +56,6 @@ class RoutineController extends Controller
     public function edit($id)
     {
         $routine = Routine::findOrFail($id);
-
-        //$routineTypes = RoutinesType::all();
 
         return new RoutineForm('routines.edit', $routine);
     }
@@ -81,6 +79,6 @@ class RoutineController extends Controller
     {
         $routine->forceDelete();
 
-        return redirect()->route('routines.index');
+        return redirect()->route('routines.list');
     }
 }

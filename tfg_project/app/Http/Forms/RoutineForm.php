@@ -3,13 +3,13 @@
 namespace App\Http\Forms;
 
 use App\Models\Routine;
-use App\Models\RoutinesType;
+use App\Models\RoutineType;
 use Illuminate\Contracts\Support\Responsable;
 
 class RoutineForm implements Responsable
 {
     private $view;
-    private $user;
+    private $routine;
 
     public function __construct($view, Routine $routine)
     {
@@ -21,7 +21,7 @@ class RoutineForm implements Responsable
     {
         return view($this->view, [
                 'routine' => $this->routine,
-                'routineTypes' => RoutinesType::orderBy('name', 'ASC')->get()
+                'routineTypes' => RoutineType::orderBy('name', 'ASC')->get()
             ]);
     }
 }

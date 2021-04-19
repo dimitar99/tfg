@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Post;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
@@ -25,7 +26,10 @@ class UserResource extends JsonResource
             'surnames' => $this->surnames,
             'nick' => $this->nick,
             'email' => $this->email,
-            'created_at' => $this->created_at->format('Y-m-d')
+            'followers' => $this->followers->count(),
+            'followed' => $this->followed->count(),
+            'created_at' => $this->created_at->format('Y-m-d'),
+            'posts' => Post::where('user_id', $this->id)->get()
         ];
     }
 }

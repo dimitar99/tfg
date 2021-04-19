@@ -32,5 +32,69 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234'),
         ]);
 
+        User::create([
+            'name' => 'Jose',
+            'surnames' =>  'Manuel Garcia',
+            'nick' => 'aaaa',
+            'email' => 'aaaaa@gmail.com',
+            'password' => bcrypt('1234'),
+        ]);
+
+        User::create([
+            'name' => 'Jose',
+            'surnames' =>  'Manuel Garcia',
+            'nick' => 'bbbbb',
+            'email' => 'bbbb@gmail.com',
+            'password' => bcrypt('1234'),
+        ]);
+
+        User::create([
+            'name' => 'Jose',
+            'surnames' =>  'Manuel Garcia',
+            'nick' => 'cccc',
+            'email' => 'cccccc.de@gmail.com',
+            'password' => bcrypt('1234'),
+        ]);
+
+        User::create([
+            'name' => 'Jose',
+            'surnames' =>  'Manuel Garcia',
+            'nick' => 'dddddd',
+            'email' => 'dddddd.de@gmail.com',
+            'password' => bcrypt('1234'),
+        ]);
+
+        User::create([
+            'name' => 'Jose',
+            'surnames' =>  'Manuel Garcia',
+            'nick' => 'qqqqqqq',
+            'email' => 'qqqqqq.de@gmail.com',
+            'password' => bcrypt('1234'),
+        ]);
+
+        User::create([
+            'name' => 'Jose',
+            'surnames' =>  'Manuel Garcia',
+            'nick' => 'wwwwww',
+            'email' => 'wwwww.de@gmail.com',
+            'password' => bcrypt('1234'),
+        ]);
+
+        User::create([
+            'name' => 'Jose',
+            'surnames' =>  'Manuel Garcia',
+            'nick' => 'eeeeeeee',
+            'email' => 'eeeeeee.de@gmail.com',
+            'password' => bcrypt('1234'),
+        ]);
+
+        User::create([
+            'name' => 'Jose',
+            'surnames' =>  'Manuel Garcia',
+            'nick' => 'fffffff',
+            'email' => 'fffffffff.de@gmail.com',
+            'password' => bcrypt('1234'),
+        ]);
+
     }
 }

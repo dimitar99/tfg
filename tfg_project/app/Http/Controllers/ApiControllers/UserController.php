@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\ApiControllers;
 
-use App\Http\Forms\UserForm;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -74,7 +74,6 @@ class UserController extends Controller
 
     public function getCurrentUser(Request $request)
     {
-
         return new UserResource($request->user());
     }
 
@@ -82,11 +81,20 @@ class UserController extends Controller
     * Muestra el detalle de un usuario
     */
 
-    public function show($id)
+    public function getUser($id)
     {
         $user = User::findOrFail($id);
 
-        return new UserResource($user);
+        if ($user){
+            return response()->json([
+                'mensaje' => 'Usuario encontrado ',
+                'user' => new UserResource($user)
+            ], 200);
+        }
+
+        return response()->json([
+            'mensaje' => 'Usuario no encontrado',
+        ], 400);
     }
 
     /*
@@ -95,9 +103,7 @@ class UserController extends Controller
 
     public function edit(Request $request)
     {
-        //$user = User::findOrFail($id);
 
-        //return new UserForm('users.edit', $user);
     }
 
     /*
@@ -106,14 +112,15 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request, User $user)
     {
-        if($request->updateUser($user)){
+        if ($request->updateUser($user)) {
             return response()->json([
                 'mensaje' => 'Usuario actualizado correctamente'
             ], 200);
         }
 
         return response()->json([
-            'mensaje' =>'La actualizacion ha fallado'
+            'mensaje' => 'La actualizacion ha fallado'
         ], 400);
     }
+
 }

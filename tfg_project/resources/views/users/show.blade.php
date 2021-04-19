@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-    <a href="{{ route('users.index') }}" class="btn btn-outline-dark btn-sm">Regresar al listado</a>
+    <a href="{{ route('users.list') }}" class="btn btn-outline-dark btn-sm">Regresar al listado</a>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -13,6 +13,10 @@
                 </div>
                 <div class="card-body">
                     <div class="card-text">
+                        @if($avatar != "")
+                            <img src="{{ $avatar }}" alt="Avatar de usuario" width="100px" height="100px">
+                        @endif
+
                         <p><strong>Id: </strong>{{ $user->id }}</p>
                         <p><strong>Nombre: </strong>{{ $user->name }}</p>
                         <p><strong>Apellidos: </strong>{{ $user->surnames }}</p>

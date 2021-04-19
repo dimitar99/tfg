@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class RoutineResource extends JsonResource
+class RoutineTypesResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,14 +14,9 @@ class RoutineResource extends JsonResource
      */
     public function toArray($request)
     {
-        return[
+        return [
             'id' => $this->id,
-            'name' => $this->name,
-            'type' => $this->type,
-            'description' => $this->description,
-            'video' => $this->video,
-            'created_at' => $this->created_at->format('Y-m-d'),
-            'hola' => $this->routineType
+            'name' => $this->name
         ];
     }
 }

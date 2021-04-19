@@ -35,7 +35,10 @@ class UpdateRoutineRequest extends FormRequest
     public function messages()
     {
         return [
-
+            'name.required' => 'El campo Nombre no puede estar vacío',
+            'type.required' => 'El campo Tipo no puede estar vacío',
+            'description.required' => 'El campo Descripcion no puede estar vacío',
+            'video.required' => 'El campo Video no puede estar vacío'
         ];
     }
 

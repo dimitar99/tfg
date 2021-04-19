@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-    <a href="{{ route('routines.index') }}" class="btn btn-outline-dark btn-sm">Regresar al listado</a>
+    <a href="{{ route('routines.list') }}" class="btn btn-outline-dark btn-sm">Regresar al listado</a>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -16,6 +16,7 @@
                         <p><strong>Id: </strong>{{ $routine->id }}</p>
                         <p><strong>Nombre: </strong>{{ $routine->name }}</p>
                         <p><strong>Tipo: </strong>{{ $routine->type }}</p>
+                        <p><strong>Descripcion: </strong>{{ $routine->description }}</p>
                         <p><strong>Video: </strong>{{ $routine->video }}</p>
                     </div>
                 </div>

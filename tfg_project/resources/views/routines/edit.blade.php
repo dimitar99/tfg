@@ -20,7 +20,7 @@
 
                         <div class="form-group mt-4">
                             <button type="submit" class="btn btn-primary">Actualizar</button>
-                            <a href="{{ route('routines.index') }}" style="text-decoration: none">Volver</a>
+                            <a href="{{ route('routines.list') }}" style="text-decoration: none">Volver</a>
                         </div>
 
                     </form>

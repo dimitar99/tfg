@@ -13,13 +13,19 @@
 
                     @include('shared._errors')
 
-                    <form method="POST" action="{{ url('/users/create') }}">
+                    <form method="POST" action="{{ url('/users/create') }}" enctype="multipart/form-data">
 
                         @include('shared._userFields')
 
+                        <div class="form-group">
+                            <label for="avatar">Avatar: </label> <small>(Solo formato .jpg)</small>
+                            <input type="file" class="form-control" name="avatar" id="avatar">
+                        </div>
+                        <br>
+
                         <div class="form-group mt-4">
                             <button type="submit" class="btn btn-primary">Crear usuario</button>
-                            <a href="{{ route('users.index') }}" style="text-decoration: none">Volver</a>
+                            <a href="{{ route('users.list') }}" style="text-decoration: none">Volver</a>
                         </div>
 
                     </form>

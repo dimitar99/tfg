@@ -29,8 +29,8 @@ class AddForeignRoutinesRoutinesType extends Migration
     public function down()
     {
         Schema::table('routines', function (Blueprint $table) {
-            $table->dropForeign('type_id');
-            $table->dropColumn('type_id');
+            $table->dropForeign('type');
+            $table->dropColumn('type');
         });
     }
 }
