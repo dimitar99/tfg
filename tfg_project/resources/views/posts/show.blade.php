@@ -13,9 +13,11 @@
                 </div>
                 <div class="card-body">
                     <div class="card-text">
+                        @if($image != "")
+                            <img src="{{ $image }}" alt="Foto del post" width="100px" height="100px">
+                        @endif
                         <p><strong>USER ID: </strong>{{ $post->user_id }}</p>
                         <p><strong>POST ID: </strong>{{ $post->id }}</p>
-                        <p><strong>IMAGE: </strong>{{ $post->image }}</p>
                         <p><strong>BODY: </strong>{{ $post->body }}</p>
                         <p><strong>COMMENTS: </strong>{{ $post->comments->count() }}</p>
                     </div>
@@ -24,6 +26,7 @@
                             <table class="table">
                                 <thead class="thead-dark">
                                     <tr>
+                                        <th></th>
                                         <th>COMMENT ID</th>
                                         <th>USER ID</th>
                                         <th>CONTENT</th>
@@ -35,7 +38,7 @@
                                     <tr>
                                         <td>{{ $comment->id }}</td>
                                         <td>{{ $comment->user_id }}</td>
-                                        <td>{{ $comment->content }}</td>
+                                        <td>{{ $comment->body }}</td>
                                         <td>{{ $comment->created_at }}</td>
                                         <td>
                                             <form action="{{ route('comments.destroy', $comment) }}" method="POST">

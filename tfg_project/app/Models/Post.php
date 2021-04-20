@@ -9,8 +9,14 @@ class Post extends Model
     protected $table = 'posts';
 
     protected $fillable = [
-        'body'
+        'body',
+        'user_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function comments()
     {

@@ -60,16 +60,16 @@ class UpdateUserRequest extends FormRequest
             $user->password = bcrypt($this->password);
         }
 
-        if ($this->avatar){
-            $user->avatar = 'users/avatar_.'.$user->id.$this->avatar->getClientOriginalExtension();
+        if ($this->avatar) {
+            $user->avatar = 'users/avatar_' . $user->id . '.' . $this->avatar->getClientOriginalExtension();
 
-            if (Storage::exists($user->avatar)){
+            if (Storage::exists($user->avatar)) {
                 Storage::delete($user->avatar);
             }
 
             Storage::put($user->avatar, file_get_contents($this->avatar));
         }
 
-        $user->save();
+        return $user->update();
     }
 }

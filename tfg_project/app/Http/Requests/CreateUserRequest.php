@@ -54,6 +54,7 @@ class CreateUserRequest extends FormRequest
     public function createUser()
     {
         DB::transaction(function () {
+
             $user = new User([
                 'name' => $this->name,
                 'surnames' => $this->surnames,
@@ -65,13 +66,14 @@ class CreateUserRequest extends FormRequest
 
             $user->save();
 
-            if ($this->avatar){
-                $user->avatar = 'users/avatar_.'.$user->id.$this->avatar->getClientOriginalExtension();
+            if ($this->avatar) {
+                $user->avatar = 'users/avatar_' . $user->id . '.' . $this->avatar->getClientOriginalExtension();
                 Storage::put($user->avatar, file_get_contents($this->avatar));
 
                 $user->update();
             }
 
+            return $user->save();
         });
     }
 }

@@ -17,7 +17,8 @@ class AddForeignRoutinesRoutinesType extends Migration
             $table->unsignedInteger('type')->nullable();
             $table->foreign('type')
                 ->references('id')
-                ->on('routines_types');
+                ->on('routines_types')
+                ->onDelete('CASCADE');
         });
     }
 

@@ -25,9 +25,9 @@
                                         <td>{{ $post->id }}</td>
                                         <td>
                                             @if($post->image)
-                                                {{ $post->image }}
+                                                Si
                                             @else
-                                                No image found
+                                                No
                                             @endif
                                         </td>
                                         <td>{{ $post->body }}</td>

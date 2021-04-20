@@ -16,8 +16,8 @@ class PostSeeder extends Seeder
     {
         foreach(range(1,10) as $i){
             Post::create([
-                'body' => 'Body de prueba',
                 'user_id' => 1,
+                'body' => 'Body de prueba',
             ]);
         }
     }

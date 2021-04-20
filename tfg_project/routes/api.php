@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\ApiControllers\CommentController;
 use App\Http\Controllers\ApiControllers\RoutineController;
-use App\Http\Controllers\ApiControllers\PostsController;
+use App\Http\Controllers\ApiControllers\PostController;
 use App\Http\Controllers\ApiControllers\UserController;
 use App\Http\Controllers\ApiControllers\RoutineTypesController;
-use App\Http\Controllers\ApiControllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -18,8 +18,22 @@ Route::group(['middleware' => ['auth:api']], function() {
     */
     Route::get('/user', [UserController::class, 'getCurrentUser']);
     Route::get('/users/{user}', [UserController::class, 'getUser']);
-    //Route::post('/users/new', [UserController::class, 'store']);
-    //Route::put('/users/{user}/update', [UserController::class, 'update']);
+    Route::put('/users/{user}/update', [UserController::class, 'update']);
+
+    /*
+    * POSTS
+    */
+    Route::get('/posts', [PostController::class, 'getPosts']);
+    Route::post('/posts/new', [PostController::class, 'create']);
+    Route::post('/posts/{post}/update', [PostController::class, 'update']);
+    Route::delete('/posts/{post}/destroy', [PostController::class, 'destroy']);
+
+    /*
+    * COMENTARIOS
+    */
+    Route::post('/comments/new', [CommentController::class, 'create']);
+    Route::post('/comments/{comment}/update', [CommentController::class, 'update']);
+    Route::delete('/comments/{comment}/destroy  ', [CommentController::class, 'destroy']);
 
     /*
     * ROUTINES
@@ -27,13 +41,8 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::get('/routines', [RoutineController::class, 'getRoutines']);
 
     /*
-    * POSTS
-    */
-    Route::get('/posts', [PostsController::class, 'getPosts']);
-    Route::delete('/posts/{post}/destroy', [PostController::class, 'destroy']);
-
-    /*
     * ROUTINES TYPE
     */
     Route::get('/routinesTypes', [RoutineTypesController::class, 'getTypes']);
+
 });

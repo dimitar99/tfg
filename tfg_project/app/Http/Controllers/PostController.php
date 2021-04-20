@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -13,7 +13,7 @@ class PostController extends Controller
 
     public function list()
     {
-        $posts = Post::paginate(10);
+        $posts = Post::paginate(15);
 
         return view('posts.list', ['posts' => $posts]);
     }
@@ -26,7 +26,13 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
 
-        return view('posts.show', compact('post'));
+        $image = "";
+
+        if(Storage::exists($post->image)){
+            $image = Storage::url($post->image);
+        }
+
+        return view('posts.show', compact('post', 'image'));
     }
 
     /*
@@ -37,6 +43,6 @@ class PostController extends Controller
     {
         $post->forceDelete();
 
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.list');
     }
 }

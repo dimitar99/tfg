@@ -98,21 +98,14 @@ class UserController extends Controller
     }
 
     /*
-    * Editar un usuario
-    */
-
-    public function edit(Request $request)
-    {
-
-    }
-
-    /*
     * Actualiza un usuario
     */
 
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UpdateUserRequest $request)
     {
-        if ($request->updateUser($user)) {
+        $currentUser = $request->user();
+
+        if ($request->updateUser($currentUser)) {
             return response()->json([
                 'mensaje' => 'Usuario actualizado correctamente'
             ], 200);
