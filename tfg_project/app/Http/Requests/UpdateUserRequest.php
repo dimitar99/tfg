@@ -46,30 +46,4 @@ class UpdateUserRequest extends FormRequest
         ];
     }
 
-    public function updateUser(User $user)
-    {
-        $user->fill([
-            'name' => $this->name,
-            'surnames' => $this->surnames,
-            'nick' => $this->nick,
-            'bio' => $this->bio,
-            'email' => $this->email
-        ]);
-
-        if ($this->password != null) {
-            $user->password = bcrypt($this->password);
-        }
-
-        if ($this->avatar) {
-            $user->avatar = 'users/avatar_' . $user->id . '.' . $this->avatar->getClientOriginalExtension();
-
-            if (Storage::exists($user->avatar)) {
-                Storage::delete($user->avatar);
-            }
-
-            Storage::put($user->avatar, file_get_contents($this->avatar));
-        }
-
-        return $user->update();
-    }
 }

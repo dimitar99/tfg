@@ -38,26 +38,4 @@ class CreatePostRequest extends FormRequest
             'body.required' => 'El campo body no puede estar vacio'
         ];
     }
-
-    public function createPost()
-    {
-        DB::transaction(function () {
-
-            $post = new Post([
-                'user_id' => $this->user()->id,
-                'body' => $this->body
-            ]);
-
-            $post->save();
-
-            if ($this->image) {
-                $post->image = 'posts/image_' . $post->id . '.' . $this->image->getClientOriginalExtension();
-                Storage::put($post->image, file_get_contents($this->image));
-
-                $post->update();
-            }
-
-            return $post->save();
-        });
-    }
 }

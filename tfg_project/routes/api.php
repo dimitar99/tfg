@@ -18,7 +18,7 @@ Route::group(['middleware' => ['auth:api']], function() {
     */
     Route::get('/user', [UserController::class, 'getCurrentUser']);
     Route::get('/users/{user}', [UserController::class, 'getUser']);
-    Route::put('/users/{user}/update', [UserController::class, 'update']);
+    Route::post('/users/{user}/update', [UserController::class, 'update']);
 
     /*
     * POSTS
@@ -27,12 +27,13 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::post('/posts/new', [PostController::class, 'create']);
     Route::post('/posts/{post}/update', [PostController::class, 'update']);
     Route::delete('/posts/{post}/destroy', [PostController::class, 'destroy']);
+    Route::post('/posts/{posts}/likeDislike', [PostController::class, 'likeDislike']);
 
     /*
     * COMENTARIOS
     */
     Route::post('/comments/new', [CommentController::class, 'create']);
-    Route::post('/comments/{comment}/update', [CommentController::class, 'update']);
+    Route::put('/comments/{comment}/update', [CommentController::class, 'update']);
     Route::delete('/comments/{comment}/destroy  ', [CommentController::class, 'destroy']);
 
     /*

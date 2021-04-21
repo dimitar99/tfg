@@ -19,7 +19,9 @@ class PostResource extends JsonResource
             'image' => $this->id,
             'body' => $this->body,
             'user_id' => $this->user_id,
-            'created_at' => $this->created_at->format('Y-m-d')
+            'created_at' => $this->created_at->format('Y-m-d'),
+            'likes' => $this->likes()->count(),
+            'liked_post' => ($this->likes()->where('id', $request->user()->id)->first()) ? 1 : 0
         ];
     }
 }

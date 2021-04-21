@@ -9,8 +9,7 @@ use App\Http\Resources\PostResource;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -31,11 +30,22 @@ class PostController extends Controller
 
     public function create(CreatePostRequest $request)
     {
-        if ($request->createPost()) {
+        $post = new Post([
+            'user_id' => $request->user()->id,
+            'body' => $request->body
+        ]);
+
+        if ($post->save()) {
+            if ($request->image) {
+                $path = 'posts/image_' . $post->id . '.' . $request->image->getClientOriginalExtension();
+                Storage::put($path, file_get_contents($request->image));
+                $post->update(['image' => $path]);
+            }
             return response()->json([
                 'message' => 'Post creado correctamente'
             ], 200);
         }
+
         return response()->json([
             'message' => 'El post no ha sido creado'
         ], 400);
@@ -50,11 +60,26 @@ class PostController extends Controller
         $currentUser = $request->user();
         $post = $currentUser->posts()->findOrFail($id);
 
-        if ($request->updatePost($post)) {
+        $post->fill([
+            'body' => $request->body
+        ]);
+
+        if ($post->update()) {
+            if ($request->image) {
+                $path = 'posts/image_' . $post->id . '.' . $request->image->getClientOriginalExtension();
+
+                if (Storage::exists($path)) {
+                    Storage::delete($path);
+                }
+
+                Storage::put($path, file_get_contents($request->image));
+                $post->update(['image' => $path]);
+            }
             return response()->json([
                 'message' => 'Post actualizado correctamente'
             ], 200);
         }
+
         return response()->json([
             'message' => 'El post no ha sido actualizado'
         ], 400);
@@ -77,5 +102,39 @@ class PostController extends Controller
         return response()->json([
             'message' => 'No se ha podido eliminar'
         ], 400);
+    }
+
+    /*
+    * Like/Dislike a un post
+    */
+
+    public function likeDislike(Request $request, $id)
+    {
+        $currentUser = $request->user();
+        $post = $currentUser->posts()->findOrFail($id);
+
+        if ($post->likes()->where('user_id', $currentUser->id)->first()){
+            $post->likes()->detach($currentUser->id);
+            return response()->json([
+                'message' => 'Dislike a post'
+            ], 200);
+        }
+
+        $post->likes()->attach($currentUser->id);
+
+        return response()->json([
+            'message' => 'Like a post'
+        ], 200);
+    }
+
+
+    /*
+    * Follow/Unfollow a un user
+    */
+
+    public function followUnfollow(Request $request, $id)
+    {
+        $currentUser = $request->user();
+        $user = User::where()
     }
 }

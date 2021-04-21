@@ -35,22 +35,4 @@ class UpdatePostRequest extends FormRequest
         return [];
     }
 
-    public function updatePost(Post $post)
-    {
-        $post->fill([
-            'body' => $this->body
-        ]);
-
-        if ($this->image) {
-            $post->image = 'posts/image_' . $post->id . '.' . $this->image->getClientOriginalExtension();
-
-            if (Storage::exists($post->image)) {
-                Storage::delete($post->image);
-            }
-
-            Storage::put($post->image, file_get_contents($this->image));
-        }
-
-        return $post->update();
-    }
 }

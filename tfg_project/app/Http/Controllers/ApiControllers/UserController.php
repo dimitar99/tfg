@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -85,7 +86,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        if ($user){
+        if ($user) {
             return response()->json([
                 'mensaje' => 'Usuario encontrado ',
                 'user' => new UserResource($user)
@@ -103,9 +104,31 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request)
     {
-        $currentUser = $request->user();
+        $user = $request->user();
 
-        if ($request->updateUser($currentUser)) {
+        $user->fill([
+            'name' => $request->name,
+            'surnames' => $request->surnames,
+            'nick' => $request->nick,
+            'bio' => $request->bio,
+            'email' => $request->email
+        ]);
+
+        if ($request->password != null) {
+            $user->password = bcrypt($request->password);
+        }
+
+        if ($user->update()) {
+            if ($request->avatar) {
+                $path = 'users/avatar_' . $user->id . '.' . $request->avatar->getClientOriginalExtension();
+
+                if (Storage::exists($user->avatar)) {
+                    Storage::delete($user->avatar);
+                }
+
+                Storage::put($path, file_get_contents($request->avatar));
+                $user->update(['avatar' => $path]);
+            }
             return response()->json([
                 'mensaje' => 'Usuario actualizado correctamente'
             ], 200);
@@ -115,5 +138,4 @@ class UserController extends Controller
             'mensaje' => 'La actualizacion ha fallado'
         ], 400);
     }
-
 }
