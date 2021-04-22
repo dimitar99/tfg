@@ -28,13 +28,4 @@ class UpdateCommentRequest extends FormRequest
             'body' => ['required', 'string', 'max:50']
         ];
     }
-
-    public function updateComment(Comment $comment)
-    {
-        $comment->fill([
-            'body' => $this->body
-        ]);
-
-        return $comment->update();
-    }
 }

@@ -14,7 +14,7 @@ class CreateRoutinesTypesTable extends Migration
     public function up()
     {
         Schema::create('routines_types', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
 
             $table->string('name');
 

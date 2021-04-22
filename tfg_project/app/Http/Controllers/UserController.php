@@ -58,7 +58,23 @@ class UserController extends Controller
 
     public function store(CreateUserRequest $request)
     {
-        $request->createUser();
+        $user = new User([
+            'name' => $request->name,
+            'surnames' => $request->surnames,
+            'nick' => $request->nick,
+            'bio' => $request->bio,
+            'email' => $request->email,
+            'password' => bcrypt($request->password)
+        ]);
+
+        $user->save();
+
+        if ($request->avatar) {
+            $user->avatar = 'users/avatar_' . $user->id . '.' . $request->avatar->getClientOriginalExtension();
+            Storage::put($user->avatar, file_get_contents($request->avatar));
+
+            $user->update();
+        }
 
         return redirect()->route('users.list');
     }
@@ -86,7 +102,17 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request, User $user)
     {
-        $request->updateUser($user);
+        if ($request->avatar){
+            $user->avatar = 'users/avatar_.'.$user->id.$request->avatar->getClientOriginalExtension();
+
+            if (Storage::exists($user->avatar)){
+                Storage::delete($user->avatar);
+            }
+
+            Storage::put($user->avatar, file_get_contents($request->avatar));
+        }
+
+        $user->save();
 
         return redirect()->route('users.show', ['id' => $user->id]);
     }
@@ -97,6 +123,8 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
+        Storage::delete($user->avatar);
+
         $user->forceDelete();
 
         return redirect()->route('users.list');

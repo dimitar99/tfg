@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\RoutinesType;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -18,6 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->truncateTable([
             'users',
             'posts',
+            'categories',
+            'post_category',
             'comments',
             'routines',
             'routines_types'
@@ -25,6 +26,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             UserSeeder::class,
+            CategorySeeder::class,
             PostSeeder::class,
             CommentSeeder::class,
             RoutinesTypeSeeder::class,

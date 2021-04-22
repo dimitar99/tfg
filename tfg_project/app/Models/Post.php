@@ -29,4 +29,9 @@ class Post extends Model
         return $this->belongsToMany(User::class, 'likes');
     }
 
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'post_category');
+    }
+
 }

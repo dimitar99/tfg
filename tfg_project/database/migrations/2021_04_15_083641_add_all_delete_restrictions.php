@@ -21,11 +21,13 @@ class AddAllDeleteRestrictions extends Migration
         $table->foreign('user_id')->references('id')->on('users')
             ->onDelete('CASCADE');
     });
+
     Schema::table('comments', function (Blueprint $table) {
         $table->dropForeign('comments_post_id_foreign');
         $table->foreign('post_id')->references('id')->on('posts')
             ->onDelete('CASCADE');
     });
+
     Schema::table('comments', function (Blueprint $table) {
         $table->dropForeign('comments_user_id_foreign');
         $table->foreign('user_id')->references('id')->on('users')

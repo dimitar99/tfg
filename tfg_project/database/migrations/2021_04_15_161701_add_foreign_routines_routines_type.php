@@ -14,7 +14,7 @@ class AddForeignRoutinesRoutinesType extends Migration
     public function up()
     {
         Schema::table('routines', function (Blueprint $table) {
-            $table->unsignedInteger('type')->nullable();
+            $table->unsignedBigInteger('type')->nullable();
             $table->foreign('type')
                 ->references('id')
                 ->on('routines_types')

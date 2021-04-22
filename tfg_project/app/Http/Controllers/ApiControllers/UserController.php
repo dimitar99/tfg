@@ -9,7 +9,9 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Mail\Mailable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -29,6 +31,8 @@ class UserController extends Controller
         ]);
 
         $user = User::create($data);
+
+        Mail::to($user->email)->send(new Mailable);
 
         $create_token = $user->createToken('Personal Access Token');
 
@@ -88,7 +92,7 @@ class UserController extends Controller
 
         if ($user) {
             return response()->json([
-                'mensaje' => 'Usuario encontrado ',
+                'mensaje' => 'Usuario encontrado',
                 'user' => new UserResource($user)
             ], 200);
         }
@@ -106,36 +110,72 @@ class UserController extends Controller
     {
         $user = $request->user();
 
-        $user->fill([
-            'name' => $request->name,
-            'surnames' => $request->surnames,
-            'nick' => $request->nick,
-            'bio' => $request->bio,
-            'email' => $request->email
-        ]);
+        if ($user){
+            $user->fill([
+                'name' => $request->name,
+                'surnames' => $request->surnames,
+                'nick' => $request->nick,
+                'bio' => $request->bio,
+                'email' => $request->email
+            ]);
 
-        if ($request->password != null) {
-            $user->password = bcrypt($request->password);
-        }
-
-        if ($user->update()) {
-            if ($request->avatar) {
-                $path = 'users/avatar_' . $user->id . '.' . $request->avatar->getClientOriginalExtension();
-
-                if (Storage::exists($user->avatar)) {
-                    Storage::delete($user->avatar);
-                }
-
-                Storage::put($path, file_get_contents($request->avatar));
-                $user->update(['avatar' => $path]);
+            if ($request->password != null) {
+                $user->password = bcrypt($request->password);
             }
-            return response()->json([
-                'mensaje' => 'Usuario actualizado correctamente'
-            ], 200);
-        }
 
-        return response()->json([
-            'mensaje' => 'La actualizacion ha fallado'
-        ], 400);
+            if ($user->update()) {
+                if ($request->avatar) {
+                    $path = 'users/avatar_' . $user->id . '.' . $request->avatar->getClientOriginalExtension();
+
+                    if (Storage::exists($user->avatar)) {
+                        Storage::delete($user->avatar);
+                    }
+
+                    Storage::put($path, file_get_contents($request->avatar));
+                    $user->update(['avatar' => $path]);
+                }
+                return response()->json([
+                    'mensaje' => 'Usuario actualizado correctamente'
+                ], 200);
+            }
+
+            return response()->json([
+                'mensaje' => 'La actualizacion ha fallado'
+            ], 400);
+        }else{
+            return response()->json([
+                'mensaje' => 'Usuario no encontrado'
+            ], 400);
+        }
+    }
+
+    /*
+    * Follow/Unfollow a un user
+    */
+
+    public function followUnfollow(Request $request, $id)
+    {
+        $currentUser = $request->user();
+        $otherUser = User::where('id', $id)->first();
+
+        if ($otherUser) {
+            // Es el id de la tabla users porque followers() y followed()
+            // pertenecen a dicha tabla
+            if ($currentUser->followers()->where('id', $id)->first() != null) {
+                $currentUser->followers()->detach($id);
+                return response()->json([
+                    'mensaje' => 'Unfollow'
+                ], 200);
+            } else {
+                $currentUser->followers()->attach($id);
+                return response()->json([
+                    'mensaje' => 'Follow'
+                ], 200);
+            }
+        } else {
+            return response()->json([
+                'mensaje' => 'Usuario no encontrado'
+            ], 400);
+        }
     }
 }

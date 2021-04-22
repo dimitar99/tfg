@@ -31,16 +31,4 @@ class CreateCommentRequest extends FormRequest
         ];
     }
 
-    public function createComment()
-    {
-        DB::transaction(function () {
-            $comment = new Comment([
-                'post_id' => $this->post_id,
-                'user_id' => $this->user()->id,
-                'body' => $this->body
-            ]);
-
-            return $comment->save();
-        });
-    }
 }

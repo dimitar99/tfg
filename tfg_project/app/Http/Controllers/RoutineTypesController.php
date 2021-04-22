@@ -43,7 +43,11 @@ class RoutineTypesController extends Controller
 
     public function store(CreateRoutineTypeRequest $request)
     {
-        $request->createRoutineType();
+        $routineType = new RoutineType([
+            'name' => $request->name
+        ]);
+
+        $routineType->save();
 
         return redirect()->route('routineTypes.list');
     }
@@ -65,7 +69,11 @@ class RoutineTypesController extends Controller
 
     public function update(UpdateRoutineTypeRequest $request, RoutineType $routineType)
     {
-        $request->updateRoutineType($routineType);
+        $routineType->fill([
+            'name' => $request->name
+        ]);
+
+        $routineType->save();
 
         return redirect()->route('routineTypes.show', ['id' => $routineType->id]);
     }

@@ -28,7 +28,9 @@ class CreatePostRequest extends FormRequest
     {
         return [
             'body' => ['required', 'string', 'max:100'],
-            'image' => ['nullable']
+            'image' => ['nullable'],
+            'categorias' => ['required', 'array'],
+            'categorias.*' => ['integer', 'exists:categories,id']
         ];
     }
 

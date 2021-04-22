@@ -17,7 +17,13 @@ class CommentController extends Controller
 
     public function create(CreateCommentRequest $request)
     {
-        if ($request->createComment()){
+        $comment = new Comment([
+            'post_id' => $request->post_id,
+            'user_id' => $request->user()->id,
+            'body' => $request->body
+        ]);
+
+        if ($comment->save()){
             return response()->json([
                 'message' => 'Comentario creado correctamente'
             ], 200);
@@ -36,14 +42,36 @@ class CommentController extends Controller
         $currentUser = $request->user();
         $comment = $currentUser->comments()->findOrFail($id);
 
-        if ($request->updateComment($comment)){
+        if ($currentUser) {
+            if($comment){
+                if ($comment != null){
+                    $comment->fill([
+                        'body' => $request->body
+                    ]);
+
+                    if ($comment->update()){
+                        return response()->json([
+                            'message' => 'Comentario actualizado correctamente'
+                        ], 200);
+                    }
+                    return response()->json([
+                        'message' => 'El comentario no ha sido actualizado'
+                    ], 400);
+                }else{
+                    return response()->json([
+                        'message' => 'Comentario no encontrado'
+                    ], 400);
+                }
+            }else{
+                return response()->json([
+                    'message' => 'Comentario no encontrado'
+                ], 400);
+            }
+        }else{
             return response()->json([
-                'message' => 'Comentario actualizado correctamente'
-            ], 200);
+                'message' => 'Usuario no encontrado'
+            ], 400);
         }
-        return response()->json([
-            'message' => 'El comentario no ha sido actualizado'
-        ], 400);
     }
 
     /*
@@ -55,13 +83,31 @@ class CommentController extends Controller
         $currentUser = $request->user();
         $comment = $currentUser->comments()->findOrFail($id);
 
-        if ($comment->forceDelete()){
+        if ($currentUser){
+            if($comment){
+                if ($comment != null){
+                    if ($comment->forceDelete()){
+                        return response()->json([
+                            'message' => 'Comentario eliminado correctamente'
+                        ], 200);
+                    }
+                    return response()->json([
+                        'message' => 'El comentario no ha sido eliminado'
+                    ], 400);
+                }else{
+                    return response()->json([
+                        'message' => 'Comentario no encontrado'
+                    ], 400);
+                }
+            }else{
+                return response()->json([
+                    'message' => 'Comentario no encontrado'
+                ], 400);
+            }
+        }else{
             return response()->json([
-                'message' => 'Comentario eliminado correctamente'
-            ], 200);
+                'message' => 'Usuario no encontrado'
+            ], 400);
         }
-        return response()->json([
-            'message' => 'El comentario no ha sido eliminado'
-        ], 400);
     }
 }

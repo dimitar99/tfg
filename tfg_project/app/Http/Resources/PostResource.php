@@ -21,7 +21,8 @@ class PostResource extends JsonResource
             'user_id' => $this->user_id,
             'created_at' => $this->created_at->format('Y-m-d'),
             'likes' => $this->likes()->count(),
-            'liked_post' => ($this->likes()->where('id', $request->user()->id)->first()) ? 1 : 0
+            'liked_by_user' => ($this->likes()->where('id', $request->user()->id)->first()) ? 1 : 0,
+            'categories' => $this->categories()->get()->toArray()
         ];
     }
 }

@@ -44,7 +44,14 @@ class RoutineController extends Controller
 
     public function store(CreateRoutineRequest $request)
     {
-        $request->createRoutine();
+        $routine = new Routine([
+            'name' => $request->name,
+            'type' => $request->type,
+            'description' => $request->description,
+            'video' => $request->video,
+        ]);
+
+        $routine->save();
 
         return redirect()->route('routines.list');
     }
@@ -66,7 +73,14 @@ class RoutineController extends Controller
 
     public function update(UpdateRoutineRequest $request, Routine $routine)
     {
-        $request->updateRoutine($routine);
+        $routine->fill([
+            'name' => $request->name,
+            'type' => $request->type,
+            'description' => $request->description,
+            'video' => $request->video
+        ]);
+
+        $routine->save();
 
         return redirect()->route('routines.show', ['id' => $routine->id]);
     }
