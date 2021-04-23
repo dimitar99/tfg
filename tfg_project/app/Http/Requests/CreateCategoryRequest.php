@@ -2,11 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Post;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Storage;
 
-class UpdatePostRequest extends FormRequest
+class CreateCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,18 +24,15 @@ class UpdatePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'body' => ['required', 'string', 'max:100s'],
-            'image' => ['nullable'],
-            'categorias' => ['required', 'array'],
-            'categorias.*' => ['integer', 'exists:categories,id']
+            'name' => ['required', 'string', 'unique:categories']
         ];
     }
 
     public function messages()
     {
         return [
-            'body.required' => 'El campo body no puede estar vacio'
+            'name.required' => 'El campo Nombre no puede estar vacío',
+            'name.unique' => 'Ya existe una categoria con ese nombre'
         ];
     }
-
 }

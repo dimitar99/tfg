@@ -18,6 +18,7 @@
                             <tr>
                               <th>Id</th>
                               <th>Nombre</th>
+                              <th>Fecha Creacion</th>
                               <th>Acciones</th>
                             </tr>
                         </thead>
@@ -26,6 +27,7 @@
                                 <tr>
                                     <td>{{$routineType->id}}</td>
                                     <td>{{$routineType->name}}</td>
+                                    <td>{{ $routineType->created_at }}</td>
                                     <td>
                                         <form action="{{ route('routineTypes.destroy', $routineType) }}" method="POST">
                                             @csrf

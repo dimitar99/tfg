@@ -20,6 +20,7 @@
                               <th>Tipo</th>
                               <th>Descripcion</th>
                               <th>Video</th>
+                              <th>Fecha Creacion</th>
                               <th>Acciones</th>
                             </tr>
                         </thead>
@@ -30,6 +31,7 @@
                                     <td>{{$routine->routineType->name}}</td>
                                     <td>{{$routine->description}}</td>
                                     <td>{{$routine->video}}</td>
+                                    <td>{{ $routine->created_at }}</td>
                                     <td>
                                         <form action="{{ route('routines.destroy', $routine) }}" method="POST">
                                             @csrf

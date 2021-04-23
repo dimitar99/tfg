@@ -38,14 +38,4 @@ class CreateRoutineTypeRequest extends FormRequest
         ];
     }
 
-    public function createRoutineType()
-    {
-        DB::transaction(function () {
-            $routineType = new RoutineType([
-                'name' => $this->name
-            ]);
-
-            $routineType->save();
-        });
-    }
 }

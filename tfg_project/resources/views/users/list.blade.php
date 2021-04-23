@@ -8,7 +8,7 @@
         <a href="{{ route('users.create') }}" class="btn btn-outline-dark">Nuevo usuario</a>
     </div>
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div>
             <div class="card">
                 <div class="card-header">{{ __('Listado usuarios') }}</div>
 
@@ -16,6 +16,7 @@
                     <table class="table">
                         <thead class="thead-dark">
                             <tr>
+                              <th>Id</th>
                               <th>Nombre</th>
                               <th>Apellidos</th>
                               <th>Nick</th>
@@ -23,19 +24,22 @@
                               <th>Posts</th>
                               <th>Seguidos</th>
                               <th>Seguidores</th>
+                              <th>Fecha Creacion</th>
                               <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($users as $user)
                                 <tr>
+                                    <td>{{ $user->id }}</td>
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->surnames}}</td>
                                     <td>{{$user->nick}}</td>
                                     <td>{{$user->email}}</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
+                                    <td>{{ $user->posts->count() }}</td>
+                                    <td>{{ $user->followed->count() }}</td>
+                                    <td>{{ $user->followers->count() }}</td>
+                                    <td>{{ $user->created_at }}</td>
                                     <td>
                                         <form action="{{ route('users.destroy', $user) }}" method="POST">
                                             @csrf

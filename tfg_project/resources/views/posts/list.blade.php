@@ -16,6 +16,7 @@
                                     <th>Imagen</th>
                                     <th>Body</th>
                                     <th>Commentarios</th>
+                                    <th>Fecha Creacion</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -32,6 +33,7 @@
                                         </td>
                                         <td>{{ $post->body }}</td>
                                         <td>{{ $post->comments->count() }}</td>
+                                        <td>{{ $post->created_at }}</td>
                                         <td>
                                             <form action="{{ route('posts.destroy', $post) }}" method="POST">
                                                 @csrf

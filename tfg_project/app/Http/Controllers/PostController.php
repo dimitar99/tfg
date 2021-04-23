@@ -13,7 +13,9 @@ class PostController extends Controller
 
     public function list()
     {
-        $posts = Post::paginate(15);
+        $posts = Post::query()
+            ->orderBy('created_at')
+            ->paginate(15);
 
         return view('posts.list', ['posts' => $posts]);
     }

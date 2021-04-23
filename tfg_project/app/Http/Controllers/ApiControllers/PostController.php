@@ -74,38 +74,32 @@ class PostController extends Controller
         $currentUser = $request->user();
         $post = $currentUser->posts()->find($id);
 
-        if ($post){
-            $post->fill([
-                'body' => $request->body
-            ]);
+        $post->fill([
+            'body' => $request->body
+        ]);
 
-            if ($post->update()) {
+        if ($post->update()) {
 
-                $post->categories()->sync($request->categorias);
+            $post->categories()->sync($request->categorias);
 
-                if ($request->image) {
-                    $path = 'posts/image_' . $post->id . '.' . $request->image->getClientOriginalExtension();
+            if ($request->image) {
+                $path = 'posts/image_' . $post->id . '.' . $request->image->getClientOriginalExtension();
 
-                    if (Storage::exists($path)) {
-                        Storage::delete($path);
-                    }
-
-                    Storage::put($path, file_get_contents($request->image));
-                    $post->update(['image' => $path]);
+                if (Storage::exists($path)) {
+                    Storage::delete($path);
                 }
-                return response()->json([
-                    'message' => 'Post actualizado correctamente'
-                ], 200);
-            }
 
+                Storage::put($path, file_get_contents($request->image));
+                $post->update(['image' => $path]);
+            }
             return response()->json([
-                'message' => 'El post no ha sido actualizado'
-            ], 400);
-        }else{
-            return response()->json([
-                'message' => 'Post no encontrado'
-            ], 400);
+                'message' => 'Post actualizado correctamente'
+            ], 200);
         }
+
+        return response()->json([
+            'message' => 'El post no ha sido actualizado'
+        ], 400);
 
     }
 

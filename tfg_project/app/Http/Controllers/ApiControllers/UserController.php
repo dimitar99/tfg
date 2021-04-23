@@ -32,7 +32,7 @@ class UserController extends Controller
 
         $user = User::create($data);
 
-        Mail::to($user->email)->send(new Mailable);
+        //Mail::to($user->email)->send(new Mailable);
 
         $create_token = $user->createToken('Personal Access Token');
 

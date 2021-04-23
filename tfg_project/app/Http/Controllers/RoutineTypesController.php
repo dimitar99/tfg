@@ -73,7 +73,7 @@ class RoutineTypesController extends Controller
             'name' => $request->name
         ]);
 
-        $routineType->save();
+        $routineType->update();
 
         return redirect()->route('routineTypes.show', ['id' => $routineType->id]);
     }

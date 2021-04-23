@@ -70,10 +70,9 @@ class UserController extends Controller
         $user->save();
 
         if ($request->avatar) {
-            $user->avatar = 'users/avatar_' . $user->id . '.' . $request->avatar->getClientOriginalExtension();
-            Storage::put($user->avatar, file_get_contents($request->avatar));
-
-            $user->update();
+            $path = 'users/avatar_' . $user->id . '.' . $request->avatar->getClientOriginalExtension();
+            Storage::put($path, file_get_contents($request->avatar));
+            $user->update(['avatar' => $path]);
         }
 
         return redirect()->route('users.list');
@@ -102,14 +101,15 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request, User $user)
     {
-        if ($request->avatar){
-            $user->avatar = 'users/avatar_.'.$user->id.$request->avatar->getClientOriginalExtension();
+        if ($request->avatar) {
+            $path = 'users/avatar_' . $user->id . '.' . $request->avatar->getClientOriginalExtension();
 
-            if (Storage::exists($user->avatar)){
+            if (Storage::exists($user->avatar)) {
                 Storage::delete($user->avatar);
             }
 
-            Storage::put($user->avatar, file_get_contents($request->avatar));
+            Storage::put($path, file_get_contents($request->avatar));
+            $user->update(['avatar' => $path]);
         }
 
         $user->save();

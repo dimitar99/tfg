@@ -23,9 +23,9 @@
                         <p><strong>Nick: </strong>{{ $user->nick }}</p>
                         <p><strong>Bio: </strong>{{ $user->bio }}</p>
                         <p><strong>Email: </strong>{{ $user->email }}</p>
-                        <p><strong>Num Posts: </strong>00000</p>
-                        <p><strong>Seguidores: </strong>{{ $user->followers }}</p>
-                        <p><strong>Seguidos: </strong>{{ $user->followed }}</p>
+                        <p><strong>Num Posts: </strong>{{ $user->posts->count()}}</p>
+                        <p><strong>Seguidores: </strong>{{ $user->followers->count() }}</p>
+                        <p><strong>Seguidos: </strong>{{ $user->followed->count() }}</p>
                     </div>
                 </div>
             </div>

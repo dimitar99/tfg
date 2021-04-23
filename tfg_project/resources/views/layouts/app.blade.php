@@ -25,6 +25,7 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/users') }}">Usuarios</a>
                 <a class="navbar-brand" href="{{ url('/posts') }}">Posts</a>
+                <a class="navbar-brand" href="{{ url('/categories') }}">Categorias</a>
                 <a class="navbar-brand" href="{{ url('/routines') }}">Rutinas</a>
                 <a class="navbar-brand" href="{{ url('/routineTypes') }}">Tipos Rutinas</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

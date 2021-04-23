@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Models\RoutineType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -38,12 +37,4 @@ class UpdateRoutineTypeRequest extends FormRequest
         ];
     }
 
-    public function updateRoutineType(RoutineType $routineType)
-    {
-        $routineType->fill([
-            'name' => $this->name
-        ]);
-
-        $routineType->save();
-    }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
@@ -50,6 +51,19 @@ Route::group(['middleware' => ['auth']], function() {
         ->where('id', '[0-9]+')
         ->name('posts.show');
     Route::delete('/posts/{post}/destroy', [PostController::class, 'destroy'])->name('posts.destroy');
+
+    /*
+    * CATEGORY
+    */
+    Route::get('/categories', [CategoryController::class, 'list'])->name('categories.list');
+    Route::get('/categories/{id}', [CategoryController::class, 'show'])
+        ->where('id', '[0-9]+')
+        ->name('categories.show');
+    Route::get('/categories/new', [CategoryController::class, 'create'])->name('categories.create');
+    Route::post('/categories/create', [CategoryController::class, 'store']);
+    Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+    Route::put('/categories/{category}', [CategoryController::class, 'update']);
+    Route::delete('/categories/{category}/destroy', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
     /*
     * COMMENT
