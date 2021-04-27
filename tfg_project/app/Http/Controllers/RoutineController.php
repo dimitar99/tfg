@@ -7,6 +7,7 @@ use App\Http\Requests\CreateRoutineRequest;
 use App\Http\Requests\UpdateRoutineRequest;
 use App\Models\Routine;
 use App\Models\RoutinesType;
+use App\Models\RoutineType;
 
 class RoutineController extends Controller
 {
@@ -18,8 +19,9 @@ class RoutineController extends Controller
     public function list()
     {
         $routines = Routine::paginate(10);
+        $routineTypes = RoutineType::all();
 
-        return view('routines.list', compact('routines'));
+        return view('routines.list', compact('routines', 'routineTypes'));
     }
 
     /*
@@ -39,7 +41,7 @@ class RoutineController extends Controller
 
     public function create()
     {
-        return new RoutineForm('routines.create', new Routine);
+        return new RoutineForm('modals.create_routine', new Routine);
     }
 
     public function store(CreateRoutineRequest $request)

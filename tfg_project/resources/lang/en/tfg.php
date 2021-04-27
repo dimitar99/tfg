@@ -9,7 +9,10 @@ return [
             'categories' => 'Categories',
             'routines' => 'Routines',
             'routine-types' => 'Routine Types',
-            'logout' => 'Logout'
+            'logout' => 'Logout',
+            'language' => 'Language',
+            'spanish' => 'Spanish',
+            'english' => 'English',
         ]
     ],
 
@@ -78,6 +81,7 @@ return [
         'return-to-list' => 'Return to list',
         'yes' => 'Yes',
         'no' => 'No',
+        'cancel' => 'Cancel'
     ],
 
     'users' => [

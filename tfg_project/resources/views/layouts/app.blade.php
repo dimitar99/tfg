@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,18 +20,24 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
+
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                @if(Auth::user())
+                @if (Auth::user())
                     <a class="navbar-brand" href="{{ url('/users') }}"> {{ __('tfg.layouts.header.users') }}</a>
                     <a class="navbar-brand" href="{{ url('/posts') }}"> {{ __('tfg.layouts.header.posts') }}</a>
-                    <a class="navbar-brand" href="{{ url('/categories') }}"> {{ __('tfg.layouts.header.categories') }}</a>
-                    <a class="navbar-brand" href="{{ url('/routines') }}"> {{ __('tfg.layouts.header.routines') }}</a>
-                    <a class="navbar-brand" href="{{ url('/routineTypes') }}"> {{  __('tfg.layouts.header.routine-types') }}</a>
+                    <a class="navbar-brand" href="{{ url('/categories') }}">
+                        {{ __('tfg.layouts.header.categories') }}</a>
+                    <a class="navbar-brand" href="{{ url('/routines') }}">
+                        {{ __('tfg.layouts.header.routines') }}</a>
+                    <a class="navbar-brand" href="{{ url('/routineTypes') }}">
+                        {{ __('tfg.layouts.header.routine-types') }}</a>
                 @endif
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -42,6 +49,24 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @if(App::getLocale() == "es")
+                                    Español
+                                @else
+                                    English
+                                @endif
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                @foreach (['es' => 'Español', 'en' => 'English'] as $lang => $language)
+                                    @if ($lang != App::getLocale())
+                                        <a class="dropdown-item" href="{{ route('language', $lang) }}">
+                                            {{ $language }}</a>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </li>
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
@@ -57,14 +82,15 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                        onclick="event.preventDefault();
+                                                                             document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -84,4 +110,5 @@
         </main>
     </div>
 </body>
+
 </html>

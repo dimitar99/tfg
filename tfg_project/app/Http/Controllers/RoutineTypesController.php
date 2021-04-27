@@ -38,7 +38,7 @@ class RoutineTypesController extends Controller
 
     public function create()
     {
-        return new RoutineTypeForm('routineTypes.create', new RoutineType);
+        return new RoutineTypeForm('modals.create_routine_type', new RoutineType);
     }
 
     public function store(CreateRoutineTypeRequest $request)
