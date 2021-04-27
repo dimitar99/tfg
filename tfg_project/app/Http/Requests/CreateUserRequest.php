@@ -39,14 +39,14 @@ class CreateUserRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'El campo Nombre no puede estar vacio',
-            'surnames.required' => 'El campo Apellidos no puede estar vacio',
-            'nick.required' => 'El campo Nick no puede estar vacio',
-            'nick.unique' => 'El nick introducido ya se esta utilizando',
-            'email.required' => 'El campo Email no puede estar vacio',
-            'email.email' => 'El campo Email no tiene un formato correcto',
+            'name.required' => __('tfg.validations.name-required'),
+            'surnames.required' => __('tfg.validations.surnames-required'),
+            'nick.required' => __('tfg.validations.nick-required'),
+            'nick.unique' => __('tfg.validations.nick-unique'),
+            'email.required' => __('tfg.validations.email-required'),
+            'email.email' => __('tfg.validations.email-email'),
             'email.unique' => 'El correo introducido ya se esta utilizando',
-            'password.required' => 'El campo Contraseña no puede estar vacio',
+            'password.required' => __('tfg.validations.password-required'),
             'password.min' => 'El campo Contraseña debe tener 8 carácteres como mínimo',
             'password.confirmed' => 'Las contraseñas no coinciden',
         ];

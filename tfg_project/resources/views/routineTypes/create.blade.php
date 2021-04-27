@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Crear nuevo tipo rutina</div>
+                <div class="card-header">{{ __('tfg.routines-types.new') }}</div>
 
                 <div class="card-body">
 
@@ -17,15 +17,15 @@
 
                         {!! csrf_field() !!}
                         <div class="form">
-                            <label for="name">Nombre: </label>
+                            <label for="name">{{ __('tfg.forms.fields.name') }}: </label>
                             <input type="text" class="form-control" name="name" id="name" placeholder="Pecho"
                                 value="{{ old('name', $routineType->name) }}">
                         </div>
                         <br>
 
                         <div class="form-group mt-4">
-                            <button type="submit" class="btn btn-primary">Crear rutina</button>
-                            <a href="{{ route('routineTypes.list') }}" style="text-decoration: none">Volver</a>
+                            <button type="submit" class="btn btn-primary">{{ __('tfg.routines-types.create') }}</button>
+                            <a href="{{ route('routineTypes.list') }}" style="text-decoration: none">{{ __('tfg.buttons.return') }}</a>
                         </div>
 
                     </form>

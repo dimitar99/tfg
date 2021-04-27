@@ -9,7 +9,8 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Mail\Mailable;
+use App\Mail\AccountCreatedConfirmationMailable;
+use App\Mail\ContactMailable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -32,7 +33,7 @@ class UserController extends Controller
 
         $user = User::create($data);
 
-        //Mail::to($user->email)->send(new Mailable);
+        Mail::to($user->email)->send(new AccountCreatedConfirmationMailable());
 
         $create_token = $user->createToken('Personal Access Token');
 
@@ -177,5 +178,16 @@ class UserController extends Controller
                 'mensaje' => 'Usuario no encontrado'
             ], 400);
         }
+    }
+
+    /*
+    * Formulario de Contacto
+    */
+
+    public function contact(Request $request)
+    {
+        $body = $request->body;
+
+        Mail::to("dimitar2015@gmail.com")->send(new ContactMailable($request, $body));
     }
 }

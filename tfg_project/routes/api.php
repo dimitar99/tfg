@@ -20,6 +20,7 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::get('/users/{user}', [UserController::class, 'getUser']);
     Route::post('/users/{user}/update', [UserController::class, 'update']);
     Route::post('/users/{user}/followUnfollow', [UserController::class, 'followUnfollow']);
+    Route::post('/users/contact', [UserController::class, 'contact']);
 
     /*
     * POSTS

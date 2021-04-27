@@ -23,11 +23,13 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/users') }}">Usuarios</a>
-                <a class="navbar-brand" href="{{ url('/posts') }}">Posts</a>
-                <a class="navbar-brand" href="{{ url('/categories') }}">Categorias</a>
-                <a class="navbar-brand" href="{{ url('/routines') }}">Rutinas</a>
-                <a class="navbar-brand" href="{{ url('/routineTypes') }}">Tipos Rutinas</a>
+                @if(Auth::user())
+                    <a class="navbar-brand" href="{{ url('/users') }}"> {{ __('tfg.layouts.header.users') }}</a>
+                    <a class="navbar-brand" href="{{ url('/posts') }}"> {{ __('tfg.layouts.header.posts') }}</a>
+                    <a class="navbar-brand" href="{{ url('/categories') }}"> {{ __('tfg.layouts.header.categories') }}</a>
+                    <a class="navbar-brand" href="{{ url('/routines') }}"> {{ __('tfg.layouts.header.routines') }}</a>
+                    <a class="navbar-brand" href="{{ url('/routineTypes') }}"> {{  __('tfg.layouts.header.routine-types') }}</a>
+                @endif
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>

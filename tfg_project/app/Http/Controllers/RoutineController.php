@@ -48,7 +48,7 @@ class RoutineController extends Controller
             'name' => $request->name,
             'type' => $request->type,
             'description' => $request->description,
-            'video' => $request->video,
+            'image' => $request->image,
         ]);
 
         $routine->save();
@@ -77,7 +77,7 @@ class RoutineController extends Controller
             'name' => $request->name,
             'type' => $request->type,
             'description' => $request->description,
-            'video' => $request->video
+            'image' => $request->image
         ]);
 
         $routine->save();

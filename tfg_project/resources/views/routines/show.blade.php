@@ -9,15 +9,15 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    Detalle de {{ $routine->name }}
+                    {{ __('tfg.routines.detail') }} {{ $routine->name }}
                 </div>
                 <div class="card-body">
                     <div class="card-text">
-                        <p><strong>Id: </strong>{{ $routine->id }}</p>
-                        <p><strong>Nombre: </strong>{{ $routine->name }}</p>
-                        <p><strong>Tipo: </strong>{{ $routine->type }}</p>
-                        <p><strong>Descripcion: </strong>{{ $routine->description }}</p>
-                        <p><strong>Video: </strong>{{ $routine->video }}</p>
+                        <p><strong>{{ __('tfg.forms.fields.id') }}: </strong>{{ $routine->id }}</p>
+                        <p><strong>{{ __('tfg.forms.fields.name') }}: </strong>{{ $routine->name }}</p>
+                        <p><strong>{{ __('tfg.forms.fields.type') }}: </strong>{{ $routine->type }}</p>
+                        <p><strong>{{ __('tfg.forms.fields.description') }}: </strong>{{ $routine->description }}</p>
+                        <p><strong>{{ __('tfg.forms.fields.image') }}: </strong>{{ $routine->image }}</p>
                     </div>
                 </div>
             </div>

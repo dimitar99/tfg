@@ -7,17 +7,17 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">{{ __('Listado Posts') }}</div>
+                    <div class="card-header">{{ __('tfg.posts.list') }}</div>
                     <div class="table-responsive">
                         <table class="table">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Imagen</th>
-                                    <th>Body</th>
-                                    <th>Commentarios</th>
-                                    <th>Fecha Creacion</th>
-                                    <th>Acciones</th>
+                                    <th>{{ __('tfg.tables.id') }}</th>
+                                    <th>{{ __('tfg.tables.image') }}</th>
+                                    <th>{{ __('tfg.tables.body') }}</th>
+                                    <th>{{ __('tfg.tables.comments') }}</th>
+                                    <th>{{ __('tfg.tables.created-at') }}</th>
+                                    <th>{{ __('tfg.tables.actions') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -25,10 +25,10 @@
                                     <tr>
                                         <td>{{ $post->id }}</td>
                                         <td>
-                                            @if($post->image)
-                                                Si
+                                            @if ($post->image)
+                                                {{ __('tfg.buttons.yes') }}
                                             @else
-                                                No
+                                                {{ __('tfg.buttons.no') }}
                                             @endif
                                         </td>
                                         <td>{{ $post->body }}</td>
@@ -38,8 +38,10 @@
                                             <form action="{{ route('posts.destroy', $post) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <a href="{{ route('posts.show', $post) }}" class="btn btn-outline-secondary btn-sm">Ver</a>
-                                                <button type="submit">Eliminar</button>
+                                                <a href="{{ route('posts.show', $post) }}"
+                                                    class="btn btn-outline-secondary btn-sm">
+                                                    {{ __('tfg.buttons.show') }} </a>
+                                                <button type="submit"> {{ __('tfg.buttons.delete') }} </button>
                                             </form>
                                         </td>
                                     </tr>

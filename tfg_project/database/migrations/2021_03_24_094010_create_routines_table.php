@@ -18,7 +18,7 @@ class CreateRoutinesTable extends Migration
 
             $table->string('name');
             $table->text('description');
-            $table->string('video')->nullable();
+            $table->string('image')->nullable();
 
             $table->timestamps();
         });

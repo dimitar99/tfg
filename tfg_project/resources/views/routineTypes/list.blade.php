@@ -5,21 +5,21 @@
 @section('content')
 <div class="container">
     <div class="d-flex justify-content-between">
-        <a href="{{ route('routineTypes.create') }}" class="btn btn-outline-dark">Nuevo tipo rutina</a>
+        <a href="{{ route('routineTypes.create') }}" class="btn btn-outline-dark"> {{ __('tfg.routines-types.new') }} </a>
     </div>
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Listado Tipos Rutinas') }}</div>
+                <div class="card-header">{{ __('tfg.routines-types.list') }}</div>
 
                 <div class="table-responsive">
                     <table class="table">
                         <thead class="thead-dark">
                             <tr>
-                              <th>Id</th>
-                              <th>Nombre</th>
-                              <th>Fecha Creacion</th>
-                              <th>Acciones</th>
+                              <th>{{ __('tfg.tables.id') }}</th>
+                              <th>{{ __('tfg.tables.name') }}</th>
+                              <th>{{ __('tfg.tables.created-at') }}</th>
+                              <th>{{ __('tfg.tables.actions') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -32,9 +32,9 @@
                                         <form action="{{ route('routineTypes.destroy', $routineType) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <a href="{{ route('routineTypes.show', $routineType) }}" class="btn btn-outline-secondary btn-sm">Ver</a>
-                                            <a href="{{ route('routineTypes.edit', $routineType) }}" class="btn btn-outline-secondary btn-sm">Editar</a>
-                                            <button type="submit">Eliminar</button>
+                                            <a href="{{ route('routineTypes.show', $routineType) }}" class="btn btn-outline-secondary btn-sm"> {{ __('tfg.buttons.show') }} </a>
+                                            <a href="{{ route('routineTypes.edit', $routineType) }}" class="btn btn-outline-secondary btn-sm"> {{ __('tfg.buttons.edit') }} </a>
+                                            <button type="submit"> {{ __('tfg.buttons.delete') }} </button>
                                         </form>
                                     </td>
                                 </tr>

@@ -1,9 +1,9 @@
 @if($errors->any())
 <div class="alert alert-danger">
-    <h4>Corrige los errores</h4>
+    <h4>{{ __('tfg.validations.correct-the-errors') }}</h4>
     <ul>
         @foreach ($errors->all() as $error)
-            <li>{{$error}}</li>                
+            <li>{{$error}}</li>
         @endforeach
     </ul>
 </div>

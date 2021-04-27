@@ -5,21 +5,21 @@
 @section('content')
     <div class="container">
         <div class="d-flex justify-content-between">
-            <a href="{{ route('categories.create') }}" class="btn btn-outline-dark">Nueva categoria</a>
+            <a href="{{ route('categories.create') }}" class="btn btn-outline-dark"> {{ __('tfg.categories.new') }} </a>
         </div>
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Listado categorias') }}</div>
+                    <div class="card-header">{{ __('tfg.routines.list') }}</div>
 
                     <div class="table-responsive">
                         <table class="table">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Nombre</th>
-                                    <th>Fecha Creacion</th>
-                                    <th>Acciones</th>
+                                    <th>{{ __('tfg.tables.id') }}</th>
+                                    <th>{{ __('tfg.tables.name') }}</th>
+                                    <th>{{ __('tfg.tables.created-at') }}</th>
+                                    <th>{{ __('tfg.tables.actions') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -33,10 +33,10 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 <a href="{{ route('categories.show', $category) }}"
-                                                    class="btn btn-outline-secondary btn-sm">Ver</a>
+                                                    class="btn btn-outline-secondary btn-sm"> {{ __('tfg.buttons.show') }} </a>
                                                 <a href="{{ route('categories.edit', $category) }} "
-                                                    class="btn btn-outline-secondary btn-sm">Editar</a>
-                                                <button type="submit">Eliminar</button>
+                                                    class="btn btn-outline-secondary btn-sm"> {{ __('tfg.buttons.edit') }} </a>
+                                                <button type="submit"> {{ __('tfg.buttons.delete') }} </button>
                                             </form>
                                         </td>
                                     </tr>
@@ -46,7 +46,6 @@
                     </div>
                 </div>
                 {{ $categories->links() }}
-                <p>Viendo pagina {{ $categories->currentPage() }} de {{ $categories->lastPage() }} </p>
             </div>
         </div>
     </div>

@@ -19,21 +19,21 @@ class RoutineSeeder extends Seeder
             'name' => 'Rutina 1',
             'type' => RoutineType::all()->random()->id,
             'description' => 'Esto es una prueba para crear una rutina y que la tabla no se quede vacia',
-            'video' => 'video'
+            'image' => 'imagen'
         ]);
 
         Routine::create([
             'name' => 'Rutina 2',
             'type' => RoutineType::all()->random()->id,
             'description' => 'Esto es una prueba para crear una rutina y que la tabla no se quede vacia',
-            'video' => 'video'
+            'image' => 'imagen'
         ]);
 
         Routine::create([
             'name' => 'Rutina 3',
             'type' => RoutineType::all()->random()->id,
             'description' => 'Esto es una prueba para crear una rutina y que la tabla no se quede vacia',
-            'video' => 'video'
+            'image' => 'imagen'
         ]);
     }
 }
