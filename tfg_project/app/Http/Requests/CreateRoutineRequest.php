@@ -36,24 +36,8 @@ class CreateRoutineRequest extends FormRequest
     public function messages()
     {
         return[
-            'name.required' => 'El campo Nombre no puede estar vacio',
-            'type.required' => 'El campo Tipo no puede estar vacio',
-            'description.required' => 'El campo Descripcion no puede estar vacio',
-            'image.required' => 'El campo Imagen no puede estar vacio'
+
         ];
     }
 
-    public function createRoutine()
-    {
-        DB::transaction(function () {
-            $routine = new Routine([
-                'name' => $this->name,
-                'type' => $this->type,
-                'description' => $this->description,
-                'image' => $this->image,
-            ]);
-
-            $routine->save();
-        });
-    }
 }

@@ -39,10 +39,7 @@ class UpdateUserRequest extends FormRequest
     public function messages()
     {
         return [
-            'nick.unique' => 'El nick introducido ya se esta utilizando',
-            'email.email' => 'El campo Email no tiene un formato correcto',
-            'email.unique' => 'El correo introducido ya se esta utilizando',
-            'password.min' => 'Como minimo 8 caracteres'
+
         ];
     }
 

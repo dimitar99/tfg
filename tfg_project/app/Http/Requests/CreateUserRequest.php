@@ -39,16 +39,6 @@ class CreateUserRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => __('tfg.validations.name-required'),
-            'surnames.required' => __('tfg.validations.surnames-required'),
-            'nick.required' => __('tfg.validations.nick-required'),
-            'nick.unique' => __('tfg.validations.nick-unique'),
-            'email.required' => __('tfg.validations.email-required'),
-            'email.email' => __('tfg.validations.email-email'),
-            'email.unique' => 'El correo introducido ya se esta utilizando',
-            'password.required' => __('tfg.validations.password-required'),
-            'password.min' => 'El campo Contraseña debe tener 8 carácteres como mínimo',
-            'password.confirmed' => 'Las contraseñas no coinciden',
         ];
     }
 

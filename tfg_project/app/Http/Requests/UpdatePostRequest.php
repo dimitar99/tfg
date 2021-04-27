@@ -34,7 +34,7 @@ class UpdatePostRequest extends FormRequest
     public function messages()
     {
         return [
-            'body.required' => 'El campo body no puede estar vacio'
+
         ];
     }
 

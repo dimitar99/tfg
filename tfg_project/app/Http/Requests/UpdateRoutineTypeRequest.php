@@ -32,8 +32,7 @@ class UpdateRoutineTypeRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'El campo Nombre no puede estar vacío',
-            'name.unique' => 'Ya existe una rutina con ese nombre'
+
         ];
     }
 
