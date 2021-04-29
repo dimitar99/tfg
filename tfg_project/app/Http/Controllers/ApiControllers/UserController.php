@@ -57,7 +57,7 @@ class UserController extends Controller
         //Si el usuario no se autentifica correctamente devuelve error
         if (!Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             return response()->json([
-                'message' => trans('tfg.api.response.user_unauthorized')
+                'message' => trans('tfg.api.responses.user_unauthorized')
             ], 400);
         }
 

@@ -4,16 +4,19 @@ return [
 
     'layouts' => [
         'header' => [
-            'users' => 'Usuarios',
-            'posts' => 'Posts',
-            'categories' => 'Categorias',
-            'routines' => 'Rutinas',
-            'routine-types' => 'Tipos Rutinas',
             'logout' => 'Cerrar Sesión',
             'language' => 'Idioma',
             'spanish' => 'Español',
             'english' => 'Ingles',
-        ]
+        ],
+        'body' => [
+            'users' => 'Usuarios',
+            'posts' => 'Posts',
+            'categories' => 'Categorias',
+            'routines' => 'Rutinas',
+            'comments' => 'Comentarios',
+            'routine-types' => 'Tipos Rutinas',
+        ],
     ],
 
     'tables' => [
@@ -33,7 +36,7 @@ return [
         'image' => 'IMAGEN',
         'body' => 'BODY',
         'comments' => 'COMENTARIOS',
-        'type' => 'TYPE',
+        'type' => 'TIPO',
         'description' => 'DESCRIPCION'
     ],
 

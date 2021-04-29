@@ -4,15 +4,18 @@ return [
 
     'layouts' => [
         'header' => [
-            'users' => 'Users',
-            'posts' => 'Posts',
-            'categories' => 'Categories',
-            'routines' => 'Routines',
-            'routine-types' => 'Routine Types',
             'logout' => 'Logout',
             'language' => 'Language',
             'spanish' => 'Spanish',
             'english' => 'English',
+        ],
+        'body' => [
+            'users' => 'Users',
+            'posts' => 'Posts',
+            'categories' => 'Categories',
+            'routines' => 'Routines',
+            'comments' => 'Comments',
+            'routine-types' => 'Routine Types',
         ]
     ],
 
@@ -145,7 +148,7 @@ return [
             'user_unauthorized' => 'User authorized',
             'user_found' => 'User found',
             'user_not_found' => 'User not found',
-            'user_updated' => 'User update',
+            'user_updated' => 'User updated',
             'user_not_updated' => 'User not update',
             'user_follow' => 'User followed',
             'user_unfollow' => 'User not followed',
