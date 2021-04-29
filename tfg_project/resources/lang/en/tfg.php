@@ -88,11 +88,13 @@ return [
         'list' => 'Users Lists',
         'new' => 'New User',
         'create' => 'Create User',
+        'edit' => 'Edit User',
         'detail' => 'User Detail',
     ],
 
     'posts' => [
         'list' => 'Posts List',
+        'edit' => 'Edit Post',
         'detail' => 'Post Detail',
     ],
 
@@ -100,6 +102,7 @@ return [
         'list' => 'Categories List',
         'new' => 'New Category',
         'create' => 'Create Category',
+        'edit' => 'Edit Category',
         'detail' => 'Category Detail',
     ],
 
@@ -107,6 +110,7 @@ return [
         'list' => 'Routines List',
         'new' => 'New Routine',
         'create' => 'Create Routine',
+        'edit' => 'Edit Routine',
         'detail' => 'Routine Detail'
     ],
 
@@ -114,11 +118,38 @@ return [
         'list' => 'Routines Type List',
         'new' => 'New Routine Type',
         'create' => 'Create Routine Type',
+        'edit' => 'Edit Routine Type',
         'detail' => 'Routine Type Detail'
     ],
 
     'validations' => [
         'correct-the-errors' => 'Correct the errors',
+    ],
+
+    'api' => [
+        'responses' => [
+            'post_created' => 'Post created',
+            'post_not_created' => 'Post not created',
+            'post_updated' => 'Post updated',
+            'post_not_updated' => 'Post not updated',
+            'post_deleted' => 'Post deleted',
+            'post_not_deleted' => 'Post not deleted',
+            'post_liked' => 'Post liked',
+            'post_disliked' => 'Post disliked',
+            'comment_created' => 'Comment created',
+            'comment_not_created' => 'Comment not created',
+            'comment_updated' => 'Comment updated',
+            'comment_not_updated' => 'Comment not updated',
+            'comment_deleted' => 'Comment deleted',
+            'comment_not_deleted' => 'Comment not deleted',
+            'user_unauthorized' => 'User authorized',
+            'user_found' => 'User found',
+            'user_not_found' => 'User not found',
+            'user_updated' => 'User update',
+            'user_not_updated' => 'User not update',
+            'user_follow' => 'User followed',
+            'user_unfollow' => 'User not followed',
+        ]
     ],
 
 ];

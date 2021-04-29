@@ -10,6 +10,7 @@ class RoutineForm implements Responsable
 {
     private $view;
     private $routine;
+    private $image;
 
     public function __construct($view, Routine $routine)
     {

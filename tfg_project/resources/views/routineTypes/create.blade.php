@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Crear Tipo Rutina')
+@section('title', __('tfg.routines-types.create'))
 
 @section('content')
 <div class="container">

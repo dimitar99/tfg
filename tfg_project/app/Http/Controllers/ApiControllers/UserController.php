@@ -57,7 +57,7 @@ class UserController extends Controller
         //Si el usuario no se autentifica correctamente devuelve error
         if (!Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             return response()->json([
-                'message' => 'Unauthorized'
+                'message' => trans('tfg.api.response.user_unauthorized')
             ], 400);
         }
 
@@ -91,16 +91,10 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        if ($user) {
-            return response()->json([
-                'mensaje' => 'Usuario encontrado',
-                'user' => new UserResource($user)
-            ], 200);
-        }
-
         return response()->json([
-            'mensaje' => 'Usuario no encontrado',
-        ], 400);
+            'mensaje' => trans('tfg.api.responses.user_found'),
+            'user' => new UserResource($user)
+        ], 200);
     }
 
     /*
@@ -111,43 +105,37 @@ class UserController extends Controller
     {
         $user = $request->user();
 
-        if ($user){
-            $user->fill([
-                'name' => $request->name,
-                'surnames' => $request->surnames,
-                'nick' => $request->nick,
-                'bio' => $request->bio,
-                'email' => $request->email
-            ]);
+        $user->fill([
+            'name' => $request->name,
+            'surnames' => $request->surnames,
+            'nick' => $request->nick,
+            'bio' => $request->bio,
+            'email' => $request->email
+        ]);
 
-            if ($request->password != null) {
-                $user->password = bcrypt($request->password);
-            }
-
-            if ($user->update()) {
-                if ($request->avatar) {
-                    $path = 'users/avatar_' . $user->id . '.' . $request->avatar->getClientOriginalExtension();
-
-                    if (Storage::exists($user->avatar)) {
-                        Storage::delete($user->avatar);
-                    }
-
-                    Storage::put($path, file_get_contents($request->avatar));
-                    $user->update(['avatar' => $path]);
-                }
-                return response()->json([
-                    'mensaje' => 'Usuario actualizado correctamente'
-                ], 200);
-            }
-
-            return response()->json([
-                'mensaje' => 'La actualizacion ha fallado'
-            ], 400);
-        }else{
-            return response()->json([
-                'mensaje' => 'Usuario no encontrado'
-            ], 400);
+        if ($request->password != null) {
+            $user->password = bcrypt($request->password);
         }
+
+        if ($user->update()) {
+            if ($request->avatar) {
+                $path = 'users/avatar_' . $user->id . '.' . $request->avatar->getClientOriginalExtension();
+
+                if (Storage::exists($user->avatar)) {
+                    Storage::delete($user->avatar);
+                }
+
+                Storage::put($path, file_get_contents($request->avatar));
+                $user->update(['avatar' => $path]);
+            }
+            return response()->json([
+                'mensaje' => trans('tfg.api.responses.user_updated')
+            ], 200);
+        }
+
+        return response()->json([
+            'mensaje' => trans('tfg.api.responses.user_not_updated')
+        ], 400);
     }
 
     /*
@@ -165,17 +153,17 @@ class UserController extends Controller
             if ($currentUser->followers()->where('id', $id)->first() != null) {
                 $currentUser->followers()->detach($id);
                 return response()->json([
-                    'mensaje' => 'Unfollow'
+                    'mensaje' => trans('api.responses.user_not_found')
                 ], 200);
             } else {
                 $currentUser->followers()->attach($id);
                 return response()->json([
-                    'mensaje' => 'Follow'
+                    'mensaje' => trans('api.responses.user_follow')
                 ], 200);
             }
         } else {
             return response()->json([
-                'mensaje' => 'Usuario no encontrado'
+                'mensaje' => trans('api.responses.user_unfollow')
             ], 400);
         }
     }
@@ -188,6 +176,6 @@ class UserController extends Controller
     {
         $body = $request->body;
 
-        Mail::to("dimitar2015@gmail.com")->send(new ContactMailable($request, $body));
+        Mail::to("dimitar1999.de@gmail.com")->send(new ContactMailable($request, $body));
     }
 }

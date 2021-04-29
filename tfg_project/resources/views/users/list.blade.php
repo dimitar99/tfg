@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.app-old')
 
-@section('title', 'Listado Usuarios' )
+@section('title', __('tfg.users.list') )
 
 @section('content')
     <div class="container">

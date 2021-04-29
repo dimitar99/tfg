@@ -6,8 +6,8 @@ use App\Http\Forms\RoutineForm;
 use App\Http\Requests\CreateRoutineRequest;
 use App\Http\Requests\UpdateRoutineRequest;
 use App\Models\Routine;
-use App\Models\RoutinesType;
 use App\Models\RoutineType;
+use Illuminate\Support\Facades\Storage;
 
 class RoutineController extends Controller
 {
@@ -41,7 +41,7 @@ class RoutineController extends Controller
 
     public function create()
     {
-        return new RoutineForm('modals.create_routine', new Routine);
+        return new RoutineForm('routines.create', new Routine);
     }
 
     public function store(CreateRoutineRequest $request)
@@ -50,10 +50,15 @@ class RoutineController extends Controller
             'name' => $request->name,
             'type' => $request->type,
             'description' => $request->description,
-            'image' => $request->image,
         ]);
 
         $routine->save();
+
+        if ($request->image) {
+            $path = 'routines/image_' . $routine->id . '.' . $request->image->getClientOriginalExtension();
+            Storage::put($path, file_get_contents($request->image));
+            $routine->update(['image' => $path]);
+        }
 
         return redirect()->route('routines.list');
     }
@@ -65,8 +70,14 @@ class RoutineController extends Controller
     public function edit($id)
     {
         $routine = Routine::findOrFail($id);
+        $routineTypes = RoutineType::all();
+        $image = "";
 
-        return new RoutineForm('routines.edit', $routine);
+        if (Storage::exists($routine->image)) {
+            $image = Storage::url($routine->image);
+        }
+
+        return view('routines.edit', compact('routine', 'routineTypes', 'image'));
     }
 
     /*

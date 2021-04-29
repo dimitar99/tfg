@@ -1,15 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Listado Tipos Rutinas')
+@section('title',  __('tfg.routines-types.list'))
 
 @section('content')
     <div class="container">
 
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal">
-            {{ __('tfg.routines-types.new') }}
-        </button>
-        @include('modals.create_routine_type')
+        <div class="d-flex justify-content-between">
+            <a href="{{ route('routineTypes.create') }}" class="btn btn-outline-dark"> {{ __('tfg.routines-types.new') }} </a>
+        </div>
 
         <div class="row justify-content-center">
             <div class="col-md-12">

@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\App;
-
 class LanguageController extends Controller
 {
     public function switchLang($lang)
     {
+        $cookie = cookie('language', 'es', 10080);
+
         if (in_array($lang, ['es', 'en'])) {
-            App::setLocale('en');
+            $cookie = cookie('language', $lang, 10080);
         }
-        return redirect()->route('users.list');
+
+        return redirect()->back()->withCookie($cookie);
     }
 }

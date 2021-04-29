@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Crear Usuario')
+@section('title', __('tfg.users.create'))
 
 @section('content')
 <div class="container">

@@ -1,33 +1,34 @@
 @extends('layouts.app')
 
-@section('title', 'Crear Rutina')
+@section('title', __('tfg.routines.create'))
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Crear nueva rutina</div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ __('tfg.routines.new') }}</div>
 
-                <div class="card-body">
+                    <div class="card-body">
 
-                    @include('shared._errors')
+                        @include('shared._errors')
 
-                    <form method="POST" action="{{ url('/routines/create') }}">
+                        <form method="POST" action="{{ url('/routines/create') }}" enctype="multipart/form-data">
 
-                        @include('shared._routineFields')
+                            @include('shared._routineFields')
 
-                        <div class="form-group mt-4">
-                            <button type="submit" class="btn btn-primary">Crear rutina</button>
-                            <a href="{{ route('routines.list') }}" style="text-decoration: none">Volver</a>
-                        </div>
+                            <div class="form-group mt-4">
+                                <button type="submit" class="btn btn-primary">{{ __('tfg.routines.create') }}</button>
+                                <a href="{{ route('routines.list') }}"
+                                    style="text-decoration: none">{{ __('tfg.buttons.return') }}</a>
+                            </div>
 
-                    </form>
+                        </form>
+
+                    </div>
 
                 </div>
-
             </div>
         </div>
     </div>
-</div>
 @endsection

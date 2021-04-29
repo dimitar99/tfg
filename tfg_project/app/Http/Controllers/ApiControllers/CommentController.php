@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Comment;
-use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -25,11 +24,11 @@ class CommentController extends Controller
 
         if ($comment->save()){
             return response()->json([
-                'message' => 'Comentario creado correctamente'
+                'message' => trans('tfg.api.responses.comment_created')
             ], 200);
         }
         return response()->json([
-            'message' => 'El comentario no ha sido creado'
+            'message' => trans('tfg.api.responses.comment_not_created')
         ], 400);
     }
 
@@ -42,36 +41,18 @@ class CommentController extends Controller
         $currentUser = $request->user();
         $comment = $currentUser->comments()->findOrFail($id);
 
-        if ($currentUser) {
-            if($comment){
-                if ($comment != null){
-                    $comment->fill([
-                        'body' => $request->body
-                    ]);
+        $comment->fill([
+            'body' => $request->body
+        ]);
 
-                    if ($comment->update()){
-                        return response()->json([
-                            'message' => 'Comentario actualizado correctamente'
-                        ], 200);
-                    }
-                    return response()->json([
-                        'message' => 'El comentario no ha sido actualizado'
-                    ], 400);
-                }else{
-                    return response()->json([
-                        'message' => 'Comentario no encontrado'
-                    ], 400);
-                }
-            }else{
-                return response()->json([
-                    'message' => 'Comentario no encontrado'
-                ], 400);
-            }
-        }else{
+        if ($comment->update()){
             return response()->json([
-                'message' => 'Usuario no encontrado'
-            ], 400);
+                'message' => trans('tfg.api.responses.comment_updated')
+            ], 200);
         }
+        return response()->json([
+            'message' => trans('tfg.api.responses.comment_not_updated')
+        ], 400);
     }
 
     /*
@@ -83,31 +64,13 @@ class CommentController extends Controller
         $currentUser = $request->user();
         $comment = $currentUser->comments()->findOrFail($id);
 
-        if ($currentUser){
-            if($comment){
-                if ($comment != null){
-                    if ($comment->forceDelete()){
-                        return response()->json([
-                            'message' => 'Comentario eliminado correctamente'
-                        ], 200);
-                    }
-                    return response()->json([
-                        'message' => 'El comentario no ha sido eliminado'
-                    ], 400);
-                }else{
-                    return response()->json([
-                        'message' => 'Comentario no encontrado'
-                    ], 400);
-                }
-            }else{
-                return response()->json([
-                    'message' => 'Comentario no encontrado'
-                ], 400);
-            }
-        }else{
+        if ($comment->forceDelete()){
             return response()->json([
-                'message' => 'Usuario no encontrado'
-            ], 400);
+                'message' => trans('tfg.api.responses.comment_deleted')
+            ], 200);
         }
+        return response()->json([
+            'message' => trans('tfg.api.responses.comment_not_deleted')
+        ], 400);
     }
 }

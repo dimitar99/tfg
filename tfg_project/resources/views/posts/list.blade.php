@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Listado Posts')
+@section('title', __('tfg.posts.list'))
 
 @section('content')
     <div class="container">

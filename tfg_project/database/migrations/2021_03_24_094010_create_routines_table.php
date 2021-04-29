@@ -16,7 +16,7 @@ class CreateRoutinesTable extends Migration
         Schema::create('routines', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name');
+            $table->string('name')->unique();
             $table->text('description');
             $table->string('image')->nullable();
 

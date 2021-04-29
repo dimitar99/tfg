@@ -56,12 +56,12 @@ class PostController extends Controller
                 $post->update(['image' => $path]);
             }
             return response()->json([
-                'message' => 'Post creado correctamente'
+                'message' => trans('tfg.api.responses.post_created')
             ], 200);
         }
 
         return response()->json([
-            'message' => 'El post no ha sido creado'
+            'message' => trans('tfg.api.responses.post_not_created')
         ], 400);
     }
 
@@ -93,14 +93,13 @@ class PostController extends Controller
                 $post->update(['image' => $path]);
             }
             return response()->json([
-                'message' => 'Post actualizado correctamente'
+                'message' => trans('tfg.api.responses.post_updated')
             ], 200);
         }
 
         return response()->json([
-            'message' => 'El post no ha sido actualizado'
+            'message' => trans('tfg.api.responses.post_not_updated')
         ], 400);
-
     }
 
     /*
@@ -112,27 +111,15 @@ class PostController extends Controller
         $currentUser = $request->user();
         $post = $currentUser->posts()->findOrFail($id);
 
-        if ($currentUser){
-            if ($post){
-                Storage::delete($post->image);
-                if ($post->forceDelete()) {
-                    return response()->json([
-                        'message' => 'Eliminado correctamente'
-                    ], 200);
-                }
-                return response()->json([
-                    'message' => 'No se ha podido eliminar'
-                ], 400);
-            }else{
-                return response()->json([
-                    'message' => 'Post no encontrado'
-                ], 400);
-            }
-        }else{
+        Storage::delete($post->image);
+        if ($post->forceDelete()) {
             return response()->json([
-                'message' => 'Usuario no encontrado'
-            ], 400);
+                'message' => trans('tfg.api.responses.post_deleted')
+            ], 200);
         }
+        return response()->json([
+            'message' => trans('tfg.api.responses.post_not_deleted')
+        ], 400);
     }
 
     /*
@@ -144,30 +131,17 @@ class PostController extends Controller
         $currentUser = $request->user();
         $post = $currentUser->posts()->findOrFail($id);
 
-        if ($currentUser){
-            if ($post) {
-                if ($post->likes()->where('user_id', $currentUser->id)->first()){
-                    $post->likes()->detach($currentUser->id);
-                    return response()->json([
-                        'message' => 'Dislike a post'
-                    ], 200);
-                }
-
-                $post->likes()->attach($currentUser->id);
-
-                return response()->json([
-                    'message' => 'Like a post'
-                ], 200);
-            }else{
-                return response()->json([
-                    'message' => 'Post no encontrado'
-                ], 400);
-            }
-        }else{
+        if ($post->likes()->where('user_id', $currentUser->id)->first()) {
+            $post->likes()->detach($currentUser->id);
             return response()->json([
-                'message' => 'Usuario no encontrado'
-            ], 400);
+                'message' => trans('tfg.api.responses.post_liked')
+            ], 200);
         }
-    }
 
+        $post->likes()->attach($currentUser->id);
+
+        return response()->json([
+            'message' => trans('tfg.api.responses.post_disliked')
+        ], 200);
+    }
 }

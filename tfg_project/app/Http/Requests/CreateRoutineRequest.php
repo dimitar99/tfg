@@ -3,8 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\DB;
-use App\Models\Routine;
 
 class CreateRoutineRequest extends FormRequest
 {
@@ -26,10 +24,11 @@ class CreateRoutineRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string'],
+            'name' => ['required', 'string', 'unique:routines,name'],
             'type' => ['required', 'string'],
             'description' => ['required', 'string'],
-            'image' => ['required', 'string']
+            'image' => ['required'],
+            'image.*' => ['mimes:jpeg,jpg,png|max:2048'],
         ];
     }
 

@@ -12,7 +12,7 @@ class Routine extends Model
         'name',
         'type',
         'description',
-        'video'
+        'image'
     ];
 
     public function routineType()
