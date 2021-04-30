@@ -18,7 +18,7 @@ class UserController extends Controller
     {
         $users = User::query()
             ->orderBy('name')
-            ->paginate(10);
+            ->paginate(15);
 
         return view('users.list', [
             'users' => $users,
@@ -70,7 +70,7 @@ class UserController extends Controller
             $user->update(['avatar' => $path]);
         }
 
-        return redirect()->route('users.list');
+        return redirect()->route('users.new-list');
     }
 
     /*

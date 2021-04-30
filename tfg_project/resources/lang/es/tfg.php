@@ -2,6 +2,15 @@
 
 return [
 
+    'login' => [
+        'sing_in' => 'Iniciar Sesión',
+        'email' => 'Correo',
+        'password' => 'Contraseña',
+        'remember_me' => 'Recuerdame',
+        'forgot_pass' => 'Contraseña olvidada?',
+        'login' => 'Acceder',
+    ],
+
     'layouts' => [
         'header' => [
             'logout' => 'Cerrar Sesión',

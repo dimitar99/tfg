@@ -2,6 +2,15 @@
 
 return [
 
+    'login' => [
+        'sing_in' => 'Sing In',
+        'email' => 'Email',
+        'password' => 'Password',
+        'remember_me' => 'Remember me',
+        'forgot_pass' => 'Forgot password',
+        'login' => 'Log in',
+    ],
+
     'layouts' => [
         'header' => [
             'logout' => 'Logout',

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
@@ -46,18 +47,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public static function createUser($data){
-
-        DB::transaction(function () use ($data) {
-            $user = User::create ([
-                'name' => $data['name'],
-                'surnames' => $data['surnames'],
-                'nick' => $data['nick'],
-                'email' => $data['email'],
-                'password' => $data['password'],
-            ]);
-        });
-
+    public function getAvatarAttribute($value)
+    {
+        return $value ? Storage::url($value) : asset('/assets/images/big/img2.jpg');
     }
 
     public function posts()

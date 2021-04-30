@@ -31,9 +31,4 @@ class CreatePostRequest extends FormRequest
         ];
     }
 
-    public function messages()
-    {
-        return [
-        ];
-    }
 }
