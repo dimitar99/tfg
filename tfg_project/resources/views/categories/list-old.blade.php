@@ -10,7 +10,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('tfg.routines.list') }}</div>
+                    <div class="card-header">{{ __('tfg.categories.list') }}</div>
 
                     <div class="table-responsive">
                         <table class="table">

@@ -26,7 +26,7 @@
 
                 </li>
                 <li>
-                    <a class="has-arrow " href="#" aria-expanded="false"><i class="ti-user"></i><span class="hide-user">Usuarios</span></a>
+                    <a class="has-arrow " href="#" aria-expanded="false"><i class="ti-user"></i><span class="hide-menu">Usuarios</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{ url('/users') }}">Listado</a></li>
                         <li><a href="{{ url('/users/new') }}">Añadir Usuario</a></li>

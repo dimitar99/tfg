@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title', __('tfg.home'))
+
+@section('page_title', __('tfg.home'))
+
 @section('content')
     <!-- ============================================================== -->
     <!-- Start Page Content -->

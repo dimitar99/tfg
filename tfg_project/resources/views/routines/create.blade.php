@@ -2,6 +2,10 @@
 
 @section('title', __('tfg.routines.create'))
 
+@section('page_title', __('tfg.routines.title'))
+
+@section('current_breadcrumb', __('tfg.routines.create'))
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -18,7 +22,7 @@
                             @include('shared._routineFields')
 
                             <div class="form-group mt-4">
-                                <button type="submit" class="btn btn-primary">{{ __('tfg.routines.create') }}</button>
+                                <button type="submit" class="btn btn-info">{{ __('tfg.routines.create') }}</button>
                                 <a href="{{ route('routines.list') }}"
                                     style="text-decoration: none">{{ __('tfg.buttons.return') }}</a>
                             </div>

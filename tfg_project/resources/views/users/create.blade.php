@@ -2,6 +2,10 @@
 
 @section('title', __('tfg.users.create'))
 
+@section('page_title', __('tfg.users.title'))
+
+@section('current_breadcrumb', __('tfg.users.create'))
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -24,7 +28,7 @@
                         <br>
 
                         <div class="form-group mt-4">
-                            <button type="submit" class="btn btn-primary">{{ __('tfg.users.create') }}</button>
+                            <button type="submit" class="btn btn-info">{{ __('tfg.users.create') }}</button>
                             <a href="{{ route('users.list') }}" style="text-decoration: none">{{ __('tfg.buttons.return') }}</a>
                         </div>
 

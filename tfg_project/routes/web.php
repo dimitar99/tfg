@@ -60,9 +60,6 @@ Route::group(['middleware' => ['language']], function(){
         * CATEGORY
         */
         Route::get('/categories', [CategoryController::class, 'list'])->name('categories.list');
-        Route::get('/categories/{id}', [CategoryController::class, 'show'])
-            ->where('id', '[0-9]+')
-            ->name('categories.show');
         Route::get('/categories/new', [CategoryController::class, 'create'])->name('categories.create');
         Route::post('/categories/create', [CategoryController::class, 'store']);
         Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
@@ -91,9 +88,6 @@ Route::group(['middleware' => ['language']], function(){
         * ROUTINE TYPES
         */
         Route::get('/routineTypes', [RoutineTypesController::class, 'list'])->name('routineTypes.list');
-        Route::get('/routineTypes/{id}', [RoutineTypesController::class, 'show'])
-        ->where('id', '[0-9]+')
-        ->name('routineTypes.show');
         Route::get('/routineTypes/new', [RoutineTypesController::class, 'create'])->name('routineTypes.create');
         Route::post('/routineTypes/create', [RoutineTypesController::class, 'store']);
         Route::get('/routineTypes/{routineType}/edit', [RoutineTypesController::class, 'edit'])->name('routineTypes.edit');

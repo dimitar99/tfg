@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('title', __('tfg.routines.list'))
+@section('title', __('tfg.categories.list'))
 
-@section('page_title', __('tfg.routines.title'))
+@section('page_title', __('tfg.categories.title'))
 
-@section('current_breadcrumb', __('tfg.routines.list'))
+@section('current_breadcrumb', __('tfg.categories.list'))
 
 @section('content')
     <div class="d-flex justify-content-between">
-        <a href="{{ route('routines.create') }}" class="btn btn-outline-dark"> {{ __('tfg.routines.new') }} </a>
+        <a href="{{ route('categories.create') }}" class="btn btn-outline-dark"> {{ __('tfg.categories.new') }} </a>
     </div>
     <!-- column -->
     <div class="col-12">
@@ -20,23 +20,21 @@
                             <tr>
                                 <th>{{ __('tfg.tables.id') }}</th>
                                 <th>{{ __('tfg.tables.name') }}</th>
-                                <th>{{ __('tfg.tables.description') }}</th>
                                 <th>{{ __('tfg.tables.created-at') }}</th>
                                 <th>{{ __('tfg.tables.actions') }}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($routines as $routine)
+                            @foreach ($categories as $category)
                                 <tr>
-                                    <td>{{ $routine->id }}</td>
-                                    <td>{{ $routine->name }}</td>
-                                    <td>{{ $routine->description }}</td>
-                                    <td>{{ $routine->created_at }}</td>
+                                    <td>{{ $category->id }}</td>
+                                    <td>{{ $category->name }}</td>
+                                    <td>{{ $category->created_at }}</td>
                                     <td>
-                                        <form action="{{ route('routines.destroy', $routine) }}" method="POST">
+                                        <form action="{{ route('categories.destroy', $category) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <a href="{{ route('routines.edit', $routine) }} "
+                                            <a href="{{ route('categories.edit', $category) }} "
                                                 class="fas fa-pencil-alt text-inverse m-r-10"></a>
                                             <button type="submit" class="btn btn-danger"><i class="icon-trash"></i></button>
                                         </form>

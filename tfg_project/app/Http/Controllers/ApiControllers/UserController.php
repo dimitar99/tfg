@@ -38,9 +38,11 @@ class UserController extends Controller
         $create_token = $user->createToken('Personal Access Token');
 
         return response()->json([
+            'success' => true,
             'access_token' => $create_token->accessToken,
             'token_type' => 'Bearer',
-            'expires_at' => Carbon::parse($create_token->token->expires_at)->toDateTimeString()
+            'expires_at' => Carbon::parse($create_token->token->expires_at)->toDateTimeString(),
+            'user' => $user
         ], 201);
     }
 
@@ -68,9 +70,11 @@ class UserController extends Controller
         $create_token = $user->createToken('Personal Access Token');
 
         return response()->json([
+            'success' => true,
             'access_token' => $create_token->accessToken,
             'token_type' => 'Bearer',
-            'expires_at' => Carbon::parse($create_token->token->expires_at)->toDateTimeString()
+            'expires_at' => Carbon::parse($create_token->token->expires_at)->toDateTimeString(),
+            'user' => $user
         ]);
     }
 

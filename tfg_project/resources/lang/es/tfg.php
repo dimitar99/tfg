@@ -2,6 +2,8 @@
 
 return [
 
+    'home' => 'Inicio',
+
     'login' => [
         'sing_in' => 'Iniciar Sesión',
         'email' => 'Correo',
@@ -97,6 +99,7 @@ return [
     ],
 
     'users' => [
+        'title' => 'Usuarios',
         'list' => 'Listado Usuarios',
         'new' => 'Nuevo Usuario',
         'create' => 'Crear usuario',
@@ -105,12 +108,14 @@ return [
     ],
 
     'posts' => [
+        'title' => 'Posts',
         'list' => 'Listado Posts',
         'edit' => 'Editar Post',
         'detail' => 'Detalle de Post',
     ],
 
     'categories' => [
+        'title' => 'Categorias',
         'list' => 'Listado Categorias',
         'new' => 'Nueva Categoria',
         'create' => 'Crear Categoria',
@@ -119,6 +124,7 @@ return [
     ],
 
     'routines' => [
+        'title' => 'Rutinas',
         'list' => 'Listado Rutinas',
         'new' => 'Nueva Rutina',
         'create' => 'Crear Rutina',
@@ -127,6 +133,7 @@ return [
     ],
 
     'routines-types' => [
+        'title' => 'Tipos Rutinas',
         'list' => 'Listado Tipos Rutinas',
         'new' => 'Nuevo Tipo Rutina',
         'create' => 'Crear Tipo Rutina',

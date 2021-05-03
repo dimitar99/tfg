@@ -12,9 +12,7 @@ class CategoryController extends Controller
 {
     public function list()
     {
-        $categories = Category::query()
-            ->orderBy('name')
-            ->paginate(10);
+        $categories = Category::paginate(10);
 
         return view('categories.list', compact('categories'));
     }

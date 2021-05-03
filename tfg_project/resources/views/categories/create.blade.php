@@ -2,6 +2,10 @@
 
 @section('title', __('tfg.categories.create'))
 
+@section('page_title', __('tfg.categories.title'))
+
+@section('current_breadcrumb', __('tfg.categories.create'))
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -24,7 +28,7 @@
                         <br>
 
                         <div class="form-group mt-4">
-                            <button type="submit" class="btn btn-primary">{{ __('tfg.categories.create') }}</button>
+                            <button type="submit" class="btn btn-info">{{ __('tfg.categories.create') }}</button>
                             <a href="{{ route('categories.list') }}" style="text-decoration: none">{{ __('tfg.buttons.return') }}</a>
                         </div>
 

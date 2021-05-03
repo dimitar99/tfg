@@ -1,13 +1,17 @@
 @extends('layouts.app')
 
-@section('title', 'Editar Tipo Rutina')
+@section('title', __('tfg.routines-types.edit'))
+
+@section('page_title', __('tfg.categories.title'))
+
+@section('current_breadcrumb', __('tfg.routines-types.edit'))
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"> {{ __('tfg.buttons.edit') }} {{ $routineType->name }}</div>
+                <div class="card-header"> {{ __('tfg.routines-types.edit') }}</div>
 
                 <div class="card-body">
 
@@ -25,7 +29,7 @@
                         <br>
 
                         <div class="form-group mt-4">
-                            <button type="submit" class="btn btn-primary"> {{ __('tfg.buttons.update') }} </button>
+                            <button type="submit" class="btn btn-info"> {{ __('tfg.buttons.update') }} </button>
                             <a href="{{ route('routineTypes.list') }}" style="text-decoration: none"> {{ __('tfg.buttons.return') }} </a>
                         </div>
 
