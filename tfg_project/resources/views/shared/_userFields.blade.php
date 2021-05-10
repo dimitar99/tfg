@@ -1,7 +1,7 @@
 {!! csrf_field() !!}
 <div class="form-group">
     <label for="name">{{ __('tfg.forms.fields.name') }}: </label>
-    <input type="text" class="form-control" name="name" id="name" placeholder="Pepe"
+    <input type="text" class="form-control" name="name" id="name" placeholder="John"
         value="{{ old('name', $user->name) }}">
 </div>
 <br>
@@ -15,7 +15,7 @@
 
 <div class="form-group">
     <label for="nick">{{ __('tfg.forms.fields.nick') }}: </label> <small>({{ __('tfg.forms.small.nick_info') }})</small>
-    <input type="text" maxlength="15" class="form-control" name="nick" id="nick" placeholder="pepe_fitness"
+    <input type="text" maxlength="15" class="form-control" name="nick" id="nick" placeholder="nick_example"
         value="{{ old('nick', $user->nick) }}">
 </div>
 <br>
@@ -29,7 +29,7 @@
 
 <div class="form-group">
     <label for="email">{{ __('tfg.forms.fields.email') }}: </label>
-    <input type="email" class="form-control" name="email" id="email" placeholder="pepe_gonzalez@gmail.com"
+    <input type="email" class="form-control" name="email" id="email" placeholder="example@gmail.com"
         value="{{ old('email', $user->email) }}">
 </div>
 <br>
@@ -43,5 +43,12 @@
 <div class="form-group">
     <label for="password_confirmation">{{ __('tfg.forms.fields.password-confirmation') }}: </label> <small>({{ __('tfg.forms.small.password_info') }})</small>
     <input type="password" class="form-control" name="password_confirmation" id="password_confirmation">
+</div>
+<br>
+
+<div class="form-group">
+    <label for="avatar">Avatar: </label>
+    <small>({{ __('tfg.forms.small.avatar_info') }})</small>
+    <input type="file" name="avatar" id="avatar" class="dropify" data-default-file="{{ $user->avatar }}"/>
 </div>
 <br>

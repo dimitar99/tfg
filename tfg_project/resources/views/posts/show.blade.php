@@ -13,13 +13,11 @@
                 </div>
                 <div class="card-body">
                     <div class="card-text">
-                        @if($image != "")
-                            <img src="{{ $image }}" alt="Foto del post" width="100px" height="100px">
-                        @endif
-                        <p><strong>{{ __('tfg.forms.fields.id') }}: </strong>{{ $post->id }}</p>
-                        <p><strong>{{ __('tfg.forms.fields.user-id') }}: </strong>{{ $post->user_id }}</p>
-                        <p><strong>{{ __('tfg.forms.fields.body') }}: </strong>{{ $post->body }}</p>
-                        <p><strong>{{ __('tfg.forms.fields.comments') }}: </strong>{{ $post->comments->count() }}</p>
+                        <img src="{{ $post->image }}" alt="Foto del post" class="rounded mx-auto d-block" style="height: 300px; margin-bottom: 20px">
+                        <p>{{ __('tfg.forms.fields.id') }} --> <strong>{{ $post->id }}</strong></p>
+                        <p>{{ __('tfg.forms.fields.user-id') }} --> <strong>{{ $post->user_id }}</strong></p>
+                        <p>{{ __('tfg.forms.fields.body') }} --> <strong>{{ $post->body }}</strong></p>
+                        <p>{{ __('tfg.forms.fields.comments') }} --> <strong>{{ $post->comments->count() }}</strong></p>
                     </div>
                     @if($post->comments->count() != 0)
                         <div class="table-responsive">

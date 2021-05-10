@@ -3,11 +3,19 @@
 return [
 
     'home' => 'Home',
+    'list' => 'List',
+    'restore_pass' => 'Restore Password',
+    'restore_info' => 'Enter your Email and instructions will be sent to you!',
+    'activity_summary' => 'Activity Summary',
+    'statistics' => 'Statistics',
+    'posts_from_categories' => 'Posts of each category',
+    'routines_from_types' => 'Routines of each type',
 
     'login' => [
         'sing_in' => 'Sing In',
         'email' => 'Email',
         'password' => 'Password',
+        'password_confirmation' => 'Confirm Password',
         'remember_me' => 'Remember me',
         'forgot_pass' => 'Forgot password',
         'login' => 'Log in',
@@ -75,7 +83,7 @@ return [
             'creation-date' => 'Creacion date',
         ],
         'small' => [
-            'avatar_info' => 'Only .jpg format',
+            'avatar_info' => 'If no photo is added, one will be added by default',
             'nick_info' => 'It can contain numbers, maximum 15 characters',
             'bio_info' => 'Max 200 characters',
             'password_info' => 'Min 8 characters',

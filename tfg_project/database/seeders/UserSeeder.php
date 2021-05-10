@@ -3,9 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Faker\Factory;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
@@ -96,5 +95,14 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234'),
         ]);
 
+        foreach (range(1, 50) as $i) {
+            User::create([
+                'name' => 'Jose',
+                'surnames' =>  'Manuel Garcia',
+                'nick' => Str::random(12),
+                'email' => Str::random(5).'@gmail.com',
+                'password' => bcrypt('1234'),
+            ]);
+        }
     }
 }

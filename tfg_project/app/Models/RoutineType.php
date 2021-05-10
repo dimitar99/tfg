@@ -14,4 +14,9 @@ class RoutineType extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function routines()
+    {
+        return $this->hasMany(Routine::class);
+    }
 }

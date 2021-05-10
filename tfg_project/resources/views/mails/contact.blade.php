@@ -7,11 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    <h4><strong>{{ __('tfg.forms.fields.name') }}: </strong> {{  $user->name }}</h4>
-    <h4><strong>{{ __('tfg.forms.fields.surnames') }}:</strong> {{ $user->surnames }}</h4>
-    <h4><strong>{{ __('tfg.forms.fields.email') }}:</strong> {{ $user->email }}</h4>
-    <h4><strong>{{ __('tfg.forms.fields.nick') }}:</strong> {{  $user->nick }}</h4>
-
+    <p>{{ $user->name }} {{ $user->surnames }}</p>
+    <p>{{ $user->email }}</p>
+    <p>{{ "@" . $user->nick }}</p>
     <p>{{ $body }}</p>
 </body>
 </html>

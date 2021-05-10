@@ -5,11 +5,13 @@ use App\Http\Controllers\ApiControllers\RoutineController;
 use App\Http\Controllers\ApiControllers\PostController;
 use App\Http\Controllers\ApiControllers\UserController;
 use App\Http\Controllers\ApiControllers\RoutineTypesController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['language_api']], function () {
     Route::post('/register', [UserController::class, 'register']);
     Route::post('/login', [UserController::class, 'login']);
+    Route::post('/reset', [ForgotPasswordController::class, 'sendResetLinkEmail']);
 
     Route::group(['middleware' => ['auth:api']], function () {
 
@@ -26,7 +28,7 @@ Route::group(['middleware' => ['language_api']], function () {
         * POSTS
         */
         Route::get('/posts', [PostController::class, 'getPosts']);
-        //Route::get('/posts/followed', [PostController::class, 'getPostsFromFollowed']);
+        Route::get('/posts/followed', [PostController::class, 'getPostsFromFollowed']);
         Route::post('/posts/new', [PostController::class, 'create']);
         Route::post('/posts/{post}/update', [PostController::class, 'update']);
         Route::delete('/posts/{post}/destroy', [PostController::class, 'destroy']);

@@ -20,6 +20,13 @@ class CreateRoutinesTable extends Migration
             $table->text('description');
             $table->string('image')->nullable();
 
+            //Referencia a table routine types
+            $table->unsignedBigInteger('routine_type_id');
+            $table->foreign('routine_type_id')
+                ->references('id')
+                ->on('routines_types')
+                ->onDelete('CASCADE');
+
             $table->timestamps();
         });
     }

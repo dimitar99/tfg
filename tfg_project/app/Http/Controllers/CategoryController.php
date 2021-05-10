@@ -6,7 +6,6 @@ use App\Http\Forms\CategoryForm;
 use App\Http\Requests\CreateCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {

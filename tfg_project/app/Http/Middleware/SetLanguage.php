@@ -19,6 +19,8 @@ class SetLanguage
     {
         if (Cookie::has('language')){
             app()->setLocale(Cookie::get('language'));
+        }else{
+            app()->setLocale("us");
         }
         return $next($request);
     }

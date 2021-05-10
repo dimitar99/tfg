@@ -22,11 +22,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
-
 Route::group(['middleware' => ['language']], function(){
+    Route::get('/', function () {
+        return view('auth.login');
+    });
+
+    Route::get('/reset', function(){
+        return view('auth.passwords.email');
+    });
+
     Route::get('lang/{lang}', [LanguageController::class, 'switchLang'])->name('language');
 
     Auth::routes();

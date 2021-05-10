@@ -15,7 +15,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-striped" data-paging="true" data-paging-size="7">
                         <thead>
                             <tr>
                                 <th>{{ __('tfg.tables.id') }}</th>

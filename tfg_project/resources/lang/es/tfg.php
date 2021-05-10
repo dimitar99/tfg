@@ -3,11 +3,19 @@
 return [
 
     'home' => 'Inicio',
+    'list' => 'Listado',
+    'restore_pass' => 'Recuperar Contraseña',
+    'restore_info' => 'Introduce tu Email y recibirás los pasos para restaurar la contraseña',
+    'activity_summary' => 'Resumen de Actividad',
+    'statistics' => 'Estadisticas',
+    'posts_from_categories' => 'Posts de cada categoria',
+    'routines_from_types' => 'Rutinas de cada tipo',
 
     'login' => [
         'sing_in' => 'Iniciar Sesión',
         'email' => 'Correo',
         'password' => 'Contraseña',
+        'password_confirmation' => 'Confirma Contraseña',
         'remember_me' => 'Recuerdame',
         'forgot_pass' => 'Contraseña olvidada?',
         'login' => 'Acceder',
@@ -75,7 +83,7 @@ return [
             'creation-date' => 'Fecha Creacion',
         ],
         'small' => [
-            'avatar_info' => 'Solo formato .jpg',
+            'avatar_info' => 'Si no se añade una foto, se añadira una por defecto',
             'nick_info' => 'Puede contener numeros, maximo 15 caracteres',
             'bio_info' => 'Máximo 200 caracteres',
             'password_info' => 'Mínimo 8 carácteres',

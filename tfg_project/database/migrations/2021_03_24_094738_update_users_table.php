@@ -15,7 +15,7 @@ class UpdateUsersTable extends Migration
     {
         Schema::table('users', function(Blueprint $table){
             $table->string('surnames')->after('name');
-            $table->string('nick')->after('surnames');
+            $table->string('nick')->after('surnames')->nullable();
             $table->string('avatar')->after('id')->nullable();
         });
     }

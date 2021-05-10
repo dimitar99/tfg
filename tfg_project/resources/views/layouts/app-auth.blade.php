@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
@@ -9,8 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('/assets/images/favicon.png') }}">
-    <title>Material Pro Admin Template - The Most Complete & Trusted Bootstrap 4 Admin Template</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('logo/logo_negro_no_letra.png') }}">
+    <title>Login</title>
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('/assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Custom CSS -->

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
@@ -13,6 +13,7 @@
     <title>@yield('title')</title>
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/dropify/dist/css/dropify.min.css') }}">
     <!-- Custom CSS -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <!-- You can change the theme colors from here -->
@@ -101,7 +102,7 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer">
-                © 2018 Material Pro Admin by wrappixel.com
+                © 2021 Dimitar Emilov Tochev
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
@@ -114,6 +115,7 @@
         <!-- ============================================================== -->
         <!-- End Page wrapper  -->
         <!-- ============================================================== -->
+    </div>
     </div>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
@@ -136,6 +138,17 @@
     <script src="{{ asset('assets/plugins/sparkline/jquery.sparkline.min.js') }}"></script>
     <!--Custom JavaScript -->
     <script src="{{ asset('js/custom.min.js') }}"></script>
+    <!-- Flot Charts JavaScript -->
+    <script src="{{ asset('assets/plugins/flot/excanvas.js') }}"></script>
+    <script src="{{ asset('assets/plugins/flot/jquery.flot.js') }}"></script>
+    <script src="{{ asset('assets/plugins/flot/jquery.flot.pie.js') }}"></script>
+    <script src="{{ asset('assets/plugins/flot/jquery.flot.time.js') }}"></script>
+    <script src="{{ asset('assets/plugins/flot/jquery.flot.stack.js') }}"></script>
+    <script src="{{ asset('assets/plugins/flot/jquery.flot.crosshair.js') }}"></script>
+    <script src="{{ asset('assets/plugins/flot.tooltip/js/jquery.flot.tooltip.min.js') }}"></script>
+    <script src="{{ asset('js/flot-data.js') }}"></script>
+    <!-- jQuery file upload -->
+    @yield('js_scripts')
     <!-- ============================================================== -->
     <!-- Style switcher -->
     <!-- ============================================================== -->

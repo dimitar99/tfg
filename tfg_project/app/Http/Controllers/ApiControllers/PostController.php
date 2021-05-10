@@ -6,10 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Http\Resources\PostResource;
-use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class PostController extends Controller
 {
@@ -28,12 +28,15 @@ class PostController extends Controller
     * Devuelve los posts de los usuarios seguidos
     */
 
-    /*public function getPostsFromFollowed(Request $request)
+    public function getPostsFromFollowed(Request $request)
     {
-        $posts = $request->user()->followed()->get();
+        $followed = $request->user()->followed()->get()->pluck('id')->toArray();
+        $posts_from_followed = Post::whereIn('user_id', $followed)->get();
 
-        dd($posts);
-    }*/
+        return response()->json([
+            $posts_from_followed,
+        ]);
+    }
 
     /*
     * Crea un post
@@ -52,7 +55,14 @@ class PostController extends Controller
 
             if ($request->image) {
                 $path = 'posts/image_' . $post->id . '.' . $request->image->getClientOriginalExtension();
-                Storage::put($path, file_get_contents($request->image));
+
+                $image = Image::make($request->image)->enconde('jpg', 90);
+                $image->resize(null, 800, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+
+                Storage::put($path, (string) $image);
+
                 $post->update(['image' => $path]);
             }
             return response()->json([
@@ -85,11 +95,16 @@ class PostController extends Controller
             if ($request->image) {
                 $path = 'posts/image_' . $post->id . '.' . $request->image->getClientOriginalExtension();
 
+                $image = Image::make($request->avatar)->encode('jpg', 90);
+
                 if (Storage::exists($path)) {
                     Storage::delete($path);
                 }
 
-                Storage::put($path, file_get_contents($request->image));
+                $image->resize(null, 800, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save('C:\xampp\htdocs\tfg\tfg_project\storage\app/' . $path);
+
                 $post->update(['image' => $path]);
             }
             return response()->json([
@@ -111,7 +126,9 @@ class PostController extends Controller
         $currentUser = $request->user();
         $post = $currentUser->posts()->findOrFail($id);
 
-        Storage::delete($post->image);
+        if(Storage::exists($post->getOriginal('image'))){
+            Storage::delete($post->getOriginal('image'));
+        }
         if ($post->forceDelete()) {
             return response()->json([
                 'message' => trans('tfg.api.responses.post_deleted')

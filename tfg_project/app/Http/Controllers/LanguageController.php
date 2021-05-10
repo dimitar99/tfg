@@ -8,7 +8,7 @@ class LanguageController extends Controller
     {
         $cookie = cookie('language', 'es', 10080);
 
-        if (in_array($lang, ['es', 'en'])) {
+        if (in_array($lang, ['es', 'us'])) {
             $cookie = cookie('language', $lang, 10080);
         }
 

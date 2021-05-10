@@ -14,6 +14,7 @@ use App\Mail\ContactMailable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
 {
@@ -26,7 +27,6 @@ class UserController extends Controller
         $data = ([
             'name' => $request->name,
             'surnames' => $request->surnames,
-            'nick' => $request->nick,
             'email' => $request->email,
             'password' => bcrypt($request->password)
         ]);
@@ -38,12 +38,11 @@ class UserController extends Controller
         $create_token = $user->createToken('Personal Access Token');
 
         return response()->json([
-            'success' => true,
             'access_token' => $create_token->accessToken,
             'token_type' => 'Bearer',
             'expires_at' => Carbon::parse($create_token->token->expires_at)->toDateTimeString(),
             'user' => $user
-        ], 201);
+        ], 200);
     }
 
     /*
@@ -70,12 +69,11 @@ class UserController extends Controller
         $create_token = $user->createToken('Personal Access Token');
 
         return response()->json([
-            'success' => true,
             'access_token' => $create_token->accessToken,
             'token_type' => 'Bearer',
             'expires_at' => Carbon::parse($create_token->token->expires_at)->toDateTimeString(),
             'user' => $user
-        ]);
+        ], 200);
     }
 
     /*
@@ -105,9 +103,9 @@ class UserController extends Controller
     * Actualiza un usuario
     */
 
-    public function update(UpdateUserRequest $request)
+    public function update(UpdateUserRequest $request, $id)
     {
-        $user = $request->user();
+        $user = User::findOrFail($id);
 
         $user->fill([
             'name' => $request->name,
@@ -123,14 +121,25 @@ class UserController extends Controller
 
         if ($user->update()) {
             if ($request->avatar) {
-                $path = 'users/avatar_' . $user->id . '.' . $request->avatar->getClientOriginalExtension();
+                $path = '/users/avatar_' . $user->id . '.' . $request->avatar->getClientOriginalExtension();
 
                 if (Storage::exists($user->avatar)) {
                     Storage::delete($user->avatar);
                 }
 
-                Storage::put($path, file_get_contents($request->avatar));
+                $image = Image::make($request->avatar)->encode('jpg', 90);
+
+                $image->resize(null, 800, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+
+                Storage::put($path, (String) $image);
+
                 $user->update(['avatar' => $path]);
+            }else {
+                if (Storage::exists($user->avatar)) {
+                    Storage::delete($user->avatar);
+                }
             }
             return response()->json([
                 'mensaje' => trans('tfg.api.responses.user_updated')

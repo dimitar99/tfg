@@ -16,7 +16,7 @@
                 <div class="card">
                     <div class="el-card-item">
                         <div class="el-card-avatar el-overlay-1">
-                            <img src="{{ $post->image }}" alt="user" />
+                            <img src="{{ $post->image }}" alt="user" class="rounded mx-auto d-block" style="height: 250px; width: auto"/>
                             <div class="el-overlay">
                                 <ul class="el-info">
                                     <li>
@@ -43,6 +43,9 @@
                 </div>
             </div>
         @endforeach
+    </div>
+    <div class="float-right">
+        {{ $posts->links() }}
     </div>
     <!-- ============================================================== -->
     <!-- End PAge Content -->

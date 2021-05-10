@@ -10,13 +10,14 @@
     <!-- ============================================================== -->
     <!-- Start Page Content -->
     <!-- ============================================================== -->
-    <div class="row el-element-overlay">
+    <div class="row el-element-overlay" data-paging="true" data-paging-size="7">
         @foreach ($users as $user)
             <div class="col-lg-3 col-md-6">
                 <div class="card">
                     <div class="el-card-item">
                         <div class="el-card-avatar el-overlay-1">
-                            <img src="{{ $user->avatar }}" alt="user" />
+                            <img src="{{ $user->avatar }}" alt="avatar" class="rounded mx-auto d-block"
+                                style="height: 250px; width: auto" />
                             <div class="el-overlay">
                                 <ul class="el-info">
                                     <li>
@@ -40,7 +41,7 @@
                             </div>
                         </div>
                         <div class="el-card-content">
-                            <p><strong>{{ '@' }}{{ $user->nick }}</strong></p>
+                            <p><strong>{{ '@' . $user->nick }}</strong></p>
                             <small>{{ $user->name . ' ' . $user->surnames }}</small>
                             <br />
                         </div>
@@ -49,7 +50,11 @@
             </div>
         @endforeach
     </div>
+    <div class="float-right">
+        {{ $users->links() }}
+    </div>
+    {{-- <p>Viendo pagina {{ $users->currentPage() }} de {{ $users->lastPage() }} </p> --}}
     <!-- ============================================================== -->
-    <!-- End PAge Content -->
+    <!-- End Page Content -->
     <!-- ============================================================== -->
 @endsection
