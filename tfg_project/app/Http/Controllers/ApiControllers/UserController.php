@@ -128,7 +128,6 @@ class UserController extends Controller
                 }
 
                 $image = Image::make($request->avatar)->encode('jpg', 90);
-
                 $image->resize(null, 800, function ($constraint) {
                     $constraint->aspectRatio();
                 });

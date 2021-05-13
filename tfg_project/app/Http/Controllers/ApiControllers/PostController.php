@@ -56,7 +56,7 @@ class PostController extends Controller
             if ($request->image) {
                 $path = 'posts/image_' . $post->id . '.' . $request->image->getClientOriginalExtension();
 
-                $image = Image::make($request->image)->enconde('jpg', 90);
+                $image = Image::make($request->image)->encode('jpg', 90);
                 $image->resize(null, 800, function ($constraint) {
                     $constraint->aspectRatio();
                 });
@@ -95,15 +95,16 @@ class PostController extends Controller
             if ($request->image) {
                 $path = 'posts/image_' . $post->id . '.' . $request->image->getClientOriginalExtension();
 
-                $image = Image::make($request->avatar)->encode('jpg', 90);
-
                 if (Storage::exists($path)) {
                     Storage::delete($path);
                 }
 
+                $image = Image::make($request->image)->encode('jpg', 90);
                 $image->resize(null, 800, function ($constraint) {
                     $constraint->aspectRatio();
-                })->save('C:\xampp\htdocs\tfg\tfg_project\storage\app/' . $path);
+                });
+
+                Storage::put($path, (string) $image);
 
                 $post->update(['image' => $path]);
             }

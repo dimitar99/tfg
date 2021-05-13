@@ -82,7 +82,7 @@
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
-                <div class="row">
+                <div id="app" class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
@@ -147,6 +147,7 @@
     <script src="{{ asset('assets/plugins/flot/jquery.flot.crosshair.js') }}"></script>
     <script src="{{ asset('assets/plugins/flot.tooltip/js/jquery.flot.tooltip.min.js') }}"></script>
     <script src="{{ asset('js/flot-data.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
     <!-- jQuery file upload -->
     @yield('js_scripts')
     <!-- ============================================================== -->

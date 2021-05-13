@@ -64,12 +64,14 @@ class UserController extends Controller
         if ($request->avatar) {
             $path = 'users/avatar_' . $user->id . '.' . $request->avatar->getClientOriginalExtension();
 
-            $image = Image::make($request->avatar);
+            if (Storage::exists($user->avatar)) {
+                Storage::delete($user->avatar);
+            }
+
+            $image = Image::make($request->avatar)->encode('jpg', 90);
             $image->resize(null, 800, function ($constraint) {
                 $constraint->aspectRatio();
             });
-
-            $image->encode('jpg', 90);
 
             Storage::put($path, (string) $image);
 
@@ -122,7 +124,6 @@ class UserController extends Controller
             }
 
             $image = Image::make($request->avatar)->encode('jpg', 90);
-
             $image->resize(null, 800, function ($constraint) {
                 $constraint->aspectRatio();
             });
@@ -151,7 +152,7 @@ class UserController extends Controller
             Storage::delete($user->getOriginal('avatar'));
         }
 
-        $user->forceDelete();
+        $user->delete();
 
         return redirect()->route('users.list');
     }

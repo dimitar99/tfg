@@ -7,7 +7,10 @@
 @section('current_breadcrumb', __('tfg.categories.list'))
 
 @section('content')
-    <div class="d-flex justify-content-between">
+
+    <categories-component />
+
+    {{-- <div class="d-flex justify-content-between">
         <a href="{{ route('categories.create') }}" class="btn btn-outline-dark"> {{ __('tfg.categories.new') }} </a>
     </div>
     <!-- column -->
@@ -46,5 +49,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
