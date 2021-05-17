@@ -26,9 +26,10 @@ class UpdateRoutineRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'type' => ['required', 'string'],
-            'description' => ['required', 'string'],
-            'image' => ['required', 'string']
+            'type' => ['required', 'array'],
+            'type.*' => ['integer', 'exists:routineTypes,id'],
+            'description' => ['required', 'string', ' max:600'],
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,svg']
         ];
     }
 

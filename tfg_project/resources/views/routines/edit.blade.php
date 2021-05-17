@@ -22,16 +22,6 @@
                         @method('PUT')
                         @include('shared._routineFields')
 
-                        @if($image != "")
-                            <img src="{{ $image }}" alt="Imagen de la rutina" width="200px" height="200px">
-                        @endif
-
-                        <div class="form-group">
-                            <label for="image">{{ __('tfg.forms.fields.image') }}: </label> <small>({{ __('tfg.forms.small.avatar_info') }})</small>
-                            <input type="file" class="form-control" name="image" id="image">
-                        </div>
-                        <br>
-
                         <div class="form-group mt-4">
                             <button type="submit" class="btn btn-info"> {{ __('tfg.buttons.update') }}</button>
                             <a href="{{ route('routines.list') }}" style="text-decoration: none"> {{ __('tfg.buttons.return') }} </a>
@@ -44,4 +34,40 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js_scripts')
+<script src="{{ asset('assets/plugins/dropify/dist/js/dropify.min.js') }}"></script>
+    <script>
+    $(document).ready(function() {
+        // Basic
+        $('.dropify').dropify();
+
+        // Used events
+        var drEvent = $('#input-file-events').dropify();
+
+        drEvent.on('dropify.beforeClear', function(event, element) {
+            return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+        });
+
+        drEvent.on('dropify.afterClear', function(event, element) {
+            alert('File deleted');
+        });
+
+        drEvent.on('dropify.errors', function(event, element) {
+            console.log('Has Errors');
+        });
+
+        var drDestroy = $('#input-file-to-destroy').dropify();
+        drDestroy = drDestroy.data('dropify')
+        $('#toggleDropify').on('click', function(e) {
+            e.preventDefault();
+            if (drDestroy.isDropified()) {
+                drDestroy.destroy();
+            } else {
+                drDestroy.init();
+            }
+        })
+    });
+    </script>
 @endsection

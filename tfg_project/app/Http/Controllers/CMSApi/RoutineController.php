@@ -1,48 +1,22 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\CMSApi;
 
-use App\Http\Forms\RoutineForm;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateRoutineRequest;
 use App\Http\Requests\UpdateRoutineRequest;
+use App\Http\Resources\RoutineResource;
 use App\Models\Routine;
-use App\Models\RoutineType;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
 class RoutineController extends Controller
 {
-
-    /*
-    * Devuelve el listado de rutinas paginado
-    */
-
-    public function list()
+    public function index()
     {
-        $routines = Routine::paginate(10);
-        $routineTypes = RoutineType::all();
+        $routines = Routine::orderBy('created_at', 'desc')->paginate(12);
 
-        return view('routines.list', compact('routines', 'routineTypes'));
-    }
-
-    /*
-    * Muestra el detalle de una rutina
-    */
-
-    public function show($id)
-    {
-        $routine = Routine::findOrFail($id);
-
-        return view('routines.show', compact('routine'));
-    }
-
-    /*
-    * Crear una rutina
-    */
-
-    public function create()
-    {
-        return new RoutineForm('routines.create', new Routine);
+        return RoutineResource::collection($routines);
     }
 
     public function store(CreateRoutineRequest $request)
@@ -57,44 +31,10 @@ class RoutineController extends Controller
 
         if ($request->image) {
             $path = 'routines/image_' . $routine->id . '.' . $request->image->getClientOriginalExtension();
-
-            if (Storage::exists($routine->getOriginal('image'))) {
-                Storage::delete($routine->getOriginal('image'));
-            }
-
-            $image = Image::make($request->avatar)->encode('jpg', 90);
-            $image->resize(null, 800, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-
-            Storage::put($path, (string)$image);
-
+            Storage::put($path, file_get_contents($request->image));
             $routine->update(['image' => $path]);
         }
-
-        return redirect()->route('routines.list');
     }
-
-    /*
-    * Editar una rutina
-    */
-
-    public function edit($id)
-    {
-        $routine = Routine::findOrFail($id);
-        $routineTypes = RoutineType::all();
-        $image = "";
-
-        if (Storage::exists($routine->getOriginal('image'))) {
-            $image = Storage::url($routine->getOriginal('image'));
-        }
-
-        return view('routines.edit', compact('routine', 'routineTypes', 'image'));
-    }
-
-    /*
-    * Actualiza una rutina
-    */
 
     public function update(UpdateRoutineRequest $request, Routine $routine)
     {
@@ -126,13 +66,7 @@ class RoutineController extends Controller
         }
 
         $routine->save();
-
-        return redirect()->route('routines.show', ['id' => $routine->id]);
     }
-
-    /*
-    * Elimina una rutina
-    */
 
     public function destroy(Routine $routine)
     {
@@ -141,7 +75,5 @@ class RoutineController extends Controller
         }
 
         $routine->forceDelete();
-
-        return redirect()->route('routines.list');
     }
 }

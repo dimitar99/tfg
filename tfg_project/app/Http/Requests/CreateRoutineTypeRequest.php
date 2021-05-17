@@ -3,8 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\DB;
-use App\Models\RoutineType;
 
 class CreateRoutineTypeRequest extends FormRequest
 {
@@ -26,15 +24,16 @@ class CreateRoutineTypeRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'unique:routines_types']
+            'name' => ['required', 'string'],
+            'type' => ['required', 'array'],
+            'type.*' => ['integer', 'exists:routineTypes,id'],
+            'description' => ['required', 'string', ' max:600'],
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,svg']
         ];
     }
 
     public function messages()
     {
-        return [
-
-        ];
+        return [];
     }
-
 }

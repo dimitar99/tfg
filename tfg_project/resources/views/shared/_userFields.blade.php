@@ -48,7 +48,6 @@
 
 <div class="form-group">
     <label for="avatar">Avatar: </label>
-    <small>({{ __('tfg.forms.small.avatar_info') }})</small>
     <input type="file" name="avatar" id="avatar" class="dropify" data-default-file="{{ $user->avatar }}"/>
 </div>
 <br>

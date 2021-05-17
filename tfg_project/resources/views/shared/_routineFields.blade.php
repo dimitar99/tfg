@@ -26,9 +26,8 @@
 </div>
 <br>
 
-<div class="form">
+<div class="form-group">
     <label for="image">{{ __('tfg.forms.fields.image') }}: </label>
-    <input type="file" class="form-control" name="image" id="image" placeholder="Imagen"
-        value="{{ old('image', $routine->image) }}">
+    <input type="file" name="image" id="image" class="dropify" data-default-file="{{ $routine->image }}"/>
 </div>
 <br>

@@ -1,4 +1,4 @@
-c<?php
+<?php
 
 namespace App\Http\Resources;
 
@@ -17,11 +17,10 @@ class RoutineResource extends JsonResource
         return[
             'id' => $this->id,
             'name' => $this->name,
-            'type' => $this->type,
             'description' => $this->description,
-            'video' => $this->video,
+            'image' => $this->image,
             'created_at' => $this->created_at->format('Y-m-d'),
-            'hola' => $this->routineType
+            'user_nick' => $this->user_id
         ];
     }
 }

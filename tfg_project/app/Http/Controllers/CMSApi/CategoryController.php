@@ -11,7 +11,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::orderBy('created_at', 'desc')->get();
+        $categories = Category::orderBy('created_at', 'desc')->paginate(12);
 
         return $categories;
     }
@@ -27,7 +27,6 @@ class CategoryController extends Controller
 
     public function show()
     {
-
     }
 
     public function update(UpdateCategoryRequest $request, Category $category)
@@ -40,4 +39,3 @@ class CategoryController extends Controller
         $category->forceDelete();
     }
 }
-

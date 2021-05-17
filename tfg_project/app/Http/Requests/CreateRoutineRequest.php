@@ -26,7 +26,7 @@ class CreateRoutineRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'unique:routines,name'],
             'type' => ['required', 'string'],
-            'description' => ['required', 'string'],
+            'description' => ['required', 'string', 'max:600'],
             'image' => ['required'],
             'image.*' => ['mimes:jpeg,jpg,png|max:2048'],
         ];

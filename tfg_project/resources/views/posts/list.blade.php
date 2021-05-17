@@ -36,6 +36,7 @@
                         </div>
                         <div class="el-card-content">
                             <p><strong>{{ '@' }}{{ $post->user->nick }}</strong></p>
+                            <!-- Falta poner substring -->
                             <small>{{ $post->body }}</small>
                             <br />
                         </div>

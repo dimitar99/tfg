@@ -31,6 +31,7 @@ class UpdateUserRequest extends FormRequest
             'bio' => ['nullable', 'string', 'max:200'],
             'email' => ['required', 'email', Rule::unique('users')->ignore($this->user)],
             'password' => ['nullable', 'string', 'min:8'],
+            'avatar' => ['required', 'image', 'mimes:jpeg,png,jpg,svg']
         ];
     }
 

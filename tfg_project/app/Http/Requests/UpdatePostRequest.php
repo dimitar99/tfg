@@ -24,10 +24,11 @@ class UpdatePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'body' => ['required', 'string', 'max:100s'],
+            'body' => ['required', 'string', 'max:100'],
             'image' => ['nullable'],
             'categorias' => ['required', 'array'],
-            'categorias.*' => ['integer', 'exists:categories,id']
+            'categorias.*' => ['integer', 'exists:categories,id'],
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,svg']
         ];
     }
 

@@ -19,6 +19,8 @@ window.Vue = require('vue').default;
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('categories-component', require('./components/CategoriesComponent.vue').default);
+Vue.component('routine-types-component', require('./components/RoutineTypesComponent.vue').default);
+Vue.component('routines-component', require('./components/RoutinesComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

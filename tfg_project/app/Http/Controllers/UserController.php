@@ -64,8 +64,8 @@ class UserController extends Controller
         if ($request->avatar) {
             $path = 'users/avatar_' . $user->id . '.' . $request->avatar->getClientOriginalExtension();
 
-            if (Storage::exists($user->avatar)) {
-                Storage::delete($user->avatar);
+            if (Storage::exists($user->getOriginal('avatar'))) {
+                Storage::delete($user->getOriginal('avatar'));
             }
 
             $image = Image::make($request->avatar)->encode('jpg', 90);
@@ -119,8 +119,8 @@ class UserController extends Controller
         if ($request->avatar) {
             $path = 'users/avatar_' . $user->id . '.' . $request->avatar->getClientOriginalExtension();
 
-            if (Storage::exists($user->avatar)) {
-                Storage::delete($user->avatar);
+            if (Storage::exists($user->getOriginal('avatar'))) {
+                Storage::delete($user->getOriginal('avatar'));
             }
 
             $image = Image::make($request->avatar)->encode('jpg', 90);
@@ -132,8 +132,9 @@ class UserController extends Controller
 
             $user->update(['avatar' => $path]);
         } else {
-            if (Storage::exists($user->avatar)) {
-                Storage::delete($user->avatar);
+            //Si se elimina la imagen del form, el usuario se queda sin foto
+            if (Storage::exists($user->getOriginal('avatar'))) {
+                Storage::delete($user->getOriginal('avatar'));
             }
         }
 

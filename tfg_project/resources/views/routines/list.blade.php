@@ -7,7 +7,8 @@
 @section('current_breadcrumb', __('tfg.routines.list'))
 
 @section('content')
-    <div class="d-flex justify-content-between">
+    <routines-component/>
+    {{-- <div class="d-flex justify-content-between">
         <a href="{{ route('routines.create') }}" class="btn btn-outline-dark"> {{ __('tfg.routines.new') }} </a>
     </div>
     <!-- column -->
@@ -48,5 +49,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
