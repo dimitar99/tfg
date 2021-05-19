@@ -98,6 +98,7 @@ return [
         'show' => 'Ver',
         'edit' => 'Editar',
         'delete' => 'Eliminar',
+        'save' => 'Guardar',
         'update' => 'Actualizar',
         'return' => 'Volver',
         'return-to-list' => 'Regresar al listado',
@@ -151,6 +152,7 @@ return [
 
     'validations' => [
         'correct-the-errors' => 'Corrige los errores',
+        'image' => 'El archivo debe ser una imagen'
     ],
 
     'api' => [

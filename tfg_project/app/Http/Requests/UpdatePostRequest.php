@@ -28,7 +28,7 @@ class UpdatePostRequest extends FormRequest
             'image' => ['nullable'],
             'categorias' => ['required', 'array'],
             'categorias.*' => ['integer', 'exists:categories,id'],
-            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,svg']
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,svg']
         ];
     }
 

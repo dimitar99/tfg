@@ -2067,7 +2067,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 axios__WEBPACK_IMPORTED_MODULE_1___default().delete("/cmsapi/categories/" + id);
 
-                _this3.list();
+                _this3.getResults();
 
               case 2:
               case "end":
@@ -2414,6 +2414,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2539,17 +2541,118 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       routines: {},
       routine: {
         name: "",
+        routine_type_id: 1,
+        image: "",
         description: ""
       },
+      routineTypes: {},
       laravelData: {},
       modificar: false,
-      tituloModal: "",
       id: 0,
       errors: {}
     };
@@ -2558,6 +2661,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     console.log("Component mounted.");
   },
   methods: {
+    getImage: function getImage() {
+      this.routine.image = this.$refs.image.files[0];
+    },
     getResults: function getResults() {
       var _arguments = arguments,
           _this = this;
@@ -2569,7 +2675,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 page = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
-                axios.get("/cmsapi/routines?page=" + page).then(function (response) {
+                axios__WEBPACK_IMPORTED_MODULE_1___default().get("/cmsapi/routines?page=" + page).then(function (response) {
                   _this.laravelData = response.data;
                 });
 
@@ -2580,10 +2686,122 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee);
       }))();
+    },
+    save: function save() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var data, config;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _this2.getImage();
+
+                data = new FormData();
+                data.append("name", _this2.routine.name);
+                data.append("description", _this2.routine.description);
+                data.append("routine_type_id", _this2.routine.routine_type_id);
+                data.append("image", _this2.routine.image ? _this2.routine.image : "");
+                config = {
+                  headers: {
+                    "content-type": "multipart/form-data"
+                  }
+                };
+
+                if (_this2.modificar) {
+                  axios__WEBPACK_IMPORTED_MODULE_1___default().put("/cmsapi/routines/" + _this2.id, data, config).then(function (response) {
+                    _this2.closeModal();
+
+                    _this2.getResults();
+                  })["catch"](function (error) {
+                    _this2.errors = error.response.data.errors;
+                  });
+                } else {
+                  axios__WEBPACK_IMPORTED_MODULE_1___default().post("/cmsapi/routines", data, config).then(function (response) {
+                    _this2.closeModal();
+
+                    _this2.getResults();
+                  })["catch"](function (error) {
+                    _this2.errors = error.response.data.errors;
+                  });
+                }
+
+                _this2.errors = {};
+                _this2.routine.image = "";
+                $(".image").click();
+
+              case 11:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    destroy: function destroy(id) {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                axios__WEBPACK_IMPORTED_MODULE_1___default().delete("/cmsapi/routines/" + id);
+
+                _this3.getResults();
+
+              case 2:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    openModal: function openModal(nuevo) {
+      var _this4 = this;
+
+      var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+      if (nuevo) {
+        this.id = 0;
+        this.routine.name = "";
+        this.routine_type_id = 0;
+        this.routine.description = "";
+        this.routine.image = "";
+      } else {
+        this.id = data.id;
+        this.routine.name = data.name;
+        this.routine_type_id = data.routine_type_id;
+        this.routine.description = data.description;
+        this.routine.image = data.image;
+        $("#image").attr("data-default-file", this.routine.image);
+        $(".dropify").dropify();
+      }
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default().get("/cmsapi/routineTypes").then(function (response) {
+        _this4.routineTypes = response.data;
+      });
+      $("#modal_rutina").modal("show");
+    },
+    closeModal: function closeModal() {
+      var event = $("#image").dropify();
+      event = event.data("dropify");
+      event.resetPreview();
+      event.clearElement();
+      $("#modal_rutina").modal("hide");
+      this.routine.image = "";
+      this.errors = {};
     }
   },
   created: function created() {
+    var _this5 = this;
+
     this.getResults();
+    axios__WEBPACK_IMPORTED_MODULE_1___default().get("/cmsapi/routineTypes").then(function (response) {
+      _this5.routineTypes = response.data;
+    });
   }
 });
 
@@ -2593,8 +2811,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
   \*****************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var laravel_vue_lang__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! laravel-vue-lang */ "./node_modules/laravel-vue-lang/dist/index.js");
+/* harmony import */ var laravel_vue_lang__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(laravel_vue_lang__WEBPACK_IMPORTED_MODULE_0__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -2603,6 +2826,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js").default;
+
+
+vue__WEBPACK_IMPORTED_MODULE_1__.default.use(laravel_vue_lang__WEBPACK_IMPORTED_MODULE_0__.Lang, {
+  locale: 'es',
+  fallback: 'en'
+});
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -2611,18 +2840,18 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js"
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-Vue.component('pagination', __webpack_require__(/*! laravel-vue-pagination */ "./node_modules/laravel-vue-pagination/dist/laravel-vue-pagination.common.js"));
-Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue").default);
-Vue.component('categories-component', __webpack_require__(/*! ./components/CategoriesComponent.vue */ "./resources/js/components/CategoriesComponent.vue").default);
-Vue.component('routine-types-component', __webpack_require__(/*! ./components/RoutineTypesComponent.vue */ "./resources/js/components/RoutineTypesComponent.vue").default);
-Vue.component('routines-component', __webpack_require__(/*! ./components/RoutinesComponent.vue */ "./resources/js/components/RoutinesComponent.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_1__.default.component('pagination', __webpack_require__(/*! laravel-vue-pagination */ "./node_modules/laravel-vue-pagination/dist/laravel-vue-pagination.common.js"));
+vue__WEBPACK_IMPORTED_MODULE_1__.default.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_1__.default.component('categories-component', __webpack_require__(/*! ./components/CategoriesComponent.vue */ "./resources/js/components/CategoriesComponent.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_1__.default.component('routine-types-component', __webpack_require__(/*! ./components/RoutineTypesComponent.vue */ "./resources/js/components/RoutineTypesComponent.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_1__.default.component('routines-component', __webpack_require__(/*! ./components/RoutinesComponent.vue */ "./resources/js/components/RoutinesComponent.vue").default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-var app = new Vue({
+var app = new vue__WEBPACK_IMPORTED_MODULE_1__.default({
   el: '#app'
 });
 
@@ -2667,6 +2896,792 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./node_modules/lang.js/src/lang.js":
+/*!******************************************!*\
+  !*** ./node_modules/lang.js/src/lang.js ***!
+  \******************************************/
+/***/ (function(module, exports) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+ *  Lang.js for Laravel localization in JavaScript.
+ *
+ *  @version 1.1.12
+ *  @license MIT https://github.com/rmariuzzo/Lang.js/blob/master/LICENSE
+ *  @site    https://github.com/rmariuzzo/Lang.js
+ *  @author  Rubens Mariuzzo <rubens@mariuzzo.com>
+ */
+
+(function(root, factory) {
+    'use strict';
+
+    if (true) {
+        // AMD support.
+        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+    } else {}
+
+}(this, function() {
+    'use strict';
+
+    function inferLocale() {
+        if (typeof document !== 'undefined' && document.documentElement) {
+            return document.documentElement.lang;
+        }
+    };
+
+    function convertNumber(str) {
+        if (str === '-Inf') {
+            return -Infinity;
+        } else if (str === '+Inf' || str === 'Inf' || str === '*') {
+            return Infinity;
+        }
+        return parseInt(str, 10);
+    }
+
+    // Derived from: https://github.com/symfony/translation/blob/460390765eb7bb9338a4a323b8a4e815a47541ba/Interval.php
+    var intervalRegexp = /^({\s*(\-?\d+(\.\d+)?[\s*,\s*\-?\d+(\.\d+)?]*)\s*})|([\[\]])\s*(-Inf|\*|\-?\d+(\.\d+)?)\s*,\s*(\+?Inf|\*|\-?\d+(\.\d+)?)\s*([\[\]])$/;
+    var anyIntervalRegexp = /({\s*(\-?\d+(\.\d+)?[\s*,\s*\-?\d+(\.\d+)?]*)\s*})|([\[\]])\s*(-Inf|\*|\-?\d+(\.\d+)?)\s*,\s*(\+?Inf|\*|\-?\d+(\.\d+)?)\s*([\[\]])/;
+
+    // Default options //
+
+    var defaults = {
+        locale: 'en'/** The default locale if not set. */
+    };
+
+    // Constructor //
+
+    var Lang = function(options) {
+        options = options || {};
+        this.locale = options.locale || inferLocale() || defaults.locale;
+        this.fallback = options.fallback;
+        this.messages = options.messages;
+    };
+
+    // Methods //
+
+    /**
+     * Set messages source.
+     *
+     * @param messages {object} The messages source.
+     *
+     * @return void
+     */
+    Lang.prototype.setMessages = function(messages) {
+        this.messages = messages;
+    };
+
+    /**
+     * Get the current locale.
+     *
+     * @return {string} The current locale.
+     */
+    Lang.prototype.getLocale = function() {
+        return this.locale || this.fallback;
+    };
+
+    /**
+     * Set the current locale.
+     *
+     * @param locale {string} The locale to set.
+     *
+     * @return void
+     */
+    Lang.prototype.setLocale = function(locale) {
+        this.locale = locale;
+    };
+
+    /**
+     * Get the fallback locale being used.
+     *
+     * @return void
+     */
+    Lang.prototype.getFallback = function() {
+        return this.fallback;
+    };
+
+    /**
+     * Set the fallback locale being used.
+     *
+     * @param fallback {string} The fallback locale.
+     *
+     * @return void
+     */
+    Lang.prototype.setFallback = function(fallback) {
+        this.fallback = fallback;
+    };
+
+    /**
+     * This method act as an alias to get() method.
+     *
+     * @param key {string} The key of the message.
+     * @param locale {string} The locale of the message
+     *
+     * @return {boolean} true if the given key is defined on the messages source, otherwise false.
+     */
+    Lang.prototype.has = function(key, locale) {
+        if (typeof key !== 'string' || !this.messages) {
+            return false;
+        }
+
+        return this._getMessage(key, locale) !== null;
+    };
+
+    /**
+     * Get a translation message.
+     *
+     * @param key {string} The key of the message.
+     * @param replacements {object} The replacements to be done in the message.
+     * @param locale {string} The locale to use, if not passed use the default locale.
+     *
+     * @return {string} The translation message, if not found the given key.
+     */
+    Lang.prototype.get = function(key, replacements, locale) {
+        if (!this.has(key, locale)) {
+            return key;
+        }
+
+        var message = this._getMessage(key, locale);
+        if (message === null) {
+            return key;
+        }
+
+        if (replacements) {
+            message = this._applyReplacements(message, replacements);
+        }
+
+        return message;
+    };
+
+    /**
+     * This method act as an alias to get() method.
+     *
+     * @param key {string} The key of the message.
+     * @param replacements {object} The replacements to be done in the message.
+     *
+     * @return {string} The translation message, if not found the given key.
+     */
+    Lang.prototype.trans = function(key, replacements) {
+        return this.get(key, replacements);
+    };
+
+    /**
+     * Gets the plural or singular form of the message specified based on an integer value.
+     *
+     * @param key {string} The key of the message.
+     * @param count {number} The number of elements.
+     * @param replacements {object} The replacements to be done in the message.
+     * @param locale {string} The locale to use, if not passed use the default locale.
+     *
+     * @return {string} The translation message according to an integer value.
+     */
+    Lang.prototype.choice = function(key, number, replacements, locale) {
+        // Set default values for parameters replace and locale
+        replacements = typeof replacements !== 'undefined'
+            ? replacements
+            : {};
+
+        // The count must be replaced if found in the message
+        replacements.count = number;
+
+        // Message to get the plural or singular
+        var message = this.get(key, replacements, locale);
+
+        // Check if message is not null or undefined
+        if (message === null || message === undefined) {
+            return message;
+        }
+
+        // Separate the plural from the singular, if any
+        var messageParts = message.split('|');
+
+        // Get the explicit rules, If any
+        var explicitRules = [];
+
+        for (var i = 0; i < messageParts.length; i++) {
+            messageParts[i] = messageParts[i].trim();
+
+            if (anyIntervalRegexp.test(messageParts[i])) {
+                var messageSpaceSplit = messageParts[i].split(/\s/);
+                explicitRules.push(messageSpaceSplit.shift());
+                messageParts[i] = messageSpaceSplit.join(' ');
+            }
+        }
+
+        // Check if there's only one message
+        if (messageParts.length === 1) {
+            // Nothing to do here
+            return message;
+        }
+
+        // Check the explicit rules
+        for (var j = 0; j < explicitRules.length; j++) {
+            if (this._testInterval(number, explicitRules[j])) {
+                return messageParts[j];
+            }
+        }
+
+        locale = locale || this._getLocale(key);
+        var pluralForm = this._getPluralForm(number, locale);
+
+        return messageParts[pluralForm];
+    };
+
+    /**
+     * This method act as an alias to choice() method.
+     *
+     * @param key {string} The key of the message.
+     * @param count {number} The number of elements.
+     * @param replacements {object} The replacements to be done in the message.
+     *
+     * @return {string} The translation message according to an integer value.
+     */
+    Lang.prototype.transChoice = function(key, count, replacements) {
+        return this.choice(key, count, replacements);
+    };
+
+    /**
+     * Parse a message key into components.
+     *
+     * @param key {string} The message key to parse.
+     * @param key {string} The message locale to parse
+     * @return {object} A key object with source and entries properties.
+     */
+    Lang.prototype._parseKey = function(key, locale) {
+        if (typeof key !== 'string' || typeof locale !== 'string') {
+            return null;
+        }
+
+        var segments = key.split('.');
+        var source = segments[0].replace(/\//g, '.');
+
+        return {
+            source: locale + '.' + source,
+            sourceFallback: this.getFallback() + '.' + source,
+            entries: segments.slice(1)
+        };
+    };
+
+    /**
+     * Returns a translation message. Use `Lang.get()` method instead, this methods assumes the key exists.
+     *
+     * @param key {string} The key of the message.
+     * @param locale {string} The locale of the message
+     *
+     * @return {string} The translation message for the given key.
+     */
+    Lang.prototype._getMessage = function(key, locale) {
+        locale = locale || this.getLocale();
+        
+        key = this._parseKey(key, locale);
+
+        // Ensure message source exists.
+        if (this.messages[key.source] === undefined && this.messages[key.sourceFallback] === undefined) {
+            return null;
+        }
+
+        // Get message from default locale.
+        var message = this.messages[key.source];
+        var entries = key.entries.slice();
+        var subKey = entries.join('.');
+        message = message !== undefined ? this._getValueInKey(message, subKey) : undefined;
+
+
+        // Get message from fallback locale.
+        if (typeof message !== 'string' && this.messages[key.sourceFallback]) {
+            message = this.messages[key.sourceFallback];
+            entries = key.entries.slice();
+            subKey = '';
+            while (entries.length && message !== undefined) {
+                var subKey = !subKey ? entries.shift() : subKey.concat('.', entries.shift());
+                if (message[subKey]) {
+                    message = message[subKey]
+                    subKey = '';
+                }
+            }
+        }
+
+        if (typeof message !== 'string') {
+            return null;
+        }
+
+        return message;
+    };
+
+    Lang.prototype._getValueInKey = function(obj, str) {
+        // If the full key exists just return the value
+        if (typeof obj[str] === 'string') {
+            return obj[str]
+        }
+
+        str = str.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
+        str = str.replace(/^\./, '');           // strip a leading dot
+
+        var parts = str.split('.');
+
+        for (var i = 0, n = parts.length; i < n; ++i) {
+            var currentKey = parts.slice(0, i + 1).join('.');
+            var restOfTheKey = parts.slice(i + 1, parts.length).join('.')
+            
+            if (obj[currentKey]) {
+                return this._getValueInKey(obj[currentKey], restOfTheKey)
+            }
+        }
+
+        return obj;
+    };
+
+    /**
+     * Return the locale to be used between default and fallback.
+     * @param {String} key
+     * @return {String}
+     */
+    Lang.prototype._getLocale = function(key) {
+        key = this._parseKey(key, this.locale)
+        if (this.messages[key.source]) {
+            return this.locale;
+        }
+        if (this.messages[key.sourceFallback]) {
+            return this.fallback;
+        }
+        return null;
+    };
+
+    /**
+     * Find a message in a translation tree using both dotted keys and regular ones
+     *
+     * @param pathSegments {array} An array of path segments such as ['family', 'father']
+     * @param tree {object} The translation tree
+     */
+    Lang.prototype._findMessageInTree = function(pathSegments, tree) {
+        while (pathSegments.length && tree !== undefined) {
+            var dottedKey = pathSegments.join('.');
+            if (tree[dottedKey]) {
+                tree = tree[dottedKey];
+                break;
+            }
+
+            tree = tree[pathSegments.shift()]
+        }
+
+        return tree;
+    };
+
+    /**
+     * Sort replacement keys by length in descending order.
+     *
+     * @param a {string} Replacement key
+     * @param b {string} Sibling replacement key
+     * @return {number}
+     * @private
+     */
+    Lang.prototype._sortReplacementKeys = function(a, b) {
+        return b.length - a.length;
+    };
+
+    /**
+     * Apply replacements to a string message containing placeholders.
+     *
+     * @param message {string} The text message.
+     * @param replacements {object} The replacements to be done in the message.
+     *
+     * @return {string} The string message with replacements applied.
+     */
+    Lang.prototype._applyReplacements = function(message, replacements) {
+        var keys = Object.keys(replacements).sort(this._sortReplacementKeys);
+
+        keys.forEach(function(replace) {
+            message = message.replace(new RegExp(':' + replace, 'gi'), function (match) {
+                var value = replacements[replace];
+
+                // Capitalize all characters.
+                var allCaps = match === match.toUpperCase();
+                if (allCaps) {
+                    return value.toUpperCase();
+                }
+
+                // Capitalize first letter.
+                var firstCap = match === match.replace(/\w/i, function(letter) {
+                    return letter.toUpperCase();
+                });
+                if (firstCap) {
+                    return value.charAt(0).toUpperCase() + value.slice(1);
+                }
+
+                return value;
+            })
+        });
+        return message;
+    };
+
+    /**
+     * Checks if the given `count` is within the interval defined by the {string} `interval`
+     *
+     * @param  count     {int}    The amount of items.
+     * @param  interval  {string} The interval to be compared with the count.
+     * @return {boolean}          Returns true if count is within interval; false otherwise.
+     */
+    Lang.prototype._testInterval = function(count, interval) {
+        /**
+         * From the Symfony\Component\Translation\Interval Docs
+         *
+         * Tests if a given number belongs to a given math interval.
+         *
+         * An interval can represent a finite set of numbers:
+         *
+         *  {1,2,3,4}
+         *
+         * An interval can represent numbers between two numbers:
+         *
+         *  [1, +Inf]
+         *  ]-1,2[
+         *
+         * The left delimiter can be [ (inclusive) or ] (exclusive).
+         * The right delimiter can be [ (exclusive) or ] (inclusive).
+         * Beside numbers, you can use -Inf and +Inf for the infinite.
+         */
+
+        if (typeof interval !== 'string') {
+            throw 'Invalid interval: should be a string.';
+        }
+
+        interval = interval.trim();
+
+        var matches = interval.match(intervalRegexp);
+        if (!matches) {
+            throw 'Invalid interval: ' + interval;
+        }
+
+        if (matches[2]) {
+            var items = matches[2].split(',');
+            for (var i = 0; i < items.length; i++) {
+                if (parseInt(items[i], 10) === count) {
+                    return true;
+                }
+            }
+        } else {
+            // Remove falsy values.
+            matches = matches.filter(function(match) {
+                return !!match;
+            });
+
+            var leftDelimiter = matches[1];
+            var leftNumber = convertNumber(matches[2]);
+            if (leftNumber === Infinity) {
+                leftNumber = -Infinity;
+            }
+            var rightNumber = convertNumber(matches[3]);
+            var rightDelimiter = matches[4];
+
+            return (leftDelimiter === '[' ? count >= leftNumber : count > leftNumber)
+                && (rightDelimiter === ']' ? count <= rightNumber : count < rightNumber);
+        }
+
+        return false;
+    };
+
+    /**
+     * Returns the plural position to use for the given locale and number.
+     *
+     * The plural rules are derived from code of the Zend Framework (2010-09-25),
+     * which is subject to the new BSD license (http://framework.zend.com/license/new-bsd).
+     * Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+     *
+     * @param {Number} count
+     * @param {String} locale
+     * @return {Number}
+     */
+    Lang.prototype._getPluralForm = function(count, locale) {
+        switch (locale) {
+            case 'az':
+            case 'bo':
+            case 'dz':
+            case 'id':
+            case 'ja':
+            case 'jv':
+            case 'ka':
+            case 'km':
+            case 'kn':
+            case 'ko':
+            case 'ms':
+            case 'th':
+            case 'tr':
+            case 'vi':
+            case 'zh':
+                return 0;
+
+            case 'af':
+            case 'bn':
+            case 'bg':
+            case 'ca':
+            case 'da':
+            case 'de':
+            case 'el':
+            case 'en':
+            case 'eo':
+            case 'es':
+            case 'et':
+            case 'eu':
+            case 'fa':
+            case 'fi':
+            case 'fo':
+            case 'fur':
+            case 'fy':
+            case 'gl':
+            case 'gu':
+            case 'ha':
+            case 'he':
+            case 'hu':
+            case 'is':
+            case 'it':
+            case 'ku':
+            case 'lb':
+            case 'ml':
+            case 'mn':
+            case 'mr':
+            case 'nah':
+            case 'nb':
+            case 'ne':
+            case 'nl':
+            case 'nn':
+            case 'no':
+            case 'om':
+            case 'or':
+            case 'pa':
+            case 'pap':
+            case 'ps':
+            case 'pt':
+            case 'so':
+            case 'sq':
+            case 'sv':
+            case 'sw':
+            case 'ta':
+            case 'te':
+            case 'tk':
+            case 'ur':
+            case 'zu':
+                return (count == 1)
+                    ? 0
+                    : 1;
+
+            case 'am':
+            case 'bh':
+            case 'fil':
+            case 'fr':
+            case 'gun':
+            case 'hi':
+            case 'hy':
+            case 'ln':
+            case 'mg':
+            case 'nso':
+            case 'xbr':
+            case 'ti':
+            case 'wa':
+                return ((count === 0) || (count === 1))
+                    ? 0
+                    : 1;
+
+            case 'be':
+            case 'bs':
+            case 'hr':
+            case 'ru':
+            case 'sr':
+            case 'uk':
+                return ((count % 10 == 1) && (count % 100 != 11))
+                    ? 0
+                    : (((count % 10 >= 2) && (count % 10 <= 4) && ((count % 100 < 10) || (count % 100 >= 20)))
+                        ? 1
+                        : 2);
+
+            case 'cs':
+            case 'sk':
+                return (count == 1)
+                    ? 0
+                    : (((count >= 2) && (count <= 4))
+                        ? 1
+                        : 2);
+
+            case 'ga':
+                return (count == 1)
+                    ? 0
+                    : ((count == 2)
+                        ? 1
+                        : 2);
+
+            case 'lt':
+                return ((count % 10 == 1) && (count % 100 != 11))
+                    ? 0
+                    : (((count % 10 >= 2) && ((count % 100 < 10) || (count % 100 >= 20)))
+                        ? 1
+                        : 2);
+
+            case 'sl':
+                return (count % 100 == 1)
+                    ? 0
+                    : ((count % 100 == 2)
+                        ? 1
+                        : (((count % 100 == 3) || (count % 100 == 4))
+                            ? 2
+                            : 3));
+
+            case 'mk':
+                return (count % 10 == 1)
+                    ? 0
+                    : 1;
+
+            case 'mt':
+                return (count == 1)
+                    ? 0
+                    : (((count === 0) || ((count % 100 > 1) && (count % 100 < 11)))
+                        ? 1
+                        : (((count % 100 > 10) && (count % 100 < 20))
+                            ? 2
+                            : 3));
+
+            case 'lv':
+                return (count === 0)
+                    ? 0
+                    : (((count % 10 == 1) && (count % 100 != 11))
+                        ? 1
+                        : 2);
+
+            case 'pl':
+                return (count == 1)
+                    ? 0
+                    : (((count % 10 >= 2) && (count % 10 <= 4) && ((count % 100 < 12) || (count % 100 > 14)))
+                        ? 1
+                        : 2);
+
+            case 'cy':
+                return (count == 1)
+                    ? 0
+                    : ((count == 2)
+                        ? 1
+                        : (((count == 8) || (count == 11))
+                            ? 2
+                            : 3));
+
+            case 'ro':
+                return (count == 1)
+                    ? 0
+                    : (((count === 0) || ((count % 100 > 0) && (count % 100 < 20)))
+                        ? 1
+                        : 2);
+
+            case 'ar':
+                return (count === 0)
+                    ? 0
+                    : ((count == 1)
+                        ? 1
+                        : ((count == 2)
+                            ? 2
+                            : (((count % 100 >= 3) && (count % 100 <= 10))
+                                ? 3
+                                : (((count % 100 >= 11) && (count % 100 <= 99))
+                                    ? 4
+                                    : 5))));
+
+            default:
+                return 0;
+        }
+    };
+
+    return Lang;
+
+}));
+
+
+/***/ }),
+
+/***/ "./node_modules/laravel-vue-lang/dist/index.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/laravel-vue-lang/dist/index.js ***!
+  \*****************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Lang = exports.default = void 0;
+const lang_js_1 = __importDefault(__webpack_require__(/*! lang.js */ "./node_modules/lang.js/src/lang.js"));
+/*
+|--------------------------------------------------------------------------
+| Helpers
+|--------------------------------------------------------------------------
+*/
+/**
+ * Determines if the given locale and domain combination is ignored.
+ */
+function shouldIgnore(ignore, locale, domain) {
+    for (let [ignoreLocale, ignoreDomains] of Object.entries(ignore)) {
+        if (locale === ignoreLocale && ignoreDomains.includes(domain)) {
+            return true;
+        }
+    }
+    return false;
+}
+/**
+ * Imports translations from the configured alias.
+ */
+function importTranslations({ ignore, globalTranslationsKey }) {
+    const catalogue = {};
+    const files = __webpack_require__("./resources/lang sync recursive \\.(php|json)$");
+    files.keys().forEach((file) => {
+        var _a, _b;
+        // Find localization files at the root directory
+        const [isGlobal, rootLocale] = (_a = /\.\/([A-Za-z0-9-_]+).(?:php|json)/.exec(file)) !== null && _a !== void 0 ? _a : [];
+        if (isGlobal) {
+            catalogue[`${rootLocale}.${globalTranslationsKey}`] = files(file);
+            return;
+        }
+        // Find localization files in a /lang/ directory
+        const [isScoped, locale, domain] = (_b = /\.\/([A-Za-z0-9-_]+)\/([A-Za-z0-9-_]+).(?:php|json)/.exec(file)) !== null && _b !== void 0 ? _b : [];
+        if (!ignore || !shouldIgnore(ignore, locale, domain)) {
+            catalogue[`${locale}.${domain}`] = files(file);
+        }
+    });
+    return catalogue;
+}
+/**
+ * Adds localization to Vue.
+ */
+const Lang = {
+    install: (Vue, options = {}) => {
+        var _a;
+        // Defines default options
+        options = Object.assign({ globalTranslationsKey: '__global__' }, options);
+        // Creates the Lang.js object
+        const i18n = new lang_js_1.default(Object.assign({ fallback: document.documentElement.lang || navigator.language, messages: (_a = options === null || options === void 0 ? void 0 : options.messages) !== null && _a !== void 0 ? _a : importTranslations(options) }, options));
+        // Defines a global translation function
+        const __ = (key, ...args) => {
+            // Non-global translations
+            if (key.match(/^[\w-]+(?:\.[\w-]+)+$/)) {
+                return i18n.get(key, ...args);
+            }
+            // Global translations
+            const result = i18n.get(`${options.globalTranslationsKey}.${key}`, ...args);
+            return result.startsWith(options.globalTranslationsKey)
+                ? result.substr(options.globalTranslationsKey.length + 1)
+                : result;
+        };
+        Vue.mixin({
+            methods: {
+                $lang: () => i18n,
+                __,
+            },
+        });
+    },
+};
+exports.default = Lang;
+exports.Lang = Lang;
+
 
 /***/ }),
 
@@ -20487,6 +21502,116 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/lang/en/auth.php":
+/*!************************************!*\
+  !*** ./resources/lang/en/auth.php ***!
+  \************************************/
+/***/ ((module) => {
+
+module.exports = {"failed":"Estas credenciales no coinciden con nuestros registros.","password":"La contraseña ingresada no es correcta.","throttle":"Demasiados intentos de acceso. Por favor intente nuevamente en :seconds segundos."};
+
+/***/ }),
+
+/***/ "./resources/lang/en/pagination.php":
+/*!******************************************!*\
+  !*** ./resources/lang/en/pagination.php ***!
+  \******************************************/
+/***/ ((module) => {
+
+module.exports = {"previous":"&laquo; Previous","next":"Next &raquo;"};
+
+/***/ }),
+
+/***/ "./resources/lang/en/passwords.php":
+/*!*****************************************!*\
+  !*** ./resources/lang/en/passwords.php ***!
+  \*****************************************/
+/***/ ((module) => {
+
+module.exports = {"reset":"Your password has been reset!","sent":"We have emailed your password reset link!","throttled":"Please wait before retrying.","token":"This password reset token is invalid.","user":"We can't find a user with that email address."};
+
+/***/ }),
+
+/***/ "./resources/lang/en/tfg.php":
+/*!***********************************!*\
+  !*** ./resources/lang/en/tfg.php ***!
+  \***********************************/
+/***/ ((module) => {
+
+module.exports = {"home":"Home","list":"List","restore_pass":"Restore Password","restore_info":"Enter your Email and instructions will be sent to you!","activity_summary":"Activity Summary","statistics":"Statistics","posts_from_categories":"Posts of each category","routines_from_types":"Routines of each type","login":{"sing_in":"Sing In","email":"Email","password":"Password","password_confirmation":"Confirm Password","remember_me":"Remember me","forgot_pass":"Forgot password","login":"Log in"},"layouts":{"header":{"logout":"Logout","language":"Language","spanish":"Spanish","english":"English"},"body":{"users":"Users","posts":"Posts","categories":"Categories","routines":"Routines","comments":"Comments","routine-types":"Routine Types"}},"tables":{"id":"ID","name":"NAME","surnames":"SURNAMES","nick":"NICK","email":"EMAIL","posts":"POSTS","followed":"FOLLOWED","followers":"FOLLOWERS","comment-id":"COMMENT ID","created-at":"CREATED AT","actions":"ACTIONS","user-id":"USER ID","content":"CONTENT","image":"IMAGE","body":"BODY","comments":"COMMENTS","type":"TYPE","description":"DESCRIPTION"},"forms":{"fields":{"id":"Id","name":"Name","surnames":"Surnames","nick":"Nick","bio":"Biography","email":"Email","password":"Password","password-confirmation":"Confirm Password","num-posts":"Posts","followers":"Followers","followed":"Followed","user-id":"User id","post-id":"Post id","body":"Body","comments":"Comments","type":"Type","description":"Description","image":"Image","posts":"Posts","creation-date":"Creacion date"},"small":{"avatar_info":"If no photo is added, one will be added by default","nick_info":"It can contain numbers, maximum 15 characters","bio_info":"Max 200 characters","password_info":"Min 8 characters","description-info":"Max 600 characters"},"default":{"select":"Select one type"}},"buttons":{"show":"Show","edit":"Edit","delete":"Delete","save":"Save","update":"Update","return":"Return","return-to-list":"Return to list","yes":"Yes","no":"No","cancel":"Cancel"},"users":{"title":"Users","list":"Users Lists","new":"New User","create":"Create User","edit":"Edit User","detail":"User Detail"},"posts":{"title":"Posts","list":"Posts List","edit":"Edit Post","detail":"Post Detail"},"categories":{"title":"Categories","list":"Categories List","new":"New Category","create":"Create Category","edit":"Edit Category","detail":"Category Detail"},"routines":{"title":"Routines","list":"Routines List","new":"New Routine","create":"Create Routine","edit":"Edit Routine","detail":"Routine Detail"},"routines-types":{"title":"Routine Types","list":"Routine Types List","new":"New Routine Type","create":"Create Routine Type","edit":"Edit Routine Type","detail":"Routine Type Detail"},"validations":{"correct-the-errors":"Correct the errors","image":"The file has to be an image"},"api":{"responses":{"post_created":"Post created","post_not_created":"Post not created","post_updated":"Post updated","post_not_updated":"Post not updated","post_deleted":"Post deleted","post_not_deleted":"Post not deleted","post_liked":"Post liked","post_disliked":"Post disliked","comment_created":"Comment created","comment_not_created":"Comment not created","comment_updated":"Comment updated","comment_not_updated":"Comment not updated","comment_deleted":"Comment deleted","comment_not_deleted":"Comment not deleted","user_unauthorized":"User authorized","user_found":"User found","user_not_found":"User not found","user_updated":"User updated","user_not_updated":"User not update","user_follow":"User followed","user_unfollow":"User not followed"}}};
+
+/***/ }),
+
+/***/ "./resources/lang/en/validation.php":
+/*!******************************************!*\
+  !*** ./resources/lang/en/validation.php ***!
+  \******************************************/
+/***/ ((module) => {
+
+module.exports = {"accepted":"The :attribute must be accepted.","active_url":"The :attribute is not a valid URL.","after":"The :attribute must be a date after :date.","after_or_equal":"The :attribute must be a date after or equal to :date.","alpha":"The :attribute must only contain letters.","alpha_dash":"The :attribute must only contain letters, numbers, dashes and underscores.","alpha_num":"The :attribute must only contain letters and numbers.","array":"The :attribute must be an array.","before":"The :attribute must be a date before :date.","before_or_equal":"The :attribute must be a date before or equal to :date.","between":{"numeric":"The :attribute must be between :min and :max.","file":"The :attribute must be between :min and :max kilobytes.","string":"The :attribute must be between :min and :max characters.","array":"The :attribute must have between :min and :max items."},"boolean":"The :attribute field must be true or false.","confirmed":"The :attribute confirmation does not match.","date":"The :attribute is not a valid date.","date_equals":"The :attribute must be a date equal to :date.","date_format":"The :attribute does not match the format :format.","different":"The :attribute and :other must be different.","digits":"The :attribute must be :digits digits.","digits_between":"The :attribute must be between :min and :max digits.","dimensions":"The :attribute has invalid image dimensions.","distinct":"The :attribute field has a duplicate value.","email":"The :attribute must be a valid email address.","ends_with":"The :attribute must end with one of the following: :values.","exists":"The selected :attribute is invalid.","file":"The :attribute must be a file.","filled":"The :attribute field must have a value.","gt":{"numeric":"The :attribute must be greater than :value.","file":"The :attribute must be greater than :value kilobytes.","string":"The :attribute must be greater than :value characters.","array":"The :attribute must have more than :value items."},"gte":{"numeric":"The :attribute must be greater than or equal :value.","file":"The :attribute must be greater than or equal :value kilobytes.","string":"The :attribute must be greater than or equal :value characters.","array":"The :attribute must have :value items or more."},"image":"The :attribute must be an image.","in":"The selected :attribute is invalid.","in_array":"The :attribute field does not exist in :other.","integer":"The :attribute must be an integer.","ip":"The :attribute must be a valid IP address.","ipv4":"The :attribute must be a valid IPv4 address.","ipv6":"The :attribute must be a valid IPv6 address.","json":"The :attribute must be a valid JSON string.","lt":{"numeric":"The :attribute must be less than :value.","file":"The :attribute must be less than :value kilobytes.","string":"The :attribute must be less than :value characters.","array":"The :attribute must have less than :value items."},"lte":{"numeric":"The :attribute must be less than or equal :value.","file":"The :attribute must be less than or equal :value kilobytes.","string":"The :attribute must be less than or equal :value characters.","array":"The :attribute must not have more than :value items."},"max":{"numeric":"The :attribute must not be greater than :max.","file":"The :attribute must not be greater than :max kilobytes.","string":"The :attribute must not be greater than :max characters.","array":"The :attribute must not have more than :max items."},"mimes":"The :attribute must be a file of type: :values.","mimetypes":"The :attribute must be a file of type: :values.","min":{"numeric":"The :attribute must be at least :min.","file":"The :attribute must be at least :min kilobytes.","string":"The :attribute must be at least :min characters.","array":"The :attribute must have at least :min items."},"multiple_of":"The :attribute must be a multiple of :value.","not_in":"The selected :attribute is invalid.","not_regex":"The :attribute format is invalid.","numeric":"The :attribute must be a number.","password":"The password is incorrect.","present":"The :attribute field must be present.","regex":"The :attribute format is invalid.","required":"The :attribute field is required.","required_if":"The :attribute field is required when :other is :value.","required_unless":"The :attribute field is required unless :other is in :values.","required_with":"The :attribute field is required when :values is present.","required_with_all":"The :attribute field is required when :values are present.","required_without":"The :attribute field is required when :values is not present.","required_without_all":"The :attribute field is required when none of :values are present.","prohibited_if":"The :attribute field is prohibited when :other is :value.","prohibited_unless":"The :attribute field is prohibited unless :other is in :values.","same":"The :attribute and :other must match.","size":{"numeric":"The :attribute must be :size.","file":"The :attribute must be :size kilobytes.","string":"The :attribute must be :size characters.","array":"The :attribute must contain :size items."},"starts_with":"The :attribute must start with one of the following: :values.","string":"The :attribute must be a string.","timezone":"The :attribute must be a valid zone.","unique":"The :attribute has already been taken.","uploaded":"The :attribute failed to upload.","url":"The :attribute format is invalid.","uuid":"The :attribute must be a valid UUID.","custom":{"attribute-name":{"rule-name":"custom-message"}},"attributes":[]};
+
+/***/ }),
+
+/***/ "./resources/lang/es/auth.php":
+/*!************************************!*\
+  !*** ./resources/lang/es/auth.php ***!
+  \************************************/
+/***/ ((module) => {
+
+module.exports = {"failed":"These credentials do not match our records.","password":"The provided password is incorrect.","throttle":"Too many login attempts. Please try again in :seconds seconds."};
+
+/***/ }),
+
+/***/ "./resources/lang/es/pagination.php":
+/*!******************************************!*\
+  !*** ./resources/lang/es/pagination.php ***!
+  \******************************************/
+/***/ ((module) => {
+
+module.exports = {"next":"Siguiente &raquo;","previous":"&laquo; Anterior"};
+
+/***/ }),
+
+/***/ "./resources/lang/es/passwords.php":
+/*!*****************************************!*\
+  !*** ./resources/lang/es/passwords.php ***!
+  \*****************************************/
+/***/ ((module) => {
+
+module.exports = {"reset":"¡Su contraseña ha sido restablecida!","sent":"¡Le hemos enviado por correo electrónico el enlace para restablecer su contraseña!","throttled":"Por favor espere antes de intentar de nuevo.","token":"El token de restablecimiento de contraseña es inválido.","user":"No encontramos ningún usuario con ese correo electrónico."};
+
+/***/ }),
+
+/***/ "./resources/lang/es/tfg.php":
+/*!***********************************!*\
+  !*** ./resources/lang/es/tfg.php ***!
+  \***********************************/
+/***/ ((module) => {
+
+module.exports = {"home":"Inicio","list":"Listado","restore_pass":"Recuperar Contraseña","restore_info":"Introduce tu Email y recibirás los pasos para restaurar la contraseña","activity_summary":"Resumen de Actividad","statistics":"Estadisticas","posts_from_categories":"Posts de cada categoria","routines_from_types":"Rutinas de cada tipo","login":{"sing_in":"Iniciar Sesión","email":"Correo","password":"Contraseña","password_confirmation":"Confirma Contraseña","remember_me":"Recuerdame","forgot_pass":"Contraseña olvidada?","login":"Acceder"},"layouts":{"header":{"logout":"Cerrar Sesión","language":"Idioma","spanish":"Español","english":"Ingles"},"body":{"users":"Usuarios","posts":"Posts","categories":"Categorias","routines":"Rutinas","comments":"Comentarios","routine-types":"Tipos Rutinas"}},"tables":{"id":"ID","name":"NOMBRE","surnames":"APELLIDOS","nick":"NICK","email":"EMAIL","posts":"POSTS","followed":"SEGUIDOS","followers":"SEGUIDORES","comment-id":"COMMENT ID","created-at":"FECHA CREACION","actions":"ACCIONES","user-id":"USER ID","content":"CONTENIDO","image":"IMAGEN","body":"BODY","comments":"COMENTARIOS","type":"TIPO","description":"DESCRIPCION"},"forms":{"fields":{"id":"Id","name":"Nombre","surnames":"Apellidos","nick":"Nick","bio":"Biografia","email":"Email","password":"Contraseña","password-confirmation":"Confirmar Contraseña","num-posts":"Posts","followers":"Seguidores","followed":"Seguidos","user-id":"User id","post-id":"Post id","body":"Body","comments":"Commentarios","type":"Tipo","description":"Descripcion","image":"Imagen","posts":"Posts","creation-date":"Fecha Creacion"},"small":{"avatar_info":"Si no se añade una foto, se añadira una por defecto","nick_info":"Puede contener numeros, maximo 15 caracteres","bio_info":"Máximo 200 caracteres","password_info":"Mínimo 8 carácteres","description-info":"Máximo 600 caracteres"},"default":{"select":"Selecciona un tipo"}},"buttons":{"show":"Ver","edit":"Editar","delete":"Eliminar","save":"Guardar","update":"Actualizar","return":"Volver","return-to-list":"Regresar al listado","yes":"Si","no":"No","cancel":"Cancelar"},"users":{"title":"Usuarios","list":"Listado Usuarios","new":"Nuevo Usuario","create":"Crear usuario","edit":"Editar Usuario","detail":"Detalle de Usuario"},"posts":{"title":"Posts","list":"Listado Posts","edit":"Editar Post","detail":"Detalle de Post"},"categories":{"title":"Categorias","list":"Listado Categorias","new":"Nueva Categoria","create":"Crear Categoria","edit":"Editar Categoria","detail":"Detalle de Categoria"},"routines":{"title":"Rutinas","list":"Listado Rutinas","new":"Nueva Rutina","create":"Crear Rutina","edit":"Editar Rutina","detail":"Detalle de Rutina"},"routines-types":{"title":"Tipos Rutinas","list":"Listado Tipos Rutinas","new":"Nuevo Tipo Rutina","create":"Crear Tipo Rutina","edit":"Editar Tipo Rutina","detail":"Detalle de Tipo Rutina"},"validations":{"correct-the-errors":"Corrige los errores","image":"El archivo debe ser una imagen"},"api":{"responses":{"post_created":"Post creado","post_not_created":"Post no creado","post_updated":"Post actualizado","post_not_updated":"Post no actualizado","post_deleted":"Post eliminado","post_not_deleted":"Post no eliminado","post_liked":"Like a post","post_disliked":"Dislike a post","comment_created":"Comentario creado","comment_not_created":"Comentario no creado","comment_updated":"Comentario actualizado","comment_not_updated":"Comentario no actualizado","comment_deleted":"Comentario eliminado","comment_not_deleted":"Comentario no eliminado","user_unauthorized":"Usuario no autorizado","user_found":"Usuario encontrado","user_not_found":"Usuario no encontrado","user_updated":"Usuario actualizado","user_not_updated":"Usuario no actualizado","user_follow":"Usuario seguido","user_unfollow":"Usuario no seguido"}}};
+
+/***/ }),
+
+/***/ "./resources/lang/es/validation-inline.php":
+/*!*************************************************!*\
+  !*** ./resources/lang/es/validation-inline.php ***!
+  \*************************************************/
+/***/ ((module) => {
+
+module.exports = {"accepted":"Este campo debe ser aceptado.","active_url":"Esta no es una URL válida.","after":"Debe ser una fecha después de :date.","after_or_equal":"Debe ser una fecha después o igual a :date.","alpha":"Este campo solo puede contener letras.","alpha_dash":"Este campo solo puede contener letras, números, guiones y guiones bajos.","alpha_num":"Este campo solo puede contener letras y números.","array":"Este campo debe ser un array (colección).","attached":"Este campo ya se adjuntó.","before":"Debe ser una fecha antes de :date.","before_or_equal":"Debe ser una fecha anterior o igual a :date.","between":{"array":"El contenido debe tener entre :min y :max elementos.","file":"Este archivo debe ser entre :min y :max kilobytes.","numeric":"Este valor debe ser entre :min y :max.","string":"El texto debe ser entre :min y :max caracteres."},"boolean":"El campo debe ser verdadero o falso.","confirmed":"La confirmación no coincide.","date":"Esta no es una fecha válida.","date_equals":"El campo debe ser una fecha igual a :date.","date_format":"El campo no corresponde al formato :format.","different":"Este valor deben ser diferente de :other.","digits":"Debe tener :digits dígitos.","digits_between":"Debe tener entre :min y :max dígitos.","dimensions":"Las dimensiones de esta imagen son inválidas.","distinct":"El campo tiene un valor duplicado.","email":"No es un correo válido.","ends_with":"Debe finalizar con uno de los siguientes valores: :values.","exists":"El valor seleccionado es inválido.","file":"El campo debe ser un archivo.","filled":"Este campo debe tener un valor.","gt":{"array":"El contenido debe tener mas de :value elementos.","file":"El archivo debe ser mayor que :value kilobytes.","numeric":"El valor del campo debe ser mayor que :value.","string":"El texto debe ser mayor de :value caracteres."},"gte":{"array":"El contenido debe tener :value elementos o más.","file":"El tamaño del archivo debe ser mayor o igual que :value kilobytes.","numeric":"El valor debe ser mayor o igual que :value.","string":"El texto debe ser mayor o igual de :value caracteres."},"image":"Esta debe ser una imagen.","in":"El valor seleccionado es inválido.","in_array":"Este valor no existe en :other.","integer":"Esto debe ser un entero.","ip":"Debe ser una dirección IP válida.","ipv4":"Debe ser una dirección IPv4 válida.","ipv6":"Debe ser una dirección IPv6 válida.","json":"Debe ser un texto válido en JSON.","lt":{"array":"El contenido debe tener menor de :value elementos.","file":"El tamaño del archivo debe ser menor a :value kilobytes.","numeric":"El valor debe ser menor que :value.","string":"El texto debe ser menor de :value caracteres."},"lte":{"array":"El contenido no debe tener más de :value elementos.","file":"El tamaño del archivo debe ser menor o igual que :value kilobytes.","numeric":"El valor debe ser menor o igual que :value.","string":"El texto debe ser menor o igual de :value caracteres."},"max":{"array":"El contenido no debe tener más de :max elementos.","file":"El tamaño del archivo no debe ser mayor a :max kilobytes.","numeric":"El valor no debe ser mayor de :max.","string":"El texto no debe ser mayor a :max caracteres."},"mimes":"Debe ser un archivo de tipo: :values.","mimetypes":"Debe ser un archivo de tipo: :values.","min":{"array":"El contenido debe tener al menos :min elementos.","file":"El tamaño del archivo debe ser al menos de :min kilobytes.","numeric":"El valor debe ser al menos de :min.","string":"El texto debe ser al menos de :min caracteres."},"multiple_of":"Este valor debe ser múltiplo de :value","not_in":"El valor seleccionado es inválido.","not_regex":"Este formato es inválido.","numeric":"Debe ser un número.","password":"La contraseña es incorrecta.","present":"Este campo debe estar presente.","prohibited":"Este campo está prohibido","prohibited_if":"Este campo está prohibido cuando :other es :value.","prohibited_unless":"Este campo está prohibido a menos que :other sea :values.","regex":"Este formato es inválido.","relatable":"Este campo no se puede asociar con este recurso.","required":"Este campo es requerido.","required_if":"Este campo es requerido cuando :other es :value.","required_unless":"Este campo es requerido a menos que :other esté en :values.","required_with":"Este campo es requerido cuando :values está presente.","required_with_all":"Este campo es requerido cuando :values están presentes.","required_without":"Este campo es requerido cuando :values no está presente.","required_without_all":"Este campo es requerido cuando ninguno de :values están presentes.","same":"El valor de este campo debe ser igual a :other.","size":{"array":"El contenido debe tener :size elementos.","file":"El tamaño del archivo debe ser de :size kilobytes.","numeric":"El valor debe ser :size.","string":"El texto debe ser de :size caracteres."},"starts_with":"Debe comenzar con alguno de los siguientes valores: :values.","string":"Debe ser un texto.","timezone":"Debe ser de una zona horaria válida.","unique":"Este campo ya ha sido tomado.","uploaded":"Falló al subir.","url":"Este formato es inválido.","uuid":"Debe ser un UUID válido.","custom":{"attribute-name":{"rule-name":"custom-message"}},"attributes":[]};
+
+/***/ }),
+
+/***/ "./resources/lang/es/validation.php":
+/*!******************************************!*\
+  !*** ./resources/lang/es/validation.php ***!
+  \******************************************/
+/***/ ((module) => {
+
+module.exports = {"accepted":":attribute debe ser aceptado.","active_url":":attribute no es una URL válida.","after":":attribute debe ser una fecha posterior a :date.","after_or_equal":":attribute debe ser una fecha posterior o igual a :date.","alpha":":attribute sólo debe contener letras.","alpha_dash":":attribute sólo debe contener letras, números, guiones y guiones bajos.","alpha_num":":attribute sólo debe contener letras y números.","array":":attribute debe ser un conjunto.","attached":"Este :attribute ya se adjuntó.","before":":attribute debe ser una fecha anterior a :date.","before_or_equal":":attribute debe ser una fecha anterior o igual a :date.","between":{"array":":attribute tiene que tener entre :min - :max elementos.","file":":attribute debe pesar entre :min - :max kilobytes.","numeric":":attribute tiene que estar entre :min - :max.","string":":attribute tiene que tener entre :min - :max caracteres."},"boolean":"El campo :attribute debe tener un valor verdadero o falso.","confirmed":"La confirmación de :attribute no coincide.","date":":attribute no es una fecha válida.","date_equals":":attribute debe ser una fecha igual a :date.","date_format":":attribute no corresponde al formato :format.","different":":attribute y :other deben ser diferentes.","digits":":attribute debe tener :digits dígitos.","digits_between":":attribute debe tener entre :min y :max dígitos.","dimensions":"Las dimensiones de la imagen :attribute no son válidas.","distinct":"El campo :attribute contiene un valor duplicado.","email":":attribute no es un correo válido.","ends_with":"El campo :attribute debe finalizar con uno de los siguientes valores: :values","exists":":attribute es inválido.","file":"El campo :attribute debe ser un archivo.","filled":"El campo :attribute es obligatorio.","gt":{"array":"El campo :attribute debe tener más de :value elementos.","file":"El campo :attribute debe tener más de :value kilobytes.","numeric":"El campo :attribute debe ser mayor que :value.","string":"El campo :attribute debe tener más de :value caracteres."},"gte":{"array":"El campo :attribute debe tener como mínimo :value elementos.","file":"El campo :attribute debe tener como mínimo :value kilobytes.","numeric":"El campo :attribute debe ser como mínimo :value.","string":"El campo :attribute debe tener como mínimo :value caracteres."},"image":":attribute debe ser una imagen.","in":":attribute es inválido.","in_array":"El campo :attribute no existe en :other.","integer":":attribute debe ser un número entero.","ip":":attribute debe ser una dirección IP válida.","ipv4":":attribute debe ser una dirección IPv4 válida.","ipv6":":attribute debe ser una dirección IPv6 válida.","json":"El campo :attribute debe ser una cadena JSON válida.","lt":{"array":"El campo :attribute debe tener menos de :value elementos.","file":"El campo :attribute debe tener menos de :value kilobytes.","numeric":"El campo :attribute debe ser menor que :value.","string":"El campo :attribute debe tener menos de :value caracteres."},"lte":{"array":"El campo :attribute debe tener como máximo :value elementos.","file":"El campo :attribute debe tener como máximo :value kilobytes.","numeric":"El campo :attribute debe ser como máximo :value.","string":"El campo :attribute debe tener como máximo :value caracteres."},"max":{"array":":attribute no debe tener más de :max elementos.","file":":attribute no debe ser mayor que :max kilobytes.","numeric":":attribute no debe ser mayor que :max.","string":":attribute no debe ser mayor que :max caracteres."},"mimes":":attribute debe ser un archivo con formato: :values.","mimetypes":":attribute debe ser un archivo con formato: :values.","min":{"array":":attribute debe tener al menos :min elementos.","file":"El tamaño de :attribute debe ser de al menos :min kilobytes.","numeric":"El tamaño de :attribute debe ser de al menos :min.","string":":attribute debe contener al menos :min caracteres."},"multiple_of":"El campo :attribute debe ser múltiplo de :value","not_in":":attribute es inválido.","not_regex":"El formato del campo :attribute no es válido.","numeric":":attribute debe ser numérico.","password":"La contraseña es incorrecta.","present":"El campo :attribute debe estar presente.","prohibited":"El campo :attribute está prohibido.","prohibited_if":"El campo :attribute está prohibido cuando :other es :value.","prohibited_unless":"El campo :attribute está prohibido a menos que :other sea :values.","regex":"El formato de :attribute es inválido.","relatable":"Este :attribute no se puede asociar con este recurso","required":"El campo :attribute es obligatorio.","required_if":"El campo :attribute es obligatorio cuando :other es :value.","required_unless":"El campo :attribute es obligatorio a menos que :other esté en :values.","required_with":"El campo :attribute es obligatorio cuando :values está presente.","required_with_all":"El campo :attribute es obligatorio cuando :values están presentes.","required_without":"El campo :attribute es obligatorio cuando :values no está presente.","required_without_all":"El campo :attribute es obligatorio cuando ninguno de :values está presente.","same":":attribute y :other deben coincidir.","size":{"array":":attribute debe contener :size elementos.","file":"El tamaño de :attribute debe ser :size kilobytes.","numeric":"El tamaño de :attribute debe ser :size.","string":":attribute debe contener :size caracteres."},"starts_with":"El campo :attribute debe comenzar con uno de los siguientes valores: :values","string":"El campo :attribute debe ser una cadena de caracteres.","timezone":"El :attribute debe ser una zona válida.","unique":"El campo :attribute ya ha sido registrado.","uploaded":"Subir :attribute ha fallado.","url":"El formato :attribute es inválido.","uuid":"El campo :attribute debe ser un UUID válido.","custom":{"email":{"unique":"El :attribute ya ha sido registrado."},"password":{"min":"La :attribute debe contener más de :min caracteres"}},"attributes":{"address":"dirección","age":"edad","body":"contenido","city":"ciudad","content":"contenido","country":"país","current_password":"contraseña actual","date":"fecha","day":"día","description":"descripción","email":"correo electrónico","excerpt":"extracto","first_name":"nombre","gender":"género","hour":"hora","last_name":"apellido","message":"mensaje","minute":"minuto","mobile":"móvil","month":"mes","name":"nombre","password":"contraseña","password_confirmation":"confirmación de la contraseña","phone":"teléfono","price":"precio","role":"rol","second":"segundo","sex":"sexo","subject":"asunto","terms":"términos","time":"hora","title":"título","username":"usuario","year":"año"}};
+
+/***/ }),
+
 /***/ "./node_modules/process/browser.js":
 /*!*****************************************!*\
   !*** ./node_modules/process/browser.js ***!
@@ -21856,8 +22981,7 @@ var render = function() {
                       "\n                        Guardar\n                    "
                     )
                   ]
-                ),
-                _vm._v("1\n                ")
+                )
               ])
             ])
           ])
@@ -22238,8 +23362,397 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function () {}
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-primary mb-4",
+        attrs: { type: "button" },
+        on: {
+          click: function($event) {
+            return _vm.openModal(true)
+          }
+        }
+      },
+      [_vm._v("\n        " + _vm._s(_vm.__("tfg.routines.new")) + "\n    ")]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "row el-element-overlay" },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal",
+            attrs: {
+              id: "modal_rutina",
+              tabindex: "-1",
+              "aria-labelledby": "modalCenterTitle",
+              "aria-hidden": "false",
+              "data-backdrop": "false"
+            }
+          },
+          [
+            _c("div", { staticClass: "modal-dialog" }, [
+              _c("div", { staticClass: "modal-content" }, [
+                _c("div", { staticClass: "modal-header" }, [
+                  _vm.modificar
+                    ? _c("h4", { staticClass: "modal-title" }, [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(_vm.__("tfg.routines.edit")) +
+                            "\n                        "
+                        )
+                      ])
+                    : _c("h4", { staticClass: "modal-title" }, [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(_vm.__("tfg.routines.create")) +
+                            "\n                        "
+                        )
+                      ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "close",
+                      attrs: { type: "button", "aria-label": "Close" },
+                      on: {
+                        click: function($event) {
+                          return _vm.closeModal()
+                        }
+                      }
+                    },
+                    [
+                      _c("span", { attrs: { "aria-hidden": "true" } }, [
+                        _vm._v("×")
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c("div", [
+                    _c("label", { attrs: { for: "name" } }, [
+                      _vm._v(_vm._s(_vm.__("tfg.forms.fields.name")) + ":")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.routine.name,
+                          expression: "routine.name"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: _vm.errors.name ? "is-invalid" : "",
+                      attrs: { type: "text", name: "name", id: "name" },
+                      domProps: { value: _vm.routine.name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.routine, "name", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.name
+                      ? _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(_vm.errors.name[0]) +
+                              "\n                            "
+                          )
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "my-4" }, [
+                    _c("label", { attrs: { for: "type" } }, [
+                      _vm._v(
+                        _vm._s(_vm.__("tfg.forms.fields.type")) +
+                          ":\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.routine.routine_type_id,
+                            expression: "routine.routine_type_id"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { name: "type", id: "type" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.routine,
+                              "routine_type_id",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { disabled: "", value: "" } }),
+                        _vm._v(" "),
+                        _vm._l(_vm.routineTypes.data, function(routineType) {
+                          return _c(
+                            "option",
+                            {
+                              key: routineType.id,
+                              domProps: { value: routineType.id }
+                            },
+                            [_vm._v(_vm._s(routineType.name))]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "my-4" }, [
+                    _c("label", { attrs: { for: "description" } }, [
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(_vm.__("tfg.forms.fields.description")) +
+                          ":\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("small", [
+                      _vm._v(_vm._s(_vm.__("tfg.forms.small.description-info")))
+                    ]),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.routine.description,
+                          expression: "routine.description"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: _vm.errors.description ? "is-invalid" : "",
+                      attrs: {
+                        maxlength: "600",
+                        name: "description",
+                        id: "description",
+                        cols: "50",
+                        rows: "8"
+                      },
+                      domProps: { value: _vm.routine.description },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.routine,
+                            "description",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.description
+                      ? _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(_vm.errors.description[0]) +
+                              "\n                            "
+                          )
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "my-4" }, [
+                    _c("label", { attrs: { for: "image" } }, [
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(_vm.__("tfg.forms.fields.image")) +
+                          ":\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      ref: "image",
+                      staticClass: "dropify",
+                      class: _vm.errors.image ? "is-invalid" : "",
+                      attrs: { type: "file", name: "image", id: "image" },
+                      on: { change: _vm.getImage }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.image
+                      ? _c("div", { staticClass: "invalid-feedback d-block" }, [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(_vm.errors.image[0]) +
+                              "\n                            "
+                          )
+                        ])
+                      : _vm._e()
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.closeModal()
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.__("tfg.buttons.cancel")) +
+                          "\n                        "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.save()
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.__("tfg.buttons.save")) +
+                          "\n                        "
+                      )
+                    ]
+                  )
+                ])
+              ])
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _vm._l(_vm.laravelData.data, function(routine) {
+          return _c(
+            "div",
+            { key: routine.id, staticClass: "col-lg-3 col-md-6" },
+            [
+              _c("div", { staticClass: "card" }, [
+                _c("div", { staticClass: "el-card-item" }, [
+                  _c("div", { staticClass: "el-card-avatar el-overlay-1" }, [
+                    _c("img", {
+                      staticClass: "rounded mx-auto d-block",
+                      staticStyle: { height: "250px", width: "auto" },
+                      attrs: { src: routine.image }
+                    }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "el-overlay" }, [
+                      _c("ul", { staticClass: "el-info" }, [
+                        _c("li", [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-dark",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  _vm.modifcar = true
+                                  _vm.openModal(false, routine)
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "icon-pencil" })]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("li", [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-danger",
+                              on: {
+                                click: function($event) {
+                                  return _vm.destroy(routine.id)
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "icon-trash" })]
+                          )
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "el-card-content" }, [
+                    _c("p", [_c("strong", [_vm._v(_vm._s(routine.name))])]),
+                    _vm._v(" "),
+                    _c("small", [
+                      _vm._v(
+                        _vm._s(routine.description.substring(0, 50) + "...")
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("br")
+                  ])
+                ])
+              ])
+            ]
+          )
+        })
+      ],
+      2
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "float-right" },
+      [
+        _c("pagination", {
+          attrs: { data: _vm.laravelData, align: "right" },
+          on: { "pagination-change-page": _vm.getResults }
+        })
+      ],
+      1
+    )
+  ])
+}
 var staticRenderFns = []
+render._withStripped = true
 
 
 
@@ -34351,6 +35864,60 @@ Vue.compile = compileToFunctions;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Vue);
 
 
+/***/ }),
+
+/***/ "./resources/lang/es.json":
+/*!********************************!*\
+  !*** ./resources/lang/es.json ***!
+  \********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = JSON.parse('{"30 Days":"30 Días","60 Days":"60 Días","90 Days":"90 Días",":amount Total":":amount Total",":days day trial":":days day trial",":resource Details":"Detalles del :resource",":resource Details: :title":"Detalles del :resource : :title","A fresh verification link has been sent to your email address.":"Se ha enviado un nuevo enlace de verificación a su correo electrónico.","A new verification link has been sent to the email address you provided during registration.":"Se ha enviado un nuevo enlace de verificación a la dirección de correo electrónico que proporcionó durante el registro.","Accept Invitation":"Aceptar invitación","Action":"Acción","Action Happened At":"La acción sucedió a las","Action Initiated By":"La acción inició a las","Action Name":"Nombre de la acción","Action Status":"Estado de la acción","Action Target":"Objetivo de la acción","Actions":"Acciones","Add":"Añadir","Add a new team member to your team, allowing them to collaborate with you.":"Agregue un nuevo miembro a su equipo, permitiéndole colaborar con usted.","Add additional security to your account using two factor authentication.":"Agregue seguridad adicional a su cuenta mediante la autenticación de dos factores.","Add row":"Añadir fila","Add Team Member":"Añadir un nuevo miembro al equipo","Add VAT Number":"Add VAT Number","Added.":"Añadido.","Address":"Address","Address Line 2":"Address Line 2","Administrator":"Administrador","Administrator users can perform any action.":"Los administradores pueden realizar cualquier acción.","Afghanistan":"Afganistán","Aland Islands":"Islas Aland","Albania":"Albania","Algeria":"Algeria","All of the people that are part of this team.":"Todas las personas que forman parte de este equipo.","All resources loaded.":"Todos los recursos cargados.","All rights reserved.":"Todos los derechos reservados.","Already registered?":"¿Ya se registró?","American Samoa":"Samoa Americana","An error occured while uploading the file.":"Ocurrio un error al subir el archivo.","An unexpected error occurred and we have notified our support team. Please try again later.":"An unexpected error occurred and we have notified our support team. Please try again later.","Andorra":"Andorra","Angola":"Angola","Anguilla":"Anguila","Another user has updated this resource since this page was loaded. Please refresh the page and try again.":"Otro usuario ha modificado el recurso desde que esta página fue cargada. Por favor refresque la página e intente nuevamente.","Antarctica":"Antártica","Antigua and Barbuda":"Antigua and Barbuda","Antigua And Barbuda":"Antigua y Barbuda","API Token":"Token API","API Token Permissions":"Permisos para el token API","API Tokens":"Tokens API","API tokens allow third-party services to authenticate with our application on your behalf.":"Los tokens API permiten a servicios de terceros autenticarse con nuestra aplicación en su nombre.","April":"Abril","Are you sure you want to delete the selected resources?":"¿Está seguro de que desea eliminar los recursos seleccionados?","Are you sure you want to delete this file?":"¿Está seguro de que desea eliminar este archivo?","Are you sure you want to delete this resource?":"¿Está seguro de que desea eliminar este recurso?","Are you sure you want to delete this team? Once a team is deleted, all of its resources and data will be permanently deleted.":"¿Está seguro que desea eliminar este equipo? Una vez que se elimina un equipo, todos sus recursos y datos se eliminarán de forma permanente.","Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.":"¿Está seguro que desea eliminar su cuenta? Una vez que se elimine su cuenta, todos sus recursos y datos se eliminarán de forma permanente. Ingrese su contraseña para confirmar que desea eliminar su cuenta de forma permanente.","Are you sure you want to detach the selected resources?":"¿Está seguro que desea desvincular los recursos seleccionados?","Are you sure you want to detach this resource?":"¿Está seguro que desea desvincular este recurso?","Are you sure you want to force delete the selected resources?":"¿Está seguro que desea forzar la eliminación de los recurso seleccionados?","Are you sure you want to force delete this resource?":"¿Está seguro que desea forzar la eliminación de este recurso?","Are you sure you want to restore the selected resources?":"¿Está seguro que desea restaurar los recursos seleccionados?","Are you sure you want to restore this resource?":"¿Está seguro que desea restaurar este recurso?","Are you sure you want to run this action?":"¿Está seguro que desea ejecutar esta acción?","Are you sure you would like to delete this API token?":"¿Está seguro que desea eliminar este token API?","Are you sure you would like to leave this team?":"¿Está seguro que le gustaría abandonar este equipo?","Are you sure you would like to remove this person from the team?":"¿Está seguro que desea retirar a esta persona del equipo?","Argentina":"Argentina","Armenia":"Armenia","Aruba":"Aruba","Attach":"Adjuntar","Attach & Attach Another":"Adjuntar & adjuntar otro","Attach :resource":"Adjuntar :resource","August":"Agosto","Australia":"Australia","Austria":"Austria","Azerbaijan":"Azerbaijan","Bahamas":"Bahamas","Bahrain":"Bahrain","Bangladesh":"Bangladesh","Barbados":"Barbados","Before proceeding, please check your email for a verification link.":"Antes de continuar, por favor, confirme su correo electrónico con el enlace de verificación que le fue enviado.","Belarus":"Bielorrusia","Belgium":"Bélgica","Belize":"Belice","Benin":"Benin","Bermuda":"Bermuda","Bhutan":"Bután","Billing Information":"Billing Information","Billing Management":"Billing Management","Bolivia":"Bolivia","Bolivia, Plurinational State of":"Bolivia, Plurinational State of","Bonaire, Sint Eustatius and Saba":"Bonaire, San Eustaquio y Saba","Bosnia And Herzegovina":"Bosnia y Herzegovina","Bosnia and Herzegovina":"Bosnia and Herzegovina","Botswana":"Botswana","Bouvet Island":"Isla Bouvet","Brazil":"Brasil","British Indian Ocean Territory":"Territorio Británico del Océano Índico","Browser Sessions":"Sesiones del navegador","Brunei Darussalam":"Brunei","Bulgaria":"Bulgaria","Burkina Faso":"Burkina Faso","Burundi":"Burundi","Cambodia":"Camboya","Cameroon":"Camerún","Canada":"Canadá","Cancel":"Cancelar","Cancel Subscription":"Cancel Subscription","Cape Verde":"Cabo Verde","Card":"Tarjeta","Cayman Islands":"Islas Caimán","Central African Republic":"República Centroafricana","Chad":"Chad","Change Subscription Plan":"Change Subscription Plan","Changes":"Cambios","Chile":"Chile","China":"China","Choose":"Elija","Choose :field":"Elija :field","Choose :resource":"Elija :resource","Choose an option":"Elija una opción","Choose date":"Elija fecha","Choose File":"Elija archivo","Choose Type":"Elija tipo","Christmas Island":"Isla de Navidad","City":"City","click here to request another":"haga clic aquí para solicitar otro","Click to choose":"Haga click para elegir","Close":"Cerrar","Cocos (Keeling) Islands":"Islas Cocos (Keeling)","Code":"Código","Colombia":"Colombia","Comoros":"Comoros","Confirm":"Confirmar","Confirm Password":"Confirmar contraseña","Confirm Payment":"Confirmar pago","Confirm your :amount payment":"Confirme su pago de :amount","Congo":"Congo","Congo, Democratic Republic":"Republica democrática del Congo","Congo, the Democratic Republic of the":"Congo, the Democratic Republic of the","Constant":"Constante","Cook Islands":"Islas Cook","Costa Rica":"Costa Rica","Cote D\'Ivoire":"Costa de Marfil","could not be found.":"no se pudo encontrar.","Country":"Country","Coupon":"Coupon","Create":"Crear","Create & Add Another":"Crear & Añadir otro","Create :resource":"Crear :resource","Create a new team to collaborate with others on projects.":"Cree un nuevo equipo para colaborar con otros en proyectos.","Create Account":"Crear cuenta","Create API Token":"Crear Token API","Create New Team":"Crear nuevo equipo","Create Team":"Crear equipo","Created.":"Creado.","Croatia":"Croacia","Cuba":"Cuba","Curaçao":"Curazao","Current Password":"Contraseña actual","Current Subscription Plan":"Current Subscription Plan","Currently Subscribed":"Currently Subscribed","Customize":"Personalizar ","Cyprus":"Chipre","Czech Republic":"República Checa","Côte d\'Ivoire":"Côte d\'Ivoire","Dashboard":"Panel","December":"Diciembre","Decrease":"Disminuir","Delete":"Eliminar","Delete Account":"Borrar cuenta","Delete API Token":"Borrar token API","Delete File":"Borrar archivo","Delete Resource":"Eliminar recurso","Delete Selected":"Eliminar seleccionado","Delete Team":"Borrar equipo","Denmark":"Dinamarca","Detach":"Desvincular","Detach Resource":"Desvincular recurso","Detach Selected":"Desvincular selección","Details":"Detalles","Disable":"Deshabilitar","Djibouti":"Yibuti","Do you really want to leave? You have unsaved changes.":"¿Realmente desea salir? Aún hay cambios sin guardar.","Dominica":"Dominica","Dominican Republic":"República Dominicana","Done.":"Hecho.","Download":"Descargar","Download Receipt":"Download Receipt","E-Mail Address":"Correo Electrónico","Ecuador":"Ecuador","Edit":"Editar","Edit :resource":"Editar :resource","Edit Attached":"Editar Adjunto","Editor":"Editor","Editor users have the ability to read, create, and update.":"Los editores están habilitados para leer, crear y actualizar.","Egypt":"Egipto","El Salvador":"El Salvador","Email":"Correo electrónico","Email Address":"Correo electrónico","Email Addresses":"Email Addresses","Email Password Reset Link":"Enviar enlace para restablecer contraseña","Enable":"Habilitar","Ensure your account is using a long, random password to stay secure.":"Asegúrese que su cuenta esté usando una contraseña larga y aleatoria para mantenerse seguro.","Equatorial Guinea":"Guinea Ecuatorial","Eritrea":"Eritrea","Estonia":"Estonia","Ethiopia":"Etiopía","ex VAT":"ex VAT","Extra Billing Information":"Extra Billing Information","Extra confirmation is needed to process your payment. Please confirm your payment by filling out your payment details below.":"Se necesita confirmación adicional para procesar su pago. Confirme su pago completando los detalles a continuación.","Extra confirmation is needed to process your payment. Please continue to the payment page by clicking on the button below.":"Se necesita confirmación adicional para procesar su pago. Continúe a la página de pago haciendo clic en el botón de abajo.","Falkland Islands (Malvinas)":"Malvinas (Falkland Islands)","Faroe Islands":"Islas Feroe","February":"Febrero","Fiji":"Fiyi","Finland":"Finlandia","For your security, please confirm your password to continue.":"Por su seguridad, confirme su contraseña para continuar.","Forbidden":"Prohibido","Force Delete":"Forzar la eliminación","Force Delete Resource":"Forzar la eliminación del recurso","Force Delete Selected":"Forzar la eliminación de la selección","Forgot Your Password?":"¿Olvidó su Contraseña?","Forgot your password?":"¿Olvidó su contraseña?","Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.":"¿Olvidó su contraseña? No hay problema. Simplemente déjenos saber su dirección de correo electrónico y le enviaremos un enlace para restablecer la contraseña que le permitirá elegir una nueva.","France":"Francia","French Guiana":"Guayana Francesa","French Polynesia":"Polinesia Francesa","French Southern Territories":"Tierras Australes y Antárticas Francesas","Full name":"Nombre completo","Gabon":"Gabón","Gambia":"Gambia","Georgia":"Georgia","Germany":"Alemania","Ghana":"Ghana","Gibraltar":"Gibraltar","Go back":"Ir atrás","Go Home":"Ir a inicio","Go to page :page":"Ir a la página :page","Great! You have accepted the invitation to join the :team team.":"¡Genial! Usted ha aceptado la invitación para unirse al equipo :team.","Greece":"Grecia","Greenland":"Groenlandia","Grenada":"Grenada","Guadeloupe":"Guadalupe","Guam":"Guam","Guatemala":"Guatemala","Guernsey":"Guernsey","Guinea":"Guinea","Guinea-Bissau":"Guinea-Bisáu","Guyana":"Guyana","Haiti":"Haití","Have a coupon code?":"Have a coupon code?","Having second thoughts about cancelling your subscription? You can instantly reactive your subscription at any time until the end of your current billing cycle. After your current billing cycle ends, you may choose an entirely new subscription plan.":"Having second thoughts about cancelling your subscription? You can instantly reactive your subscription at any time until the end of your current billing cycle. After your current billing cycle ends, you may choose an entirely new subscription plan.","Heard Island & Mcdonald Islands":"Islas Heard y McDonald","Heard Island and McDonald Islands":"Heard Island and McDonald Islands","Hello!":"¡Hola!","Hide Content":"Ocultar contenido","Hold Up!":"En espera!","Holy See (Vatican City State)":"Ciudad del Vaticano","Honduras":"Honduras","Hong Kong":"Hong Kong","Hungary":"Hungría","I agree to the :terms_of_service and :privacy_policy":"Acepto los :terms_of_service y la :privacy_policy","Iceland":"Islandia","ID":"ID","If necessary, you may log out of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password.":"Si es necesario, puede salir de todas las demás sesiones de otros navegadores en todos sus dispositivos. Algunas de sus sesiones recientes se enumeran a continuación; sin embargo, es posible que esta lista no sea exhaustiva. Si cree que su cuenta se ha visto comprometida, también debería actualizar su contraseña.","If necessary, you may logout of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password.":"Si es necesario, puede salir de todas las demás sesiones de otros navegadores en todos sus dispositivos. Algunas de sus sesiones recientes se enumeran a continuación; sin embargo, es posible que esta lista no sea exhaustiva. Si cree que su cuenta se ha visto comprometida, también debería actualizar su contraseña.","If you already have an account, you may accept this invitation by clicking the button below:":"Si ya tiene una cuenta, puede aceptar esta invitación haciendo clic en el botón de abajo:","If you did not create an account, no further action is required.":"Si no ha creado una cuenta, no se requiere ninguna acción adicional.","If you did not expect to receive an invitation to this team, you may discard this email.":"Si no esperaba recibir una invitación para este equipo, puede descartar este correo electrónico.","If you did not receive the email":"Si no ha recibido el correo electrónico","If you did not request a password reset, no further action is required.":"Si no ha solicitado el restablecimiento de contraseña, omita este mensaje de correo electrónico.","If you do not have an account, you may create one by clicking the button below. After creating an account, you may click the invitation acceptance button in this email to accept the team invitation:":"Si no tiene una cuenta, puede crear una haciendo clic en el botón de abajo. Después de crear una cuenta, puede hacer clic en el botón de aceptación de la invitación en este correo electrónico para aceptar la invitación del equipo:","If you need to add specific contact or tax information to your receipts, like your full business name, VAT identification number, or address of record, you may add it here.":"If you need to add specific contact or tax information to your receipts, like your full business name, VAT identification number, or address of record, you may add it here.","If you’re having trouble clicking the \\":actionText\\" button, copy and paste the URL below\\ninto your web browser:":"Si tiene problemas para hacer clic en el botón \\":actionText\\", copie y pegue la siguiente URL \\nen su navegador web:","Increase":"Incrementar","India":"India","Indonesia":"Indonesia","Invalid signature.":"Firma no válida.","Iran, Islamic Republic of":"Iran, Islamic Republic of","Iran, Islamic Republic Of":"República Islámica de Irán","Iraq":"Iraq","Ireland":"Irlanda","Isle of Man":"Isle of Man","Isle Of Man":"Isla de Man","Israel":"Israel","It looks like you do not have an active subscription. You may choose one of the subscription plans below to get started. Subscription plans may be changed or cancelled at your convenience.":"It looks like you do not have an active subscription. You may choose one of the subscription plans below to get started. Subscription plans may be changed or cancelled at your convenience.","Italy":"Italia","Jamaica":"Jamaica","January":"Enero","Japan":"Japón","Jersey":"Jersey","Jordan":"Jordán","July":"Julio","June":"Junio","Kazakhstan":"Kazajistán","Kenya":"Kenya","Key":"Clave","Kiribati":"Kiribati","Korea":"Corea del Sur","Korea, Democratic People\'s Republic of":"Corea del Norte","Korea, Republic of":"Korea, Republic of","Kosovo":"Kosovo","Kuwait":"Kuwait","Kyrgyzstan":"Kirguistán","Lao People\'s Democratic Republic":"Laos","Last active":"Activo por última vez","Last used":"Usado por última vez","Latvia":"Letonia","Leave":"Abandonar","Leave Team":"Abandonar equipo","Lebanon":"Líbano","Lens":"Lens","Lesotho":"Lesoto","Liberia":"Liberia","Libyan Arab Jamahiriya":"Libia","Liechtenstein":"Liechtenstein","Lithuania":"Lituania","Load :perPage More":"Cargar :perPage Mas","Log in":"Iniciar sesión","Log out":"Finalizar sesión","Log Out":"Finalizar sesión","Log Out Other Browser Sessions":"Cerrar las demás sesiones","Login":"Iniciar sesión","Logout":"Finalizar sesión","Logout Other Browser Sessions":"Cerrar las demás sesiones","Luxembourg":"Luxemburgo","Macao":"Macao","Macedonia":"Macedonia","Macedonia, the former Yugoslav Republic of":"Macedonia, the former Yugoslav Republic of","Madagascar":"Madagascar","Malawi":"Malaui","Malaysia":"Malasia","Maldives":"Maldivas","Mali":"Malí","Malta":"Malta","Manage Account":"Administrar cuenta","Manage and log out your active sessions on other browsers and devices.":"Administre y cierre sus sesiones activas en otros navegadores y dispositivos.","Manage and logout your active sessions on other browsers and devices.":"Administre y cierre sus sesiones activas en otros navegadores y dispositivos.","Manage API Tokens":"Administrar Tokens API","Manage Role":"Administrar rol","Manage Team":"Administrar equipo","Managing billing for :billableName":"Managing billing for :billableName","March":"Marzo","Marshall Islands":"Islas Marshall","Martinique":"Martinica","Mauritania":"Mauritania","Mauritius":"Mauricio","May":"Mayo","Mayotte":"Mayotte","Mexico":"México","Micronesia, Federated States Of":"Micronesia","Moldova":"Moldavia","Moldova, Republic of":"Moldova, Republic of","Monaco":"Mónaco","Mongolia":"Mongolia","Montenegro":"Montenegro","Month To Date":"Mes hasta la fecha","Monthly":"Monthly","monthly":"monthly","Montserrat":"Montserrat","Morocco":"Marruecos","Mozambique":"Mozambique","Myanmar":"Myanmar","Name":"Nombre","Namibia":"Namibia","Nauru":"Nauru","Nepal":"Nepal","Netherlands":"Países Bajos​","Netherlands Antilles":"Netherlands Antilles","Nevermind":"Olvidar","Nevermind, I\'ll keep my old plan":"Nevermind, I\'ll keep my old plan","New":"Nuevo","New :resource":"Nuevo :resource","New Caledonia":"Nueva Caledonia","New Password":"Nueva Contraseña","New Zealand":"Nueva Zelanda","Next":"Siguiente","Nicaragua":"Nicaragua","Niger":"Níger","Nigeria":"Nigeria","Niue":"Niue","No":"No","No :resource matched the given criteria.":"Ningún :resource coincide con los criterios.","No additional information...":"Sin información adicional...","No Current Data":"Sin datos actuales","No Data":"No hay datos","no file selected":"no se seleccionó el archivo","No Increase":"No incrementar","No Prior Data":"No hay datos previos","No Results Found.":"No se encontraron resultados.","Norfolk Island":"Isla Norfolk","Northern Mariana Islands":"Islas Marianas del Norte","Norway":"Noruega","Not Found":"No encontrado","Nova User":"Usuario Nova","November":"Noviembre","October":"Octubre","of":"de","Oh no":"Oh no","Oman":"Omán","Once a team is deleted, all of its resources and data will be permanently deleted. Before deleting this team, please download any data or information regarding this team that you wish to retain.":"Una vez que se elimina un equipo, todos sus recursos y datos se eliminarán de forma permanente. Antes de eliminar este equipo, descargue cualquier dato o información sobre este equipo que desee conservar.","Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.":"Una vez su cuenta sea borrada, todos sus recursos y datos se eliminarán de forma permanente. Antes de borrar su cuenta, por favor descargue cualquier dato o información que desee conservar.","Only Trashed":"Solo en papelera","Original":"Original","Our billing management portal allows you to conveniently manage your subscription plan, payment method, and download your recent invoices.":"Our billing management portal allows you to conveniently manage your subscription plan, payment method, and download your recent invoices.","Page Expired":"Página expirada","Pagination Navigation":"Navegación por los enlaces de paginación","Pakistan":"Pakistán","Palau":"Palau","Palestinian Territory, Occupied":"Territorios Palestinos","Panama":"Panamá","Papua New Guinea":"Papúa Nueva Guinea","Paraguay":"Paraguay","Password":"Contraseña","Pay :amount":"Pague :amount","Payment Cancelled":"Pago cancelado","Payment Confirmation":"Confirmación de pago","Payment Information":"Payment Information","Payment Successful":"Pago exitoso","Pending Team Invitations":"Invitaciones de equipo pendientes","Per Page":"Por Pagina","Permanently delete this team.":"Eliminar este equipo de forma permanente","Permanently delete your account.":"Eliminar su cuenta de forma permanente.","Permissions":"Permisos","Peru":"Perú","Philippines":"Filipinas","Photo":"Foto","Pitcairn":"Islas Pitcairn","Please click the button below to verify your email address.":"Por favor, haga clic en el botón de abajo para verificar su dirección de correo electrónico.","Please confirm access to your account by entering one of your emergency recovery codes.":"Por favor confirme el acceso a su cuenta ingresando uno de sus códigos de recuperación de emergencia.","Please confirm access to your account by entering the authentication code provided by your authenticator application.":"Por favor confirme el acceso a su cuenta digitando el código de autenticación provisto por su aplicación autenticadora.","Please confirm your password before continuing.":"Por favor confirme su contraseña antes de continuar.","Please copy your new API token. For your security, it won\'t be shown again.":"Por favor copie su nuevo token API. Por su seguridad, no se volverá a mostrar.","Please enter your password to confirm you would like to log out of your other browser sessions across all of your devices.":"Por favor ingrese su contraseña para confirmar que desea cerrar las demás sesiones de otros navegadores en todos sus dispositivos.","Please enter your password to confirm you would like to logout of your other browser sessions across all of your devices.":"Por favor ingrese su contraseña para confirmar que desea cerrar las demás sesiones de otros navegadores en todos sus dispositivos.","Please provide a maximum of three receipt emails addresses.":"Please provide a maximum of three receipt emails addresses.","Please provide the email address of the person you would like to add to this team.":"Por favor proporcione la dirección de correo electrónico de la persona que le gustaría agregar a este equipo.","Please provide the email address of the person you would like to add to this team. The email address must be associated with an existing account.":"Por favor proporcione la dirección de correo electrónico de la persona que le gustaría agregar a este equipo. La dirección de correo electrónico debe estar asociada a una cuenta existente.","Please provide your name.":"Por favor proporcione su nombre.","Poland":"Polonia","Portugal":"Portugal","Press / to search":"Presione / para buscar","Preview":"Previsualizar","Previous":"Previo","Privacy Policy":"Política de Privacidad","Profile":"Perfil","Profile Information":"Información de perfil","Puerto Rico":"Puerto Rico","Qatar":"Qatar","Quarter To Date":"Trimestre hasta la fecha","Receipt Email Addresses":"Receipt Email Addresses","Receipts":"Receipts","Recovery Code":"Código de recuperación","Regards":"Saludos","Regenerate Recovery Codes":"Regenerar códigos de recuperación","Register":"Registrarse","Reload":"Recargar","Remember me":"Mantener sesión activa","Remember Me":"Mantener sesión activa","Remove":"Eliminar","Remove Photo":"Eliminar foto","Remove Team Member":"Eliminar miembro del equipo","Resend Verification Email":"Reenviar correo de verificación","Reset Filters":"Restablecer filtros","Reset Password":"Restablecer contraseña","Reset Password Notification":"Notificación de restablecimiento de contraseña","resource":"recurso","Resources":"Recursos","resources":"recursos","Restore":"Restaurar","Restore Resource":"Restaurar Recursos","Restore Selected":"Restaurar Selección","results":"resultados","Resume Subscription":"Resume Subscription","Return to :appName":"Return to :appName","Reunion":"Reunión","Role":"Rol","Romania":"Rumania","Run Action":"Ejecutar Acción","Russian Federation":"Federación Rusa","Rwanda":"Ruanda","Réunion":"Réunion","Saint Barthelemy":"San Bartolomé","Saint Barthélemy":"Saint Barthélemy","Saint Helena":"Santa Helena","Saint Kitts and Nevis":"Saint Kitts and Nevis","Saint Kitts And Nevis":"San Cristóbal y Nieves","Saint Lucia":"Santa Lucía","Saint Martin":"San Martín","Saint Martin (French part)":"Saint Martin (French part)","Saint Pierre and Miquelon":"Saint Pierre and Miquelon","Saint Pierre And Miquelon":"San Pedro y Miquelón","Saint Vincent And Grenadines":"San Vicente y las Granadinas","Saint Vincent and the Grenadines":"Saint Vincent and the Grenadines","Samoa":"Samoa","San Marino":"San Marino","Sao Tome and Principe":"Sao Tome and Principe","Sao Tome And Principe":"Santo Tomé y Príncipe","Saudi Arabia":"Arabia Saudita","Save":"Guardar","Saved.":"Guardado.","Search":"Buscar","Select":"Select","Select a different plan":"Select a different plan","Select A New Photo":"Seleccione una nueva foto","Select Action":"Seleccione una Acción","Select All":"Seleccione Todo","Select All Matching":"Seleccione Todas las coincidencias","Send Password Reset Link":"Enviar enlace para restablecer la contraseña","Senegal":"Senegal","September":"Septiembre","Serbia":"Serbia","Server Error":"Error del servidor","Service Unavailable":"Servicio no disponible","Seychelles":"Seychelles","Show All Fields":"Mostrar todos los campos","Show Content":"Mostrar contenido","Show Recovery Codes":"Mostrar códigos de recuperación","Showing":"Mostrando","Sierra Leone":"Sierra Leona","Signed in as":"Signed in as","Singapore":"Singapur","Sint Maarten (Dutch part)":"San Martín","Slovakia":"Eslovaquia","Slovenia":"Eslovenia","Solomon Islands":"Islas Salomón","Somalia":"Somalia","Something went wrong.":"Algo salió mal.","Sorry! You are not authorized to perform this action.":"¡Lo siento! Usted no está autorizado para ejecutar esta acción.","Sorry, your session has expired.":"Lo siento, su sesión ha caducado.","South Africa":"Sudáfrica","South Georgia And Sandwich Isl.":"Islas Georgias del Sur y Sandwich del Sur","South Georgia and the South Sandwich Islands":"South Georgia and the South Sandwich Islands","South Sudan":"Sudán del Sur","Spain":"España","Sri Lanka":"Sri Lanka","Start Polling":"Iniciar encuesta","State / County":"State / County","Stop Polling":"Detener encuesta","Store these recovery codes in a secure password manager. They can be used to recover access to your account if your two factor authentication device is lost.":"Guarde estos códigos de recuperación en un administrador de contraseñas seguro. Se pueden utilizar para recuperar el acceso a su cuenta si pierde su dispositivo de autenticación de dos factores.","Subscribe":"Subscribe","Subscription Information":"Subscription Information","Sudan":"Sudán","Suriname":"Suriname","Svalbard And Jan Mayen":"Svalbard y Jan Mayen","Swaziland":"Eswatini","Sweden":"Suecia","Switch Teams":"Cambiar de equipo","Switzerland":"Suiza","Syrian Arab Republic":"Siria","Taiwan":"Taiwán","Taiwan, Province of China":"Taiwan, Province of China","Tajikistan":"Tayikistán","Tanzania":"Tanzania","Tanzania, United Republic of":"Tanzania, United Republic of","Team Details":"Detalles del equipo","Team Invitation":"Invitación de equipo","Team Members":"Miembros del equipo","Team Name":"Nombre del equipo","Team Owner":"Propietario del equipo","Team Settings":"Ajustes del equipo","Terms of Service":"Términos del servicio","Thailand":"Tailandia","Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.":"¡Gracias por registrarse! Antes de comenzar, ¿podría verificar su dirección de correo electrónico haciendo clic en el enlace que le acabamos de enviar? Si no recibió el correo electrónico, con gusto le enviaremos otro.","Thanks for your continued support. We\'ve attached a copy of your invoice for your records. Please let us know if you have any questions or concerns.":"Thanks for your continued support. We\'ve attached a copy of your invoice for your records. Please let us know if you have any questions or concerns.","Thanks,":"Thanks,","The :attribute must be a valid role.":":Attribute debe ser un rol válido.","The :attribute must be at least :length characters and contain at least one number.":"La :attribute debe tener al menos :length caracteres y contener por lo menos un número.","The :attribute must be at least :length characters and contain at least one special character and one number.":"La :attribute debe tener al menos :length caracteres y contener por lo menos un caracter especial y un número.","The :attribute must be at least :length characters and contain at least one special character.":"La :attribute debe tener al menos :length caracteres y contener por lo menos un carácter especial.","The :attribute must be at least :length characters and contain at least one uppercase character and one number.":"La :attribute debe tener al menos :length caracteres y contener por lo menos una letra mayúscula y un número.","The :attribute must be at least :length characters and contain at least one uppercase character and one special character.":"La :attribute debe tener al menos :length caracteres y contener por lo menos una letra mayúscula y un carácter especial.","The :attribute must be at least :length characters and contain at least one uppercase character, one number, and one special character.":"La :attribute debe tener al menos :length caracteres y contener por lo menos una letra mayúscula, un número y un carácter especial.","The :attribute must be at least :length characters and contain at least one uppercase character.":"La :attribute debe tener al menos :length caracteres y contener por lo menos una letra mayúscula.","The :attribute must be at least :length characters.":"La :attribute debe tener al menos :length caracteres.","The :attribute must contain at least one letter.":"La :attribute debe contener al menos una letra.","The :attribute must contain at least one number.":"La :attribute debe contener al menos un número.","The :attribute must contain at least one symbol.":"La :attribute debe contener al menos un símbolo.","The :attribute must contain at least one uppercase and one lowercase letter.":"La :attribute debe contener al menos una letra mayúscula y una minúscula.","The :resource was created!":"¡El :resource fue creado!","The :resource was deleted!":"¡El :resource fue eliminado!","The :resource was restored!":"¡El :resource fue restaurado!","The :resource was updated!":"¡El :resource fue actualizado!","The action ran successfully!":"¡La acción se ejecutó correctamente!","The file was deleted!":"¡El archivo fue eliminado!","The given :attribute has appeared in a data leak. Please choose a different :attribute.":"La :attribute proporcionada se ha visto comprometida en una filtración de datos (data leak). Elija una :attribute diferente.","The government won\'t let us show you what\'s behind these doors":"El gobierno no nos permitirá mostrarle lo que hay detrás de estas puertas","The HasOne relationship has already been filled.":"La relación HasOne ya fué completada.","The payment was successful.":"El pago fue exitoso.","The provided coupon code is invalid.":"The provided coupon code is invalid.","The provided password does not match your current password.":"La contraseña proporcionada no coincide con su contraseña actual.","The provided password was incorrect.":"La contraseña proporcionada no es correcta.","The provided two factor authentication code was invalid.":"El código de autenticación de dos factores proporcionado no es válido.","The provided VAT number is invalid.":"The provided VAT number is invalid.","The receipt emails must be valid email addresses.":"The receipt emails must be valid email addresses.","The resource was updated!":"¡El recurso fue actualizado!","The selected country is invalid.":"The selected country is invalid.","The selected plan is invalid.":"The selected plan is invalid.","The team\'s name and owner information.":"Nombre del equipo e información del propietario.","There are no available options for this resource.":"No hay opciones disponibles para este recurso.","There was a problem executing the action.":"Hubo un problema ejecutando la acción.","There was a problem submitting the form.":"Hubo un problema al enviar el formulario.","These people have been invited to your team and have been sent an invitation email. They may join the team by accepting the email invitation.":"Estas personas han sido invitadas a su equipo y se les ha enviado un correo electrónico de invitación. Pueden unirse al equipo aceptando la invitación por correo electrónico.","This account does not have an active subscription.":"This account does not have an active subscription.","This action is unauthorized.":"Esta acción no está autorizada.","This device":"Este dispositivo","This file field is read-only.":"Este campo de archivo es de solo lectura.","This image":"Esta imagen","This is a secure area of the application. Please confirm your password before continuing.":"Esta es un área segura de la aplicación. Confirme su contraseña antes de continuar.","This password does not match our records.":"Esta contraseña no coincide con nuestros registros.","This password reset link will expire in :count minutes.":"Este enlace de restablecimiento de contraseña expirará en :count minutos.","This payment was already successfully confirmed.":"Este pago ya se confirmó con éxito.","This payment was cancelled.":"Este pago fue cancelado.","This resource no longer exists":"Este recurso ya no existe","This subscription has expired and cannot be resumed. Please create a new subscription.":"This subscription has expired and cannot be resumed. Please create a new subscription.","This user already belongs to the team.":"Este usuario ya pertenece al equipo.","This user has already been invited to the team.":"Este usuario ya ha sido invitado al equipo.","Timor-Leste":"Timor Oriental","to":"al","Today":"Hoy","Toggle navigation":"Activar navegación","Togo":"Togo","Tokelau":"Tokelau","Token Name":"Nombre del token","Tonga":"Tonga","Too Many Attempts.":"Demasiados intentos","Too Many Requests":"Demasiadas peticiones","total":"total","Total:":"Total:","Trashed":"Desechado","Trinidad And Tobago":"Trinidad y Tobago","Tunisia":"Tunisia","Turkey":"Turquía","Turkmenistan":"Turkmenistán","Turks and Caicos Islands":"Turks and Caicos Islands","Turks And Caicos Islands":"Islas Turcas y Caicos","Tuvalu":"Tuvalu","Two Factor Authentication":"Autenticación de dos factores","Two factor authentication is now enabled. Scan the following QR code using your phone\'s authenticator application.":"La autenticación de dos factores ahora está habilitada. Escanee el siguiente código QR usando la aplicación de autenticación de su teléfono.","Uganda":"Uganda","Ukraine":"Ucrania","Unauthorized":"No autorizado","United Arab Emirates":"Emiratos Árabes Unidos","United Kingdom":"Reino Unido","United States":"Estados Unidos","United States Minor Outlying Islands":"United States Minor Outlying Islands","United States Outlying Islands":"Islas Ultramarinas Menores de los Estados Unidos","Update":"Actualizar","Update & Continue Editing":"Actualice & Continúe Editando","Update :resource":"Actualizar :resource","Update :resource: :title":"Actualice el :title del :resource:","Update attached :resource: :title":"Actualice el :title del :resource: adjuntado","Update Password":"Actualizar contraseña","Update Payment Information":"Update Payment Information","Update your account\'s profile information and email address.":"Actualice la información de su cuenta y la dirección de correo electrónico","Uruguay":"Uruguay","Use a recovery code":"Use un código de recuperación","Use an authentication code":"Use un código de autenticación","Uzbekistan":"Uzbekistan","Value":"Valor","Vanuatu":"Vanuatu","VAT Number":"VAT Number","Venezuela":"Venezuela","Venezuela, Bolivarian Republic of":"Venezuela, Bolivarian Republic of","Verify Email Address":"Confirme su correo electrónico","Verify Your Email Address":"Verifique su correo electrónico","Viet Nam":"Vietnam","View":"Vista","Virgin Islands, British":"Islas Vírgenes Británicas","Virgin Islands, U.S.":"Islas Vírgenes Estadounidenses","Wallis and Futuna":"Wallis and Futuna","Wallis And Futuna":"Wallis y Futuna","We are unable to process your payment. Please contact customer support.":"We are unable to process your payment. Please contact customer support.","We were unable to find a registered user with this email address.":"No pudimos encontrar un usuario registrado con esta dirección de correo electrónico.","We will send a receipt download link to the email addresses that you specify below. You may separate multiple email addresses using commas.":"We will send a receipt download link to the email addresses that you specify below. You may separate multiple email addresses using commas.","We won\'t ask for your password again for a few hours.":"No pediremos su contraseña de nuevo por unas horas.","We\'re lost in space. The page you were trying to view does not exist.":"Estamos perdidos en el espacio. La página que intenta buscar no existe.","Welcome Back!":"Bienvenido!","Western Sahara":"Sahara Occidental","When two factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone\'s Google Authenticator application.":"Cuando la autenticación de dos factores esté habilitada, le pediremos un token aleatorio seguro durante la autenticación. Puede recuperar este token desde la aplicación Google Authenticator de su teléfono.","Whoops":"Ups","Whoops!":"¡Ups!","Whoops! Something went wrong.":"¡Ups! Algo salió mal.","With Trashed":"Incluida la papelera","Write":"Escriba","Year To Date":"Año hasta la fecha","Yearly":"Yearly","Yemen":"Yemen","Yes":"Sí","You are currently within your free trial period. Your trial will expire on :date.":"You are currently within your free trial period. Your trial will expire on :date.","You are logged in!":"¡Ha iniciado sesión!","You are receiving this email because we received a password reset request for your account.":"Ha recibido este mensaje porque se solicitó un restablecimiento de contraseña para su cuenta.","You have been invited to join the :team team!":"¡Usted ha sido invitado a unirse al equipo :team!","You have enabled two factor authentication.":"Ha habilitado la autenticación de dos factores.","You have not enabled two factor authentication.":"No ha habilitado la autenticación de dos factores.","You may cancel your subscription at any time. Once your subscription has been cancelled, you will have the option to resume the subscription until the end of your current billing cycle.":"You may cancel your subscription at any time. Once your subscription has been cancelled, you will have the option to resume the subscription until the end of your current billing cycle.","You may delete any of your existing tokens if they are no longer needed.":"Puede eliminar cualquiera de sus tokens existentes si ya no los necesita.","You may not delete your personal team.":"No se puede borrar su equipo personal.","You may not leave a team that you created.":"No se puede abandonar un equipo que usted creó.","Your :invoiceName invoice is now available!":"Your :invoiceName invoice is now available!","Your card was declined. Please contact your card issuer for more information.":"Your card was declined. Please contact your card issuer for more information.","Your current payment method is a credit card ending in :lastFour that expires on :expiration.":"Your current payment method is a credit card ending in :lastFour that expires on :expiration.","Your email address is not verified.":"Su dirección de correo electrónico no está verificada.","Your registered VAT Number is :vatNumber.":"Your registered VAT Number is :vatNumber.","Zambia":"Zambia","Zimbabwe":"Zimbabwe","Zip / Postal Code":"Zip / Postal Code"}');
+
+/***/ }),
+
+/***/ "./resources/lang sync recursive \\.(php|json)$":
+/*!********************************************!*\
+  !*** ./resources/lang/ sync \.(php|json)$ ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var map = {
+	"./en/auth.php": "./resources/lang/en/auth.php",
+	"./en/pagination.php": "./resources/lang/en/pagination.php",
+	"./en/passwords.php": "./resources/lang/en/passwords.php",
+	"./en/tfg.php": "./resources/lang/en/tfg.php",
+	"./en/validation.php": "./resources/lang/en/validation.php",
+	"./es.json": "./resources/lang/es.json",
+	"./es/auth.php": "./resources/lang/es/auth.php",
+	"./es/pagination.php": "./resources/lang/es/pagination.php",
+	"./es/passwords.php": "./resources/lang/es/passwords.php",
+	"./es/tfg.php": "./resources/lang/es/tfg.php",
+	"./es/validation-inline.php": "./resources/lang/es/validation-inline.php",
+	"./es/validation.php": "./resources/lang/es/validation.php"
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = "./resources/lang sync recursive \\.(php|json)$";
+
 /***/ })
 
 /******/ 	});
@@ -34513,7 +36080,7 @@ Vue.compile = compileToFunctions;
 /******/ 					__webpack_require__.m[moduleId] = moreModules[moduleId];
 /******/ 				}
 /******/ 			}
-/******/ 			if(runtime) runtime(__webpack_require__);
+/******/ 			if(runtime) var result = runtime(__webpack_require__);
 /******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
 /******/ 			for(;i < chunkIds.length; i++) {
 /******/ 				chunkId = chunkIds[i];
@@ -34522,7 +36089,7 @@ Vue.compile = compileToFunctions;
 /******/ 				}
 /******/ 				installedChunks[chunkIds[i]] = 0;
 /******/ 			}
-/******/ 			__webpack_require__.O();
+/******/ 			return __webpack_require__.O(result);
 /******/ 		}
 /******/ 		
 /******/ 		var chunkLoadingGlobal = self["webpackChunk"] = self["webpackChunk"] || [];

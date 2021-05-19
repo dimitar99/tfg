@@ -14,7 +14,7 @@ class RoutineController extends Controller
 {
     public function index()
     {
-        $routines = Routine::orderBy('created_at', 'desc')->paginate(12);
+        $routines = Routine::orderBy('created_at', 'desc')->paginate(8);
 
         return RoutineResource::collection($routines);
     }
@@ -23,7 +23,7 @@ class RoutineController extends Controller
     {
         $routine = new Routine([
             'name' => $request->name,
-            'type' => $request->type,
+            'routine_type_id' => $request->routine_type_id,
             'description' => $request->description,
         ]);
 

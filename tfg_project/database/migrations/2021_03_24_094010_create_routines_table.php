@@ -16,16 +16,16 @@ class CreateRoutinesTable extends Migration
         Schema::create('routines', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name')->unique();
+            $table->string('name');
             $table->text('description');
             $table->string('image')->nullable();
 
             //Referencia a table routine types
-            $table->unsignedBigInteger('routine_type_id');
+            $table->unsignedBigInteger('routine_type_id')->nullable();
             $table->foreign('routine_type_id')
                 ->references('id')
                 ->on('routines_types')
-                ->onDelete('CASCADE');
+                ->onDelete('set null');
 
             $table->timestamps();
         });

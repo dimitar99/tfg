@@ -22,5 +22,6 @@ class RoutinesTypeSeeder extends Seeder
         RoutineType::create(['name' => 'Piernas']);
         RoutineType::create(['name' => 'Abdominales']);
         RoutineType::create(['name' => 'Cardio']);
+        RoutineType::create(['name' => 'Cuerpo Completo']);
     }
 }

@@ -31,7 +31,7 @@ class UserResource extends JsonResource
             'followed' => $this->followed->count(),
             'created_at' => $this->created_at->format('Y-m-d'),
             'posts_count' => $this->posts()->count(),
-            'posts' => Post::where('user_id', $this->id)->get()
+            'posts' => PostResource::collection(Post::where('user_id', $this->id)->get())
         ];
     }
 }

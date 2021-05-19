@@ -8,6 +8,14 @@ require('./bootstrap');
 
 window.Vue = require('vue').default;
 
+import Vue from 'vue';
+import { Lang } from 'laravel-vue-lang';
+
+Vue.use(Lang ,{
+    locale: 'es',
+    fallback: 'en',
+});
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -15,7 +23,7 @@ window.Vue = require('vue').default;
  *
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
- Vue.component('pagination', require('laravel-vue-pagination'));
+Vue.component('pagination', require('laravel-vue-pagination'));
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('categories-component', require('./components/CategoriesComponent.vue').default);

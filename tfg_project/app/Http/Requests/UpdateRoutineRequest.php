@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Routine;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateRoutineRequest extends FormRequest
@@ -25,18 +25,17 @@ class UpdateRoutineRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string'],
-            'type' => ['required', 'array'],
-            'type.*' => ['integer', 'exists:routineTypes,id'],
+            'name' => ['required', 'string', Rule::unique('routines')->ignore($this->routine)],
+            'routine_type_id' => ['nullable', 'integer', 'exists:routines_types,id'],
             'description' => ['required', 'string', ' max:600'],
-            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,svg']
+            'image' => ['required', 'image', 'mimes:jpeg,jpg,png,svg'],
         ];
     }
 
     public function messages()
     {
         return [
+            'image.image' => __('tfg.validations.image'),
         ];
     }
-
 }

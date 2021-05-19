@@ -30,11 +30,11 @@ class PostController extends Controller
 
     public function getPostsFromFollowed(Request $request)
     {
-        $followed = $request->user()->followed()->get()->pluck('id')->toArray();
-        $posts_from_followed = Post::whereIn('user_id', $followed)->get();
+        $followed = $request->user()->followed()->get()->pluck('id');
+        $posts_from_followed = PostResource::collection(Post::whereIn('user_id', $followed)->get());
 
         return response()->json([
-            $posts_from_followed,
+            'posts' => $posts_from_followed,
         ]);
     }
 
@@ -46,12 +46,12 @@ class PostController extends Controller
     {
         $post = new Post([
             'user_id' => $request->user()->id,
-            'body' => $request->body
+            'body' => $request->body,
         ]);
 
-        if ($post->save()) {
+        $post->categories()->attach($request->categorias);
 
-            $post->categories()->attach($request->categorias);
+        if ($post->save()) {
 
             if ($request->image) {
                 $path = 'posts/image_' . $post->id . '.' . $request->image->getClientOriginalExtension();
@@ -147,7 +147,7 @@ class PostController extends Controller
     public function likeDislike(Request $request, $id)
     {
         $currentUser = $request->user();
-        $post = $currentUser->posts()->findOrFail($id);
+        $post = $currentUser->posts()->find($id);
 
         if ($post->likes()->where('user_id', $currentUser->id)->first()) {
             $post->likes()->detach($currentUser->id);

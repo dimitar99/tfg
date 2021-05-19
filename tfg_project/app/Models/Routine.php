@@ -23,13 +23,13 @@ class Routine extends Model
 
     public function routineType()
     {
-        return $this->belongsTo(RoutineType::class, 'type');
+        return $this->belongsTo(RoutineType::class, 'routine_type_id');
     }
 
-    public function scopeType($query, $type)
+    public function scopeType($query, $routine_type_id)
     {
-        if ($type){
-            return $query->where('type', '=', $type);
+        if ($routine_type_id){
+            return $query->where('routine_type_id', '=', $routine_type_id);
         }
     }
 }

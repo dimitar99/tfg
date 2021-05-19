@@ -19,4 +19,5 @@ class RoutineType extends Model
     {
         return $this->hasMany(Routine::class);
     }
+
 }

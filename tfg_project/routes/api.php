@@ -32,7 +32,7 @@ Route::group(['middleware' => ['language_api']], function () {
         Route::post('/posts/new', [PostController::class, 'create']);
         Route::post('/posts/{post}/update', [PostController::class, 'update']);
         Route::delete('/posts/{post}/destroy', [PostController::class, 'destroy']);
-        Route::post('/posts/{posts}/likeDislike', [PostController::class, 'likeDislike']);
+        Route::post('/posts/{id}/likeDislike', [PostController::class, 'likeDislike']);
 
         /*
         * COMENTARIOS

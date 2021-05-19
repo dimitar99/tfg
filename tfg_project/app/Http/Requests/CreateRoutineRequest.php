@@ -25,18 +25,16 @@ class CreateRoutineRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'unique:routines,name'],
-            'type' => ['required', 'string'],
+            'routine_type_id' => ['nullable', 'integer', 'exists:routines_types,id'],
             'description' => ['required', 'string', 'max:600'],
-            'image' => ['required'],
-            'image.*' => ['mimes:jpeg,jpg,png|max:2048'],
+            'image' => ['required', 'image', 'mimes:jpeg,jpg,png,svg'],
         ];
     }
 
     public function messages()
     {
-        return[
-
+        return [
+            'image.image' => __('tfg.validations.image'),
         ];
     }
-
 }

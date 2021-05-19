@@ -58,7 +58,7 @@
                             class="btn btn-success"
                         >
                             Guardar
-                        </button>1
+                        </button>
                     </div>
                 </div>
             </div>
@@ -163,7 +163,7 @@ export default {
         },
         async destroy(id) {
             axios.delete("/cmsapi/categories/" + id);
-            this.list();
+            this.getResults();
         },
         openModal: function(titulo, data = {}) {
             if (titulo == 0) {

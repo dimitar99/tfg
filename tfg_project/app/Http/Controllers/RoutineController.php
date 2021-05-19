@@ -49,7 +49,7 @@ class RoutineController extends Controller
     {
         $routine = new Routine([
             'name' => $request->name,
-            'type' => $request->type,
+            'routine_type_id' => $request->routine_type_id,
             'description' => $request->description,
         ]);
 
@@ -100,7 +100,7 @@ class RoutineController extends Controller
     {
         $routine->fill([
             'name' => $request->name,
-            'type' => $request->type,
+            'routine_type_id' => $request->routine_type_id,
             'description' => $request->description
         ]);
 
