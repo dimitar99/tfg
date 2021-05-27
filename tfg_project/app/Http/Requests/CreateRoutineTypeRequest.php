@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CreateRoutineTypeRequest extends FormRequest
 {
@@ -24,11 +25,7 @@ class CreateRoutineTypeRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string'],
-            'type' => ['required', 'array'],
-            'type.*' => ['integer', 'exists:routineTypes,id'],
-            'description' => ['required', 'string', ' max:600'],
-            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,svg']
+            'name' => ['required', 'string', Rule::unique('routines_types')->ignore($this->routineType)],
         ];
     }
 

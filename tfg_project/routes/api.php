@@ -23,6 +23,7 @@ Route::group(['middleware' => ['language_api']], function () {
         Route::post('/users/{user}/update', [UserController::class, 'update']);
         Route::post('/users/{user}/followUnfollow', [UserController::class, 'followUnfollow']);
         Route::post('/users/contact', [UserController::class, 'contact']);
+        Route::get('/users/suggested', [UserController::class, 'suggested']);
 
         /*
         * POSTS

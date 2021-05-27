@@ -11,10 +11,7 @@ window.Vue = require('vue').default;
 import Vue from 'vue';
 import { Lang } from 'laravel-vue-lang';
 
-Vue.use(Lang ,{
-    locale: 'es',
-    fallback: 'en',
-});
+Vue.use(Lang);
 
 /**
  * The following block of code may be used to automatically register your

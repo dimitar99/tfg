@@ -19,7 +19,7 @@ class PostController extends Controller
 
     public function getPosts()
     {
-        $posts = Post::paginate(15);
+        $posts = Post::get();
 
         return PostResource::collection($posts);
     }

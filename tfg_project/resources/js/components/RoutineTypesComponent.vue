@@ -2,11 +2,14 @@
     <div class="container">
         <!-- Button trigger modal -->
         <button
-            v-on:click="openModal(0)"
+            v-on:click="
+                modificar = false;
+                openModal(0);
+            "
             type="button"
             class="btn btn-primary my-4"
         >
-            Añadir Tipo Rutina
+            {{ __("Create Routine Type") }}
         </button>
 
         <!-- Modal -->
@@ -22,13 +25,18 @@
                 <div class="modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">{{ tituloModal }}</h4>
+                        <h4 v-if="modificar == true" class="modal-title">
+                            {{ __("Edit Routine Type") }}
+                        </h4>
+                        <h4 v-else class="modal-title">
+                            {{ __("Create Routine Type") }}
+                        </h4>
                     </div>
 
                     <!-- Modal Body -->
                     <div class="modal-body">
                         <div class="my-4">
-                            <label for="name">Nombre:</label>
+                            <label for="name">{{ __("Name") }}:</label>
                             <input
                                 class="form-control"
                                 v-model="routineType.name"
@@ -50,14 +58,23 @@
                             type="button"
                             class="btn btn-danger"
                         >
-                            Cancelar
+                            {{ __("Cancel") }}
                         </button>
                         <button
+                            v-if="modificar == true"
                             v-on:click="save()"
                             type="button"
                             class="btn btn-success"
                         >
-                            Guardar
+                            {{ __("Update") }}
+                        </button>
+                        <button
+                            v-else
+                            v-on:click="save()"
+                            type="button"
+                            class="btn btn-success"
+                        >
+                            {{ __("Save") }}
                         </button>
                     </div>
                 </div>
@@ -68,9 +85,9 @@
             <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Created at</th>
-                    <th scope="col" colspan="2">Actions</th>
+                    <th scope="col">{{ __("Name") }}</th>
+                    <th scope="col">{{ __("Created at") }}</th>
+                    <th scope="col" colspan="2">{{ __("Actions") }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -80,7 +97,7 @@
                 >
                     <th scope="row">{{ routineType.id }}</th>
                     <td>{{ routineType.name }}</td>
-                    <td>{{ routineType.created_at }}</td>
+                    <td>{{ routineType.created_at | formatDate }}</td>
                     <td>
                         <button
                             v-on:click="
@@ -89,13 +106,13 @@
                             "
                             class="btn btn-success"
                         >
-                            Editar
+                            {{ __("Edit") }}
                         </button>
                         <button
                             v-on:click="destroy(routineType.id)"
                             class="btn btn-danger"
                         >
-                            Eliminar
+                            {{ __("Delete") }}
                         </button>
                     </td>
                 </tr>
@@ -111,6 +128,12 @@
 
 <script>
 import axios from "axios";
+import moment from "moment";
+Vue.filter('formatDate', function(value) {
+    if (value) {
+        return moment(String(value)).format('hh:mm MM/DD/YYYY')
+    }
+});
 
 export default {
     data() {
@@ -171,11 +194,9 @@ export default {
         openModal: function(titulo, data = {}) {
             if (titulo == 0) {
                 this.id = 0;
-                this.tituloModal = "Crear Tipo Rutina";
                 this.routineType.name = "";
             } else {
                 this.id = data.id;
-                this.tituloModal = "Editar Tipo Rutina";
                 this.routineType.name = data.name;
             }
             $("#modal_tipoRutina").modal("show");

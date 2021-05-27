@@ -7,9 +7,6 @@
 @section('current_breadcrumb', __('tfg.users.list'))
 
 @section('content')
-    <!-- ============================================================== -->
-    <!-- Start Page Content -->
-    <!-- ============================================================== -->
     <div class="row el-element-overlay" data-paging="true" data-paging-size="7">
         @foreach ($users as $user)
             <div class="col-lg-3 col-md-6">
@@ -53,8 +50,4 @@
     <div class="float-right">
         {{ $users->links() }}
     </div>
-    {{-- <p>Viendo pagina {{ $users->currentPage() }} de {{ $users->lastPage() }} </p> --}}
-    <!-- ============================================================== -->
-    <!-- End Page Content -->
-    <!-- ============================================================== -->
 @endsection

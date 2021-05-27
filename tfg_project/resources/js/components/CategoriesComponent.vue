@@ -2,11 +2,14 @@
     <div class="container">
         <!-- Button trigger modal -->
         <button
-            v-on:click="openModal(0)"
+            v-on:click="
+                modificar = false;
+                openModal(0);
+            "
             type="button"
             class="btn btn-primary my-4"
         >
-            Añadir Categoria
+            {{ __("Create Category") }}
         </button>
 
         <!-- Modal -->
@@ -22,13 +25,18 @@
                 <div class="modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">{{ tituloModal }}</h4>
+                        <h4 v-if="modificar == true" class="modal-title">
+                            {{ __("Edit Category") }}
+                        </h4>
+                        <h4 v-else class="modal-title">
+                            {{ __("Create Category") }}
+                        </h4>
                     </div>
 
                     <!-- Modal Body -->
                     <div class="modal-body">
                         <div class="my-4">
-                            <label for="name">Nombre:</label>
+                            <label for="name">{{ __("Name") }}:</label>
                             <input
                                 class="form-control"
                                 v-model="category.name"
@@ -50,14 +58,23 @@
                             type="button"
                             class="btn btn-danger"
                         >
-                            Cancelar
+                            {{ __("Cancel") }}
                         </button>
                         <button
+                            v-if="modificar == true"
                             v-on:click="save()"
                             type="button"
                             class="btn btn-success"
                         >
-                            Guardar
+                            {{ __("Update") }}
+                        </button>
+                        <button
+                            v-else
+                            v-on:click="save()"
+                            type="button"
+                            class="btn btn-success"
+                        >
+                            {{ __("Save") }}
                         </button>
                     </div>
                 </div>
@@ -68,16 +85,16 @@
             <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Created at</th>
-                    <th scope="col" colspan="2">Actions</th>
+                    <th scope="col">{{ __("Name") }}</th>
+                    <th scope="col">{{ __("Created at") }}</th>
+                    <th scope="col" colspan="2">{{ __("Actions") }}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="category in laravelData.data" :key="category.id">
                     <th scope="row">{{ category.id }}</th>
                     <td>{{ category.name }}</td>
-                    <td>{{ category.created_at }}</td>
+                    <td>{{ category.created_at | formatDate }}</td>
                     <td>
                         <button
                             v-on:click="
@@ -86,13 +103,13 @@
                             "
                             class="btn btn-success"
                         >
-                            Editar
+                            {{ __("Edit") }}
                         </button>
                         <button
                             v-on:click="destroy(category.id)"
                             class="btn btn-danger"
                         >
-                            Eliminar
+                            {{ __("Delete") }}
                         </button>
                     </td>
                 </tr>
@@ -108,6 +125,12 @@
 
 <script>
 import axios from "axios";
+import moment from "moment";
+Vue.filter('formatDate', function(value) {
+    if (value) {
+        return moment(String(value)).format('hh:mm MM/DD/YYYY')
+    }
+});
 
 export default {
     data() {
@@ -117,12 +140,12 @@ export default {
                 name: ""
             },
             modificar: false,
-            tituloModal: "",
             id: 0,
             errors: {},
             laravelData: {}
         };
     },
+
     mounted() {
         console.log("Component mounted.");
     },
@@ -168,11 +191,9 @@ export default {
         openModal: function(titulo, data = {}) {
             if (titulo == 0) {
                 this.id = 0;
-                this.tituloModal = "Crear Categoria";
                 this.category.name = "";
             } else {
                 this.id = data.id;
-                this.tituloModal = "Editar Categoria";
                 this.category.name = data.name;
             }
             $("#modal_categoria").modal("show");

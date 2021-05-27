@@ -190,4 +190,18 @@ class UserController extends Controller
 
         Mail::to("dimitar1999.de@gmail.com")->send(new ContactMailable($request, $body));
     }
+
+    /*
+    * Usuarios recomendados
+    */
+
+    public function suggested(Request $request)
+    {
+        $users = User::where('id','!=',$request->user()->id);
+        $users = $users->query()->with('followers')->where('follower_id','!=','id');
+
+        return response()->json([
+            'users' => $users
+        ]);
+    }
 }

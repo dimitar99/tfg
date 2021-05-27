@@ -4,9 +4,12 @@
         <button
             type="button"
             class="btn btn-primary mb-4"
-            v-on:click="openModal(true)"
+            v-on:click="
+                modificar = false;
+                openModal(true);
+            "
         >
-            {{ __("tfg.routines.new") }}
+            {{ __("Create Routine") }}
         </button>
         <div class="row el-element-overlay">
             <!-- Modal -->
@@ -22,11 +25,11 @@
                     <div class="modal-content">
                         <!-- Modal Header -->
                         <div class="modal-header">
-                            <h4 class="modal-title" v-if="modificar">
-                                {{ __("tfg.routines.edit") }}
+                            <h4 class="modal-title" v-if="modificar == true">
+                                {{ __("Edit Routine") }}
                             </h4>
                             <h4 class="modal-title" v-else>
-                                {{ __("tfg.routines.create") }}
+                                {{ __("Create Routine") }}
                             </h4>
                             <button
                                 type="button"
@@ -40,7 +43,7 @@
 
                         <!-- Modal Body -->
                         <div class="modal-body">
-                            <!-- <div v-if="routine.image") class="my-4">
+                            <!-- <div v-if="routine.image" class="my-4">
                                 <img
                                     class="rounded mx-auto d-block"
                                     src="/storage/routines/image_26.jpg"
@@ -48,9 +51,7 @@
                                 />
                             </div> -->
                             <div>
-                                <label for="name"
-                                    >{{ __("tfg.forms.fields.name") }}:</label
-                                >
+                                <label for="name">{{ __("Name") }}:</label>
                                 <input
                                     type="text"
                                     class="form-control"
@@ -68,7 +69,7 @@
                             </div>
                             <div class="my-4">
                                 <label for="type"
-                                    >{{ __("tfg.forms.fields.type") }}:
+                                    >{{ __("Choose Type") }}:
                                 </label>
                                 <select
                                     v-model="routine.routine_type_id"
@@ -87,11 +88,9 @@
                             </div>
                             <div class="my-4">
                                 <label for="description">
-                                    {{ __("tfg.forms.fields.description") }}:
+                                    {{ __("Description") }}:
                                 </label>
-                                <small>{{
-                                    __("tfg.forms.small.description-info")
-                                }}</small>
+                                <small>{{ __("Max 600 characters") }}</small>
                                 <textarea
                                     maxlength="600"
                                     name="description"
@@ -113,14 +112,12 @@
                             </div>
 
                             <div class="my-4">
-                                <label for="image">
-                                    {{ __("tfg.forms.fields.image") }}:
-                                </label>
+                                <label for="image"> {{ __("Image") }}: </label>
                                 <input
                                     type="file"
                                     name="image"
                                     id="image"
-                                    class="dropify"
+                                    class="dropify1"
                                     ref="image"
                                     v-on:change="getImage"
                                     :class="errors.image ? 'is-invalid' : ''"
@@ -141,14 +138,23 @@
                                 v-on:click="closeModal()"
                                 class="btn btn-danger"
                             >
-                                {{ __('tfg.buttons.cancel') }}
+                                {{ __("Cancel") }}
                             </button>
                             <button
+                                v-if="modificar == true"
                                 v-on:click="save()"
                                 type="button"
                                 class="btn btn-success"
                             >
-                                {{ __('tfg.buttons.save') }}
+                                {{ __("Update") }}
+                            </button>
+                            <button
+                                v-else
+                                v-on:click="save()"
+                                type="button"
+                                class="btn btn-success"
+                            >
+                                {{ __("Save") }}
                             </button>
                         </div>
                     </div>
@@ -175,7 +181,7 @@
                                             type="button"
                                             class="btn btn-dark"
                                             v-on:click="
-                                                modifcar = true;
+                                                modificar = true;
                                                 openModal(false, routine);
                                             "
                                         >
@@ -217,6 +223,7 @@
 </template>
 <script>
 import axios from "axios";
+
 export default {
     data() {
         return {
@@ -288,6 +295,7 @@ export default {
             this.getResults();
         },
         openModal: function(nuevo, data = {}) {
+            console.log(data);
             if (nuevo) {
                 this.id = 0;
                 this.routine.name = "";
@@ -300,19 +308,17 @@ export default {
                 this.routine_type_id = data.routine_type_id;
                 this.routine.description = data.description;
                 this.routine.image = data.image;
-                $("#image").attr("data-default-file", this.routine.image);
-                $(".dropify").dropify();
+                console.log("Name " + this.routine.name);
+                console.log("Desc " + this.routine.description);
             }
+            $("#image").attr("data-default-file", this.routine.image);
+            $(".dropify1").dropify();
             axios.get("/cmsapi/routineTypes").then(response => {
                 this.routineTypes = response.data;
             });
             $("#modal_rutina").modal("show");
         },
         closeModal: function() {
-            var event = $("#image").dropify();
-            event = event.data("dropify");
-            event.resetPreview();
-            event.clearElement();
             $("#modal_rutina").modal("hide");
             this.routine.image = "";
             this.errors = {};

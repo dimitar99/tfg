@@ -65,11 +65,6 @@ Route::group(['middleware' => ['language']], function(){
         * CATEGORY
         */
         Route::get('/categories', [CategoryController::class, 'list'])->name('categories.list');
-        // Route::get('/categories/new', [CategoryController::class, 'create'])->name('categories.create');
-        // Route::post('/categories/create', [CategoryController::class, 'store']);
-        // Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
-        // Route::put('/categories/{category}', [CategoryController::class, 'update']);
-        // Route::delete('/categories/{category}/destroy', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
         /*
         * COMMENT

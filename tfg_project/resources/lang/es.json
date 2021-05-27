@@ -122,7 +122,7 @@
     "Choose an option": "Elija una opción",
     "Choose date": "Elija fecha",
     "Choose File": "Elija archivo",
-    "Choose Type": "Elija tipo",
+    "Choose TypeType": "Elija tipo",
     "Christmas Island": "Isla de Navidad",
     "City": "City",
     "click here to request another": "haga clic aquí para solicitar otro",
@@ -154,7 +154,7 @@
     "Create API Token": "Crear Token API",
     "Create New Team": "Crear nuevo equipo",
     "Create Team": "Crear equipo",
-    "Created.": "Creado.",
+    ".Created": "Creado.",
     "Croatia": "Croacia",
     "Cuba": "Cuba",
     "Curaçao": "Curazao",
@@ -706,5 +706,16 @@
     "Your registered VAT Number is :vatNumber.": "Your registered VAT Number is :vatNumber.",
     "Zambia": "Zambia",
     "Zimbabwe": "Zimbabwe",
-    "Zip \/ Postal Code": "Zip \/ Postal Code"
+    "Zip \/ Postal Code": "Zip \/ Postal Code",
+
+    "Create Routine": "Crear Rutina",
+    "Create Category": "Crear Categoria",
+    "Create Routine Type": "Crear Tipo Rutina",
+    "Edit Routine": "Editar Rutina",
+    "Edit Category": "Editar Categoria",
+    "Edit Routine Type": "Editar Tipo Rutina",
+    "Description": "Descripcion",
+    "Image": "Imagen",
+    "Created at": "Creado el",
+    "Max 600 characters": "Máximo 600 carácteres"
 }
