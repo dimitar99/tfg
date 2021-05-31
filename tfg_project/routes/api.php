@@ -29,6 +29,7 @@ Route::group(['middleware' => ['language_api']], function () {
         * POSTS
         */
         Route::get('/posts', [PostController::class, 'getPosts']);
+        // Route::get('/posts/{post}', [PostController::class, 'getPost']);
         Route::get('/posts/followed', [PostController::class, 'getPostsFromFollowed']);
         Route::post('/posts/new', [PostController::class, 'create']);
         Route::post('/posts/{post}/update', [PostController::class, 'update']);

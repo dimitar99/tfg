@@ -16,7 +16,8 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
 
-            $table->string('image')->nullable();
+            $table->string('image');
+            $table->string('imageApi');
             $table->string('body');
 
             //Referencia a table users

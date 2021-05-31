@@ -15,8 +15,10 @@ class RoutineController extends Controller
 
     public function getRoutines(Request $request)
     {
-        $routines = Routine::type($request->type)->paginate(15);
+        $routines = Routine::get();
 
-        return RoutineResource::collection($routines);
+        return response()->json([
+            'routines' => RoutineResource::collection($routines)
+        ]);
     }
 }

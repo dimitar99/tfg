@@ -10,7 +10,7 @@ class RoutineTypesController extends Controller
 {
     public function getTypes()
     {
-        $types = RoutineType::all();
+        $types = RoutineType::get();
 
         return RoutineTypesResource::collection($types);
     }

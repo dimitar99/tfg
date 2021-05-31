@@ -21,7 +21,22 @@ class PostController extends Controller
     {
         $posts = Post::get();
 
-        return PostResource::collection($posts);
+        return response()->json([
+            'posts' => PostResource::collection($posts)
+        ]);
+    }
+
+    /*
+    * Devuelve todos los posts
+    */
+
+    public function getPost($id)
+    {
+        $post = Post::find($id)->get();
+
+        return response()->json([
+            'posts' => $post
+        ]);
     }
 
     /*
@@ -147,7 +162,8 @@ class PostController extends Controller
     public function likeDislike(Request $request, $id)
     {
         $currentUser = $request->user();
-        $post = $currentUser->posts()->find($id);
+        //$post = $currentUser->posts()->find($id);
+        $post = Post::find($id);
 
         if ($post->likes()->where('user_id', $currentUser->id)->first()) {
             $post->likes()->detach($currentUser->id);

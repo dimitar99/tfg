@@ -20,7 +20,6 @@ class RoutineResource extends JsonResource
             'description' => $this->description,
             'image' => $this->image,
             'created_at' => $this->created_at->format('Y-m-d'),
-            'user_nick' => $this->user_id
         ];
     }
 }

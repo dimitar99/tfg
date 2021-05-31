@@ -27,24 +27,24 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Jose',
             'surnames' =>  'Manuel Garcia',
-            'nick' => 'josema69',
+            'nick' => 'josema_train',
             'bio' => Str::random(50),
-            'email' => 'josema.de@gmail.com',
+            'email' => 'josema@gmail.com',
             'password' => bcrypt('1234'),
         ]);
 
         User::create([
-            'name' => 'Jose',
-            'surnames' =>  'Manuel Garcia',
-            'nick' => 'aaaa',
+            'name' => 'Miguel',
+            'surnames' =>  'Garcia Jimenez',
+            'nick' => 'magaji1223',
             'bio' => Str::random(50),
-            'email' => 'aaaaa@gmail.com',
+            'email' => 'magaji@gmail.com',
             'password' => bcrypt('1234'),
         ]);
 
         foreach (range(1, 50) as $i) {
             User::create([
-                'name' => 'Jose',
+                'name' => 'Luis',
                 'surnames' =>  'Manuel Garcia',
                 'nick' => Str::random(12),
                 'email' => Str::random(5).'@gmail.com',
