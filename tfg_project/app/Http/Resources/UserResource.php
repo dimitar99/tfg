@@ -30,6 +30,7 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'followers' => $this->followers->count(),
             'followed' => $this->followed->count(),
+            'followed_by_user' => ($this->followers()->where('follower_id', $request->user()->id)->first()) ? 1 : 0,
             'created_at' => $this->created_at->format('Y-m-d'),
             'posts_count' => $this->posts()->count(),
             'posts' => PostResource::collection(Post::where('user_id', $this->id)->get())

@@ -8,7 +8,7 @@
 </head>
 <body>
     <p>{{ $user->name }} {{ $user->surnames }}</p>
-    <p>{{ $user->email }}</p>
+    <p>{{ $user->email }} </p>
     <p>{{ "@" . $user->nick }}</p>
     <p>{{ $body }}</p>
 </body>

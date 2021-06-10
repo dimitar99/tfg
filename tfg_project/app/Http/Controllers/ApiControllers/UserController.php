@@ -86,6 +86,18 @@ class UserController extends Controller
     }
 
     /*
+    * Muestra todos los usuarios
+    */
+
+    public function getUsers(Request $request)
+    {
+        return response()->json([
+            'users' => UserResource::collection(User::where('id', '!=', $request->user()->id)->get())
+        ]);
+    }
+
+
+    /*
     * Muestra el detalle de un usuario
     */
 
@@ -157,18 +169,18 @@ class UserController extends Controller
     public function followUnfollow(Request $request, $id)
     {
         $currentUser = $request->user();
-        $otherUser = User::where('id', $id)->first();
+        $otherUser = User::find($id);
 
         if ($otherUser) {
             // Es el id de la tabla users porque followers() y followed()
             // pertenecen a dicha tabla
-            if ($currentUser->followers()->where('id', $id)->first() != null) {
-                $currentUser->followers()->detach($id);
+            if ($currentUser->followed()->where('id', $id)->first() != null) {
+                $currentUser->followed()->detach($id);
                 return response()->json([
                     'mensaje' => trans('api.responses.user_not_found')
                 ], 200);
             } else {
-                $currentUser->followers()->attach($id);
+                $currentUser->followed()->attach($id);
                 return response()->json([
                     'mensaje' => trans('api.responses.user_follow')
                 ], 200);

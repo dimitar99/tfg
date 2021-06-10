@@ -15,13 +15,13 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
-        foreach(range(1,10) as $i){
+        /*foreach(range(1,10) as $i){
             $post = Post::create([
                 'user_id' => 1,
                 'body' => 'Body de prueba',
             ]);
             $post->categories()->attach(Category::find(rand(1,3)));
-        }
+        }*/
 
         $post = Post::create([
             'user_id' => 2,
@@ -37,8 +37,9 @@ class PostSeeder extends Seeder
 
         // foreach(range(1,10) as $i){
         //     $post = Post::create([
-        //         'user_id' => 2,
+        //         'user_id' => 1,
         //         'body' => 'Body de prueba',
+        //         'image' => asset('/assets/images/big/img1.jpg')
         //     ]);
         //     $post->categories()->attach(Category::find(rand(1,3)));
         // }

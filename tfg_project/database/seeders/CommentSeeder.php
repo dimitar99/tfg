@@ -14,7 +14,7 @@ class CommentSeeder extends Seeder
      */
     public function run()
     {
-        foreach (range(1, 10) as $i){
+        /*foreach (range(1, 10) as $i){
             Comment::create([
                 'user_id' => 1,
                 'post_id' => 1,
@@ -30,6 +30,6 @@ class CommentSeeder extends Seeder
                 'post_id' => 3,
                 'body' => 'Esto es un comentario de prueba para rellenar la tabla y que no este vacia',
             ]);
-        }
+        }*/
     }
 }

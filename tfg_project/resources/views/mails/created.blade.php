@@ -8,6 +8,5 @@
 </head>
 <body>
     Informamos que su cuenta en Gym Around ha sido creada correctamente.
-    Agradecemos
 </body>
 </html>

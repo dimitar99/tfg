@@ -30,12 +30,12 @@ class PostController extends Controller
     * Devuelve todos los posts
     */
 
-    public function getPost($id)
+    public function getPostDetail($id)
     {
-        $post = Post::find($id)->get();
+        $post = Post::findOrFail($id);
 
         return response()->json([
-            'posts' => $post
+            'post' => new PostResource($post)
         ]);
     }
 

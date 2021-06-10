@@ -19,6 +19,7 @@ Route::group(['middleware' => ['language_api']], function () {
         * USERS
         */
         Route::get('/user', [UserController::class, 'getCurrentUser']);
+        Route::get('/users', [UserController::class, 'getUsers']);
         Route::get('/users/{user}', [UserController::class, 'getUser']);
         Route::post('/users/{user}/update', [UserController::class, 'update']);
         Route::post('/users/{user}/followUnfollow', [UserController::class, 'followUnfollow']);
@@ -28,8 +29,8 @@ Route::group(['middleware' => ['language_api']], function () {
         /*
         * POSTS
         */
+        Route::get('/post/{post}', [PostController::class, 'getPostDetail']);
         Route::get('/posts', [PostController::class, 'getPosts']);
-        // Route::get('/posts/{post}', [PostController::class, 'getPost']);
         Route::get('/posts/followed', [PostController::class, 'getPostsFromFollowed']);
         Route::post('/posts/new', [PostController::class, 'create']);
         Route::post('/posts/{post}/update', [PostController::class, 'update']);

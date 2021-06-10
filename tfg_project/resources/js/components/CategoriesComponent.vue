@@ -1,4 +1,20 @@
 <template>
+
+</template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style>
+
+</style>
+
+
+
+<template>
     <div class="container">
         <!-- Button trigger modal -->
         <button
